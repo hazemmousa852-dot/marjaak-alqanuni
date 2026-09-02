@@ -1,0 +1,12 @@
+{
+  "name": "مرجعك القانوني",
+  "short_name": "مرجعك",
+  "description": "مرجع بحثي موحد لقانون العمل وقانون التأمينات الاجتماعية والمعاشات.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbfaf6",
+  "theme_color": "#143f38"
+}
+
