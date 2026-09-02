@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#143f38">
+  <meta name="description" content="مرجع بحثي موحد لقانون العمل وقانون التأمينات الاجتماعية والمعاشات مع ربط مواد العقوبات.">
+  <meta property="og:title" content="مرجعك القانوني">
+  <meta property="og:description" content="ابحث في النصوص القانونية واعرف العقوبة المرتبطة بالمادة.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_EG">
+  <title>مرجعك القانوني</title>
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#results">انتقل إلى النتائج</a>
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="./" aria-label="مرجعك القانوني - الرئيسية">
+        <span class="brand-mark" aria-hidden="true">م</span>
+        <span><strong>مرجعك القانوني</strong><small>النص والمادة والعقوبة في مكان واحد</small></span>
+      </a>
+      <button class="about-btn" id="aboutBtn" type="button">عن المرجع</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">مرجع تشريعي مصري موحّد</p>
+          <h1>ابحث عن المادة، واعرف <span>العقوبة المرتبطة</span> بها.</h1>
+          <p>ابحث في قانون العمل رقم 14 لسنة 2025 وقانون التأمينات الاجتماعية والمعاشات رقم 148 لسنة 2019.</p>
+        </div>
+        <div class="hero-stat" aria-label="إحصاءات المرجع">
+          <strong id="totalCount">468</strong>
+          <span>مادة قانونية قابلة للبحث</span>
+          <div><b>قانونان</b><i></i><b>بحث فوري</b><i></i><b>ربط العقوبات</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-zone" aria-label="البحث في القوانين">
+      <div class="shell">
+        <div class="search-card">
+          <label for="query">ماذا تريد أن تبحث؟</label>
+          <div class="search-row">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="query" type="search" autocomplete="off" placeholder="مثال: إجازة الوضع، المعاش، أو رقم المادة 54">
+            <button id="clearBtn" class="clear-btn" type="button" aria-label="مسح البحث" hidden>×</button>
+            <button id="searchBtn" class="primary-btn" type="button">بحث</button>
+          </div>
+          <div class="filters" aria-label="مرشحات البحث">
+            <fieldset>
+              <legend>القانون</legend>
+              <label><input type="radio" name="law" value="all" checked><span>كل القوانين</span></label>
+              <label><input type="radio" name="law" value="labor-14-2025"><span>العمل 14/2025</span></label>
+              <label><input type="radio" name="law" value="insurance-148-2019"><span>التأمينات 148/2019</span></label>
+            </fieldset>
+            <fieldset>
+              <legend>نوع النتيجة</legend>
+              <label><input type="radio" name="kind" value="all" checked><span>الكل</span></label>
+              <label><input type="radio" name="kind" value="article"><span>مواد القانون</span></label>
+              <label><input type="radio" name="kind" value="penalty"><span>مواد العقوبات</span></label>
+            </fieldset>
+          </div>
+          <p class="search-hint">يمكنك الكتابة بالأرقام العربية أو الإنجليزية، وبدون تشكيل أو همزات.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content shell">
+      <div class="results-head">
+        <div><p class="eyebrow">نتائج البحث</p><h2 id="resultsTitle">ابدأ بكتابة كلمة أو رقم مادة</h2></div>
+        <span id="resultCount" class="result-count" aria-live="polite"></span>
+      </div>
+      <div id="results" class="results" tabindex="-1">
+        <div class="welcome-state">
+          <div class="welcome-icon" aria-hidden="true">§</div>
+          <h3>الوصول إلى النص القانوني أصبح أسهل</h3>
+          <p>اكتب كلمة أو رقم مادة، وسنعرض لك النص الكامل والبنود والعقوبة المرتبطة إن وجدت.</p>
+          <div class="quick-searches"><span>جرّب:</span><button data-query="الإجازة">الإجازة</button><button data-query="إصابة العمل">إصابة العمل</button><button data-query="المعاش">المعاش</button><button data-query="54">المادة 54</button></div>
+        </div>
+      </div>
+      <button id="loadMore" class="load-more" type="button" hidden>عرض نتائج إضافية</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div><strong>مرجعك القانوني</strong><p>أداة بحثية لتيسير الوصول إلى التشريعات المصرية.</p></div>
+      <p>تنبيه: لا يُعد هذا الموقع استشارة قانونية، ويُرجى الرجوع إلى الجريدة الرسمية والتعديلات السارية.</p>
+      <span>آخر مراجعة: 2 سبتمبر 2026</span>
+    </div>
+  </footer>
+
+  <dialog id="aboutDialog">
+    <button class="dialog-close" type="button" aria-label="إغلاق">×</button>
+    <p class="eyebrow">عن المرجع</p>
+    <h2>مرجعك القانوني</h2>
+    <p>يجمع النصوص القانونية في صيغة موحّدة قابلة للبحث، ويربط مادة الالتزام بمادة العقوبة متى كانت العلاقة محددة في النص.</p>
+    <ul><li>قانون العمل رقم 14 لسنة 2025: المواد 1–298.</li><li>قانون التأمينات الاجتماعية والمعاشات رقم 148 لسنة 2019: المواد 1–170.</li></ul>
+    <p class="notice">النص المعروض مرجع بحثي. عند التعارض أو الشك، تكون الأولوية للنص المنشور في الجريدة الرسمية وللتعديلات اللاحقة.</p>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
