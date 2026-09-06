@@ -146,7 +146,11 @@
 
   async function init(){
     try{
-      const [lawsRes,scenariosRes]=await Promise.all([fetch('data/laws.json'),fetch('data/hr-scenarios.json')]);
+      const dataVersion='20260906-2';
+      const [lawsRes,scenariosRes]=await Promise.all([
+        fetch(`data/laws.json?v=${dataVersion}`),
+        fetch(`data/hr-scenarios.json?v=${dataVersion}`)
+      ]);
       if(!lawsRes.ok)throw new Error(); state.data=await lawsRes.json();
       if(scenariosRes.ok){const scenarioData=await scenariosRes.json();state.scenarios=scenarioData.scenarios||[];state.scenarioMeta=scenarioData.meta||null;}
       state.items=state.data.laws.flatMap(l=>l.items); els.total.textContent=state.items.length;
