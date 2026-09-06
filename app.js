@@ -18,7 +18,8 @@
   }
   function esc(s=''){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function law(key){ return state.data.laws.find(l => l.key === key); }
-  function item(key,num){ return state.items.find(i => i.law===key && Number(i.num)===Number(num)); }
+  function provisionNum(value=''){ return norm(String(value)).replace(/\s+/g,' '); }
+  function item(key,num){ return state.items.find(i => i.law===key && provisionNum(i.num)===provisionNum(num)); }
   function haystack(i){ return norm([i.num,i.text,i.section,...(i.sub||[])].join(' ')); }
 
   const stopWords = new Set(['ايه','اي','ازاي','كيف','هل','هو','هي','ده','دي','دا','في','من','عن','علي','الى','الي','له','لها','لو','عايز','عاوزه','موظف','موظفه','عامل','عامله','اعمل','ممكن','ماده','القانون']);
@@ -27,7 +28,7 @@
   function score(i, raw){
     const q = norm(raw); if(!q) return 0;
     const numeric = /^\d+$/.test(q);
-    if(numeric) return Number(i.num)===Number(q) ? 1000 : 0;
+    if(numeric) return /^\d+$/.test(provisionNum(i.num)) && Number(i.num)===Number(q) ? 1000 : 0;
     const h=haystack(i), words=usefulWords(raw);
     if(!words.length) return 0;
     const hits=words.filter(w=>h.includes(w)).length;
@@ -60,7 +61,7 @@
   function penaltyFor(i){
     if(i.kind!=='article') return [];
     const explicit=(i.penaltyNums||[]).map(n=>item(i.law,n)).filter(Boolean);
-    const reverse=state.items.filter(p=>p.law===i.law&&p.kind==='penalty'&&(p.linkedTo||[]).includes(Number(i.num)));
+    const reverse=state.items.filter(p=>p.law===i.law&&p.kind==='penalty'&&(p.linkedTo||[]).some(n=>provisionNum(n)===provisionNum(i.num)));
     return [...new Map([...explicit,...reverse].map(x=>[x.id,x])).values()];
   }
   function highlight(text, raw){
@@ -95,7 +96,8 @@
   function scenarioCard(s){
     const steps=(s.steps||[]).map(x=>`<li>${esc(x)}</li>`).join('');
     const refs=(s.articles||[]).map(a=>{const i=item(a.law,a.num),l=law(a.law);return i?`<button type="button" data-open="${a.law}:${a.num}">${esc(l.short)} · المادة ${a.num}</button>`:''}).join('');
-    return `<article class="scenario-card"><div class="scenario-label">موقف عملي · بدون AI</div><h3>${esc(s.title)}</h3><p class="scenario-summary">${esc(s.summary)}</p>${steps?`<div class="scenario-steps"><strong>خطوات المراجعة لمسؤول شئون العاملين</strong><ol>${steps}</ol></div>`:''}${refs?`<div class="scenario-refs"><strong>السند القانوني</strong><div>${refs}</div></div>`:''}<p class="scenario-notice">${esc(state.scenarioMeta?.notice||'يظل النص الرسمي للقانون والقرارات المنفذة هو المرجع.')}</p></article>`;
+    const isFaq=s.type==='tax-faq';
+    return `<article class="scenario-card"><div class="scenario-label">${isFaq?'سؤال ضريبي شائع · بدون AI':'موقف عملي · بدون AI'}</div>${s.category?`<p class="scenario-category">${esc(s.category)}</p>`:''}<h3>${esc(s.title)}</h3><p class="scenario-summary">${esc(s.summary)}</p>${steps?`<div class="scenario-steps"><strong>خطوات المراجعة لمسؤول شئون العاملين</strong><ol>${steps}</ol></div>`:''}${refs?`<div class="scenario-refs"><strong>السند القانوني المذكور في الإجابة</strong><div>${refs}</div></div>`:''}${s.source?`<p class="faq-source">المصدر: ${esc(s.source)}${s.sourcePage?` · ص ${s.sourcePage}`:''}</p>`:''}<p class="scenario-notice">${esc(state.scenarioMeta?.notice||'يظل النص الرسمي للقانون والقرارات المنفذة هو المرجع.')}</p></article>`;
   }
 
   function render(reset=true){
@@ -105,15 +107,16 @@
     const scenario=lawFilter==='all'&&kindFilter==='all'?matchingScenario(raw):null;
     state.filtered=state.items.map(i=>({i,s:score(i,raw)})).filter(x=>x.s>0)
       .filter(x=>lawFilter==='all'||x.i.law===lawFilter).filter(x=>kindFilter==='all'||x.i.kind===kindFilter)
-      .sort((a,b)=>b.s-a.s||a.i.num-b.i.num).map(x=>x.i);
+      .sort((a,b)=>b.s-a.s||Number.parseInt(a.i.num,10)-Number.parseInt(b.i.num,10)||String(a.i.num).localeCompare(String(b.i.num),'ar')).map(x=>x.i);
     if(reset) state.shown=state.pageSize;
     const visible=state.filtered.slice(0,state.shown);
     if(scenario){
       const referenced=(scenario.articles||[]).map(a=>item(a.law,a.num)).filter(Boolean);
       const unique=[...new Map(referenced.map(i=>[i.id,i])).values()];
-      els.title.textContent=`إجابة عملية عن «${raw}»`;
-      els.count.textContent=`موقف واحد · ${unique.length} مادة مرتبطة`;
-      els.results.innerHTML=scenarioCard(scenario)+`<div class="legal-results-heading"><strong>النصوص القانونية المرتبطة والعقوبات</strong><span>اضغط على رقم أي مادة للانتقال إليها منفردة.</span></div>`+unique.map(i=>card(i,'')).join('');
+      els.title.textContent=`${scenario.type==='tax-faq'?'إجابة من دليل الضرائب':'إجابة عملية'} عن «${raw}»`;
+      els.count.textContent=scenario.type==='tax-faq'?`سؤال شائع${unique.length?` · ${unique.length} مادة مرتبطة`:''}`:`موقف واحد · ${unique.length} مادة مرتبطة`;
+      const linkedMarkup=unique.length?`<div class="legal-results-heading"><strong>النصوص القانونية المرتبطة والعقوبات</strong><span>اضغط على رقم أي مادة للانتقال إليها منفردة.</span></div>${unique.map(i=>card(i,'')).join('')}`:'';
+      els.results.innerHTML=scenarioCard(scenario)+linkedMarkup;
       els.more.hidden=true;
       els.clear.hidden=false;
       syncHash(raw,lawFilter,kindFilter);
@@ -128,7 +131,7 @@
   }
   function showWelcome(){
     els.title.textContent='ابدأ بكتابة كلمة أو رقم مادة'; els.count.textContent=''; els.clear.hidden=true; els.more.hidden=true;
-    els.results.innerHTML=`<div class="welcome-state"><div class="welcome-icon" aria-hidden="true">§</div><h3>اسأل عن موقف HR أو ابحث في القانون</h3><p>لو وجدنا موقفًا مطابقًا سنعرض خطواته ومواده، وإلا سنعرض النصوص القانونية الكاملة والعقوبات المرتبطة.</p><div class="quick-searches"><span>جرّب:</span><button data-query="موظف قدم استقالة أعمل إيه؟">استقالة موظف</button><button data-query="موظف غاب عشرة أيام">غياب موظف</button><button data-query="إصابة العمل">إصابة العمل</button><button data-query="54">المادة 54</button></div></div>`;
+    els.results.innerHTML=`<div class="welcome-state"><div class="welcome-icon" aria-hidden="true">§</div><h3>اسأل عن موقف HR أو ابحث في القانون</h3><p>لو وجدنا موقفًا مطابقًا سنعرض خطواته ومواده، وإلا سنعرض النصوص القانونية الكاملة والعقوبات المرتبطة.</p><div class="quick-searches"><span>جرّب:</span><button data-query="موظف قدم استقالة أعمل إيه؟">استقالة موظف</button><button data-query="الإعفاء الشخصي كام؟">إعفاء المرتبات</button><button data-query="توريد ضريبة المرتبات">توريد الضريبة</button><button data-query="54">المادة 54</button></div></div>`;
     history.replaceState(null,'',location.pathname);
   }
   function syncHash(q,l,k){ const p=new URLSearchParams({q}); if(l!=='all')p.set('law',l);if(k!=='all')p.set('kind',k);history.replaceState(null,'',`#${p}`); }
