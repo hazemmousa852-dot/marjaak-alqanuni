@@ -146,7 +146,7 @@
 
   async function init(){
     try{
-      const dataVersion='20260906-2';
+      const dataVersion='20260906-3';
       const [lawsRes,scenariosRes]=await Promise.all([
         fetch(`data/laws.json?v=${dataVersion}`),
         fetch(`data/hr-scenarios.json?v=${dataVersion}`)
