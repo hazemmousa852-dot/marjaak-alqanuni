@@ -55,7 +55,11 @@
   }
 
   function matchingScenario(raw){
-    return state.scenarios.map(s=>({s,n:scenarioScore(s,raw)})).filter(x=>x.n>=20).sort((a,b)=>b.n-a.n)[0]?.s||null;
+    // لا تجعل كثرة الأسئلة الضريبية تحجب موقفًا مباشرًا من العمل أو التأمينات.
+    // عند تعادل درجة المطابقة، يُقدَّم الموقف العملي؛ أما السؤال الضريبي الصريح
+    // فتكون درجته الأعلى ويظل هو النتيجة الأولى.
+    return state.scenarios.map(s=>({s,n:scenarioScore(s,raw)})).filter(x=>x.n>=20)
+      .sort((a,b)=>b.n-a.n||Number(b.s.type!=='tax-faq')-Number(a.s.type!=='tax-faq'))[0]?.s||null;
   }
 
   function penaltyFor(i){
@@ -146,7 +150,7 @@
 
   async function init(){
     try{
-      const dataVersion='20260906-4';
+      const dataVersion='20260907-1';
       const [lawsRes,scenariosRes]=await Promise.all([
         fetch(`data/laws.json?v=${dataVersion}`),
         fetch(`data/hr-scenarios.json?v=${dataVersion}`)
