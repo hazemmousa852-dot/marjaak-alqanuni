@@ -2,7 +2,7 @@
   'use strict';
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
-  const state = { data: null, items: [], scenarios: [], scenarioMeta: null, filtered: [], shown: 0, pageSize: 20 };
+  const state = { data: null, items: [], scenarios: [], decisions: [], scenarioMeta: null, filtered: [], shown: 0, pageSize: 20 };
   const els = {
     query: $('#query'), results: $('#results'), title: $('#resultsTitle'), count: $('#resultCount'),
     clear: $('#clearBtn'), more: $('#loadMore'), toast: $('#toast'), total: $('#totalCount')
@@ -22,20 +22,41 @@
   function item(key,num){ return state.items.find(i => i.law===key && provisionNum(i.num)===provisionNum(num)); }
   function haystack(i){ return norm([i.num,i.text,i.section,...(i.sub||[])].join(' ')); }
 
-  const stopWords = new Set(['ايه','اي','ازاي','كيف','هل','هو','هي','ده','دي','دا','في','من','عن','علي','الى','الي','له','لها','لو','عايز','عاوزه','موظف','موظفه','عامل','عامله','اعمل','ممكن','ماده','القانون']);
-  function usefulWords(raw){ return norm(raw).split(' ').filter(w=>w.length>1&&!stopWords.has(w)); }
+  const stopWords = new Set(['ايه','اي','ازاي','كيف','هل','هو','هي','ده','دي','دا','في','من','عن','علي','الى','الي','له','لها','لو','عايز','عاوزه','اعمل','ممكن','كام','ماده','قانون','رقم','لسنه','سنه','بدون']);
+  function stemWord(word=''){
+    let value=word;
+    if(value.length>5&&/^(وال|فال|بال|كال)/.test(value)) value=value.slice(1);
+    else if(value.length>4&&value.startsWith('لل')) value=`ال${value.slice(2)}`;
+    if(value.length>4&&value.startsWith('ال')) value=value.slice(2);
+    return value;
+  }
+  function wordsOf(raw){ return norm(raw).split(' ').map(stemWord).filter(Boolean); }
+  function usefulWords(raw){ return [...new Set(wordsOf(raw).filter(w=>w.length>1&&!stopWords.has(w)))]; }
+  function tokenMatches(term,token){
+    if(/^\d+$/.test(term)||/^\d+$/.test(token)) return term===token;
+    return term===token||(term.length>=4&&token.length>=4&&Math.abs(term.length-token.length)<=2&&(term.startsWith(token)||token.startsWith(term)));
+  }
+  function matchedTerms(terms,text){
+    const tokens=wordsOf(text);
+    return terms.filter(term=>tokens.some(token=>tokenMatches(term,token)));
+  }
+  function articleNumberFromQuery(raw){
+    const match=norm(raw).match(/^(?:(?:الماده|ماده|م|رقم)\s*)?(\d+)$/);
+    return match?.[1]||'';
+  }
 
   function score(i, raw){
-    const q = norm(raw); if(!q) return 0;
-    const numeric = /^\d+$/.test(q);
-    if(numeric) return /^\d+$/.test(provisionNum(i.num)) && Number(i.num)===Number(q) ? 1000 : 0;
-    const h=haystack(i), words=usefulWords(raw);
+    const q=norm(raw); if(!q) return 0;
+    const requestedNumber=articleNumberFromQuery(raw);
+    if(requestedNumber) return /^\d+$/.test(provisionNum(i.num))&&Number(i.num)===Number(requestedNumber)?1000:0;
+    const h=haystack(i),words=usefulWords(raw);
     if(!words.length) return 0;
-    const hits=words.filter(w=>h.includes(w)).length;
-    if(!hits || (words.length>1 && hits<Math.ceil(words.length/2))) return 0;
+    const matched=matchedTerms(words,h),hits=matched.length;
+    const required=words.length===1?1:Math.max(2,Math.ceil(words.length*.65));
+    if(hits<required) return 0;
     let n=10;
-    n+=hits*3;
-    if(hits===words.length) n+=8;
+    n+=hits*5;
+    if(hits===words.length) n+=12;
     if(norm(i.text).includes(q)) n+=12;
     if(norm(i.section).includes(q)) n+=5;
     if((i.sub||[]).some(x=>norm(x).includes(q))) n+=7;
@@ -44,22 +65,62 @@
   }
 
   function scenarioScore(s, raw){
-    const q=norm(raw); if(!q || /^\d+$/.test(q)) return 0;
-    const phrases=[...(s.keywords||[]),...(s.questions||[])].map(norm).filter(Boolean);
-    let best=phrases.reduce((n,p)=>q.includes(p)||p.includes(q)?Math.max(n,40+Math.min(p.length,20)):n,0);
+    const q=norm(raw); if(!q||articleNumberFromQuery(raw)) return 0;
     const words=usefulWords(raw);
-    const h=norm([s.title,s.summary,...(s.keywords||[]),...(s.questions||[])].join(' '));
-    const hits=words.filter(w=>h.includes(w)).length;
-    if(hits) best=Math.max(best,hits*10+(hits===words.length?15:0));
-    return best;
+    if(!words.length) return 0;
+    const source=[s.title,s.summary,s.category,...(s.keywords||[]),...(s.questions||[])].join(' ');
+    const hits=matchedTerms(words,source).length;
+    const required=words.length===1?1:Math.max(2,Math.ceil(words.length*.6));
+    if(hits<required) return 0;
+    const titleHits=matchedTerms(words,s.title).length;
+    const keywordHits=matchedTerms(words,(s.keywords||[]).join(' ')).length;
+    const exact=norm(s.title)===q||(s.questions||[]).some(question=>norm(question)===q);
+    return hits*12+Math.round((hits/words.length)*20)+titleHits*8+keywordHits*6+(hits===words.length?15:0)+(exact?50:0);
+  }
+
+  function isTaxIntent(raw){
+    const words=usefulWords(raw);
+    const has=prefix=>words.some(word=>word.startsWith(prefix));
+    if(['ضريب','وعاء','اعفاء','شريح','تسوي','احتساب','منظوم','معامل'].some(has)) return true;
+    return (has('توريد')&&(has('مرتب')||has('اجر')||has('كسب')))||(has('كسب')&&has('عمل'));
   }
 
   function matchingScenario(raw){
-    // لا تجعل كثرة الأسئلة الضريبية تحجب موقفًا مباشرًا من العمل أو التأمينات.
-    // عند تعادل درجة المطابقة، يُقدَّم الموقف العملي؛ أما السؤال الضريبي الصريح
-    // فتكون درجته الأعلى ويظل هو النتيجة الأولى.
-    return state.scenarios.map(s=>({s,n:scenarioScore(s,raw)})).filter(x=>x.n>=20)
+    const allowTax=isTaxIntent(raw);
+    return state.scenarios.filter(s=>allowTax||s.type!=='tax-faq')
+      .map(s=>({s,n:scenarioScore(s,raw)})).filter(x=>x.n>=32)
       .sort((a,b)=>b.n-a.n||Number(b.s.type!=='tax-faq')-Number(a.s.type!=='tax-faq'))[0]?.s||null;
+  }
+
+  const decisionGenericWords=new Set(['قرار','قرارات','وزير','وزاره','وزاري','رقم','لسنه','سنه','بشان']);
+  function decisionTitle(filename=''){
+    const base=filename.replace(/\.pdf$/i,'').replace(/_/g,' ').replace(/([0-9٠-٩۰-۹])(?=[ء-ي])/g,'$1 ').replace(/\s+/g,' ').trim();
+    const standard=digits(base).match(/^2026\s+(\d+)\s*(.*)$/);
+    return standard?`قرار رقم ${standard[1]} لسنة 2026${standard[2]?` — ${standard[2]}`:''}`:base;
+  }
+  function decisionNumber(filename=''){
+    const value=digits(filename);
+    const direct=value.match(/^2026_(\d+)|^قرار\s+(\d+)/);
+    if(direct) return direct[1]||direct[2];
+    return value.match(/رقم\s*(\d+)/)?.[1]||'';
+  }
+  function decisionMatches(raw){
+    const queryTokens=wordsOf(raw),numberTerms=queryTokens.filter(word=>/^\d+$/.test(word));
+    const textTerms=queryTokens.filter(word=>!/^\d+$/.test(word)&&!decisionGenericWords.has(word));
+    return state.decisions.map(filename=>{
+      const title=decisionTitle(filename),tokens=wordsOf(title);
+      if(numberTerms.some(term=>!tokens.includes(term))) return null;
+      const textHits=textTerms.filter(term=>tokens.some(token=>tokenMatches(term,token))).length;
+      if(textTerms.length&&textHits<Math.max(1,Math.ceil(textTerms.length*.6))) return null;
+      let rank=numberTerms.length*40+textHits*12;
+      const number=decisionNumber(filename);
+      if(numberTerms.includes(number)) rank+=80;
+      if(!numberTerms.length&&!textTerms.length) return null;
+      return {filename,title,rank};
+    }).filter(Boolean).sort((a,b)=>b.rank-a.rank||a.title.localeCompare(b.title,'ar'));
+  }
+  function isDecisionIntent(raw){
+    return wordsOf(raw).some(word=>['قرار','قرارات','لائحه','وزاري'].some(prefix=>word.startsWith(prefix)));
   }
 
   function penaltyFor(i){
@@ -104,16 +165,41 @@
     return `<article class="scenario-card"><div class="scenario-label">${isFaq?'سؤال ضريبي شائع · بدون AI':'موقف عملي · بدون AI'}</div>${s.category?`<p class="scenario-category">${esc(s.category)}</p>`:''}<h3>${esc(s.title)}</h3><p class="scenario-summary">${esc(s.summary)}</p>${steps?`<div class="scenario-steps"><strong>خطوات المراجعة لمسؤول شئون العاملين</strong><ol>${steps}</ol></div>`:''}${refs?`<div class="scenario-refs"><strong>السند القانوني المذكور في الإجابة</strong><div>${refs}</div></div>`:''}${s.source?`<p class="faq-source">المصدر: ${esc(s.source)}${s.sourcePage?` · ص ${s.sourcePage}`:''}</p>`:''}<p class="scenario-notice">${esc(state.scenarioMeta?.notice||'يظل النص الرسمي للقانون والقرارات المنفذة هو المرجع.')}</p></article>`;
   }
 
+  function decisionCard(decision){
+    const target=`decision-viewer.html#${encodeURIComponent(decision.filename)}`;
+    return `<article class="decision-row search-decision"><div class="decision-icon" aria-hidden="true">PDF</div><div><p class="decision-kicker">قرار وزاري</p><h3>${esc(decision.title)}</h3></div><a class="decision-link" href="${target}" aria-label="فتح ${esc(decision.title)}">فتح القرار</a></article>`;
+  }
+
   function render(reset=true){
     const raw=els.query.value.trim();
     if(!raw){ showWelcome(); return; }
     const lawFilter=$('input[name="law"]:checked').value, kindFilter=$('input[name="kind"]:checked').value;
+    const decisionIntent=lawFilter==='all'&&kindFilter==='all'&&isDecisionIntent(raw);
+    const decisions=decisionIntent?decisionMatches(raw):[];
     const scenario=lawFilter==='all'&&kindFilter==='all'?matchingScenario(raw):null;
     state.filtered=state.items.map(i=>({i,s:score(i,raw)})).filter(x=>x.s>0)
       .filter(x=>lawFilter==='all'||x.i.law===lawFilter).filter(x=>kindFilter==='all'||x.i.kind===kindFilter)
       .sort((a,b)=>b.s-a.s||Number.parseInt(a.i.num,10)-Number.parseInt(b.i.num,10)||String(a.i.num).localeCompare(String(b.i.num),'ar')).map(x=>x.i);
     if(reset) state.shown=state.pageSize;
     const visible=state.filtered.slice(0,state.shown);
+    if(decisions.length){
+      els.title.textContent=`القرارات المطابقة لـ «${raw}»`;
+      els.count.textContent=`${decisions.length} قرار`;
+      els.results.innerHTML=`<div class="fallback-note"><strong>وجدنا القرار في فهرس القرارات الوزارية.</strong><span>يفتح الرابط ملف القرار داخل عارض الموقع.</span></div>${decisions.map(decisionCard).join('')}`;
+      els.more.hidden=true;
+      els.clear.hidden=false;
+      syncHash(raw,lawFilter,kindFilter);
+      return;
+    }
+    if(decisionIntent){
+      els.title.textContent=`البحث في القرارات عن «${raw}»`;
+      els.count.textContent='0 قرار';
+      els.results.innerHTML='<div class="empty-state"><strong>لا يوجد قرار مطابق في الفهرس</strong><span>تحقق من رقم القرار أو ابحث بكلمة أقصر من موضوعه.</span><p><a class="primary-link" href="decisions.html">تصفح كل القرارات</a></p></div>';
+      els.more.hidden=true;
+      els.clear.hidden=false;
+      syncHash(raw,lawFilter,kindFilter);
+      return;
+    }
     if(scenario){
       const referenced=(scenario.articles||[]).map(a=>item(a.law,a.num)).filter(Boolean);
       const unique=[...new Map(referenced.map(i=>[i.id,i])).values()];
@@ -135,7 +221,7 @@
   }
   function showWelcome(){
     els.title.textContent='ابدأ بكتابة كلمة أو رقم مادة'; els.count.textContent=''; els.clear.hidden=true; els.more.hidden=true;
-    els.results.innerHTML=`<div class="welcome-state"><div class="welcome-icon" aria-hidden="true">§</div><h3>اسأل عن موقف HR أو ابحث في القانون</h3><p>لو وجدنا موقفًا مطابقًا سنعرض خطواته ومواده، وإلا سنعرض النصوص القانونية الكاملة والعقوبات المرتبطة.</p><div class="quick-searches"><span>جرّب:</span><button data-query="موظف قدم استقالة أعمل إيه؟">استقالة موظف</button><button data-query="الإعفاء الشخصي كام؟">إعفاء المرتبات</button><button data-query="توريد ضريبة المرتبات">توريد الضريبة</button><button data-query="54">المادة 54</button></div></div>`;
+    els.results.innerHTML=`<div class="welcome-state"><div class="welcome-icon" aria-hidden="true">§</div><h3>اسأل عن موقف HR أو ابحث في القانون</h3><p>لو وجدنا موقفًا مطابقًا سنعرض خطواته ومواده، وإلا سنعرض النصوص القانونية الكاملة والعقوبات المرتبطة.</p><div class="quick-searches"><span>جرّب:</span><button data-query="موظف قدم استقالة أعمل إيه؟">استقالة موظف</button><button data-query="الإعفاء الشخصي كام؟">إعفاء المرتبات</button><button data-query="قرار 162">قرار 162</button><button data-query="54">المادة 54</button></div><p class="welcome-links"><a class="primary-link" href="scenarios.html">تصفح المواقف والأسئلة</a><a class="article-page-link" href="hr-hub/">أدوات HR من حازم موسى</a></p></div>`;
     history.replaceState(null,'',location.pathname);
   }
   function syncHash(q,l,k){ const p=new URLSearchParams({q}); if(l!=='all')p.set('law',l);if(k!=='all')p.set('kind',k);history.replaceState(null,'',`#${p}`); }
@@ -150,13 +236,15 @@
 
   async function init(){
     try{
-      const dataVersion='20260907-1';
-      const [lawsRes,scenariosRes]=await Promise.all([
+      const dataVersion='20260911-1';
+      const [lawsRes,scenariosRes,decisionsRes]=await Promise.all([
         fetch(`data/laws.json?v=${dataVersion}`),
-        fetch(`data/hr-scenarios.json?v=${dataVersion}`)
+        fetch(`data/hr-scenarios.json?v=${dataVersion}`),
+        fetch(`data/decisions.json?v=${dataVersion}`)
       ]);
       if(!lawsRes.ok)throw new Error(); state.data=await lawsRes.json();
       if(scenariosRes.ok){const scenarioData=await scenariosRes.json();state.scenarios=scenarioData.scenarios||[];state.scenarioMeta=scenarioData.meta||null;}
+      if(decisionsRes.ok){const decisionsData=await decisionsRes.json();state.decisions=decisionsData.files||[];}
       state.items=state.data.laws.flatMap(l=>l.items); els.total.textContent=state.items.length;
       const p=new URLSearchParams(location.hash.slice(1)); if(p.get('q')){els.query.value=p.get('q');const lr=$(`input[name="law"][value="${p.get('law')}"]`);const kr=$(`input[name="kind"][value="${p.get('kind')}"]`);if(lr)lr.checked=true;if(kr)kr.checked=true;render();}
     }catch{els.results.innerHTML='<div class="empty-state"><strong>تعذر تحميل بيانات القوانين</strong><span>أعد تحميل الصفحة أو تحقق من ملفات الموقع.</span></div>'}
