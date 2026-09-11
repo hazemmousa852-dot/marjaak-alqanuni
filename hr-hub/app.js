@@ -255,10 +255,7 @@
 
   document.querySelector('#year').textContent = new Date().getFullYear();
 
-  const preferredTheme = readPreference(
-    'hazem-site-theme',
-    window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-  );
+  const preferredTheme = readPreference('hazem-site-theme', 'dark');
   setTheme(preferredTheme === 'light' ? 'light' : 'dark');
   translatePage(currentLanguage);
 
