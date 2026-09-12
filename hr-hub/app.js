@@ -36,7 +36,7 @@
       pillarLaw: 'قانون العمل<br>والامتثال',
       pillarTraining: 'تدريب<br>وتطوير',
       pillarTools: 'أدوات عملية<br>تسهّل عملك',
-      requestTraining: 'اطلب تفاصيل التدريب',
+      requestTraining: 'تفاصيل البرنامج التدريبي',
       exploreTools: 'استكشف الأدوات',
       knowMore: 'تعرّف عليّ أكثر',
       quote: 'لأن تطوير نفسك مش خيار.. ده استثمار',
@@ -49,9 +49,9 @@
       knowledgeToPractice: 'معرفة مرتبطة بالتطبيق',
       hrContent: 'محتوى وأدوات',
       practicalTrusted: 'عملية ومتخصصة',
-      toolsEyebrow: 'نماذج من أعمالي',
-      toolsTitle: 'أدوات تسهّل عملك',
-      toolsLead: 'مشروعات رقمية منشورة طورتها لحل مهام متكررة في شئون العاملين والمرتبات.',
+      toolsEyebrow: 'أدوات مجانية جاهزة',
+      toolsTitle: 'اختصر وقتك في مهام الـHR',
+      toolsLead: 'أربع أدوات منشورة تساعدك في الحسابات والنماذج والبحث القانوني، بدون تحميل أو تسجيل.',
       showAllTools: 'عرض كل الأدوات',
       toolSearchLabel: 'ابحث عن أداة',
       toolSearchPlaceholder: 'ابحث عن أداة...',
@@ -67,6 +67,11 @@
       openReference: 'افتح المرجع',
       publishedTool: 'أداة منشورة',
       publishedProject: 'مشروع منشور',
+      payrollImageAlt: 'واجهة دعائية لحاسبة صافي وشامل المرتب',
+      leaveImageAlt: 'واجهة دعائية لحاسبة الإجازات السنوية',
+      insuranceImageAlt: 'واجهة دعائية لأداة نماذج التأمينات',
+      legalImageAlt: 'واجهة دعائية للمرجع القانوني',
+      openToolsPage: 'شاهد صفحة الأدوات كاملة',
       noTools: 'لا توجد أداة مطابقة. جرّب كلمة أقصر.',
       toolResults: 'عدد الأدوات المطابقة: {count}',
       spotlightAlt: 'حازم موسى خلال مسيرته المهنية',
@@ -94,7 +99,11 @@
       programDeliveryLabel: 'تعلم من أي مكان',
       programCertificate: 'شهادة حضور',
       programCertificateLabel: 'في نهاية البرنامج',
-      programCta: 'اطلب المواعيد والسعر',
+      programCta: 'استعرض تفاصيل البرنامج',
+      programPreviewTitle: 'صفحة تدريب متكاملة',
+      programPreview1: 'محاور البرنامج مرتبة بصورة واضحة',
+      programPreview2: 'الفئة المناسبة وطريقة التدريب',
+      programPreview3: 'روابط التسجيل والمحتوى عند إتاحتها',
       programTopicsTitle: 'ماذا ستتعلم؟',
       programTopic1: 'قانون العمل رقم 14 لسنة 2025 والقرارات المكملة',
       programTopic2: 'ملفات العاملين والعقود واللوائح والسجلات',
@@ -153,7 +162,7 @@
       pillarLaw: 'Labor Law<br>& Compliance',
       pillarTraining: 'Training<br>& Development',
       pillarTools: 'Practical tools<br>for your work',
-      requestTraining: 'Request training details',
+      requestTraining: 'View training program',
       exploreTools: 'Explore tools',
       knowMore: 'Know me better',
       quote: 'Developing yourself is not optional. It is an investment.',
@@ -166,9 +175,9 @@
       knowledgeToPractice: 'knowledge connected to practice',
       hrContent: 'Content & tools',
       practicalTrusted: 'practical and specialized',
-      toolsEyebrow: 'Selected work',
-      toolsTitle: 'Tools that make work easier',
-      toolsLead: 'Published digital projects I built to solve recurring personnel and payroll tasks.',
+      toolsEyebrow: 'Free, ready-to-use tools',
+      toolsTitle: 'Save time on everyday HR tasks',
+      toolsLead: 'Four published tools for calculations, forms and legal research — with no download or account required.',
       showAllTools: 'Show all tools',
       toolSearchLabel: 'Search for a tool',
       toolSearchPlaceholder: 'Search for a tool...',
@@ -184,6 +193,11 @@
       openReference: 'Open reference',
       publishedTool: 'Published tool',
       publishedProject: 'Published project',
+      payrollImageAlt: 'Promotional visual for the Net and Gross Salary Calculator',
+      leaveImageAlt: 'Promotional visual for the Annual Leave Calculator',
+      insuranceImageAlt: 'Promotional visual for the social insurance forms tool',
+      legalImageAlt: 'Promotional visual for the legal reference',
+      openToolsPage: 'View the full tools page',
       noTools: 'No matching tool. Try a shorter keyword.',
       toolResults: 'Matching tools: {count}',
       spotlightAlt: 'Hazem Moussa during his professional journey',
@@ -211,7 +225,11 @@
       programDeliveryLabel: 'Learn from anywhere',
       programCertificate: 'Attendance certificate',
       programCertificateLabel: 'At program completion',
-      programCta: 'Request dates and price',
+      programCta: 'Explore program details',
+      programPreviewTitle: 'A complete training page',
+      programPreview1: 'Clearly structured program topics',
+      programPreview2: 'Target audience and training approach',
+      programPreview3: 'Registration and content links when available',
       programTopicsTitle: 'What will you learn?',
       programTopic1: 'Egyptian Labor Law No. 14 of 2025 and its implementing decisions',
       programTopic2: 'Employee files, contracts, workplace policies and records',
@@ -361,6 +379,7 @@
   }
 
   function filterTools() {
+    if (!toolSearch) return;
     const query = normalize(toolSearch.value);
     const terms = query.split(/\s+/).filter(Boolean);
     let visibleCount = 0;
@@ -373,8 +392,8 @@
       if (visible) visibleCount += 1;
     });
 
-    noTools.hidden = visibleCount !== 0;
-    toolResultStatus.textContent = terms.length
+    if (noTools) noTools.hidden = visibleCount !== 0;
+    if (toolResultStatus) toolResultStatus.textContent = terms.length
       ? translations[currentLanguage].toolResults.replace('{count}', String(visibleCount))
       : '';
   }
@@ -412,27 +431,30 @@
     if (window.innerWidth > 1020) closeMenu();
   });
 
-  toolSearch.addEventListener('input', filterTools);
-  toolSearch.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape' || !toolSearch.value) return;
-    toolSearch.value = '';
-    filterTools();
-  });
+  if (toolSearch) {
+    toolSearch.addEventListener('input', filterTools);
+    toolSearch.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !toolSearch.value) return;
+      toolSearch.value = '';
+      filterTools();
+    });
 
-  document.querySelector('#showAllTools').addEventListener('click', () => {
-    toolSearch.value = '';
-    filterTools();
-    toolSearch.focus();
-  });
+    document.querySelector('#showAllTools')?.addEventListener('click', () => {
+      toolSearch.value = '';
+      filterTools();
+      toolSearch.focus();
+    });
 
-  document.querySelector('.search-jump').addEventListener('click', () => {
-    document.querySelector('#tools').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.setTimeout(() => toolSearch.focus(), 450);
-  });
+    document.querySelector('.search-jump')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      document.querySelector('#tools')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => toolSearch.focus(), 450);
+    });
+  }
 
   const portrait = document.querySelector('.portrait');
-  portrait.addEventListener('error', () => {
-    portrait.closest('.hero-visual').classList.add('image-missing');
+  portrait?.addEventListener('error', () => {
+    portrait.closest('.hero-visual')?.classList.add('image-missing');
   });
 
   const sections = [...document.querySelectorAll('main section[id]')];

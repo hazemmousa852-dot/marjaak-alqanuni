@@ -1092,6 +1092,89 @@ html[data-theme="light"] .gold-card { --tool-color: #7a5200; }
   text-align: center;
 }
 
+.featured-tools-grid {
+  direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+[dir="ltr"] .featured-tools-grid {
+  direction: ltr;
+}
+
+.featured-tool {
+  --tool-color: #f2b94b;
+  overflow: hidden;
+  border: 1px solid rgba(116, 166, 202, .23);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(16, 47, 72, .92), rgba(7, 25, 40, .96));
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .15);
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+html[data-theme="light"] .featured-tool {
+  background: rgba(255, 255, 255, .9);
+}
+
+.featured-tool:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--tool-color) 58%, transparent);
+}
+
+.featured-tool img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.featured-tool > div {
+  padding: 17px;
+}
+
+.featured-tool h3 {
+  min-height: 54px;
+  margin: 9px 0 14px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.featured-tool a {
+  display: inline-flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--tool-color);
+  border-radius: 999px;
+  color: var(--tool-color);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.featured-tool a:hover {
+  background: var(--tool-color);
+  color: #091726;
+}
+
+.featured-tool a svg {
+  width: 17px;
+  height: 17px;
+}
+
+[dir="rtl"] .featured-tool a svg,
+[dir="rtl"] .section-center-action svg {
+  transform: scaleX(-1);
+}
+
+.section-center-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
 .spotlight-section {
   background: linear-gradient(180deg, var(--navy-950), var(--navy-900));
 }
@@ -1595,6 +1678,7 @@ html[data-theme="light"] footer {
   }
 
   .tool-grid,
+  .featured-tools-grid,
   .expertise-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1834,6 +1918,7 @@ html[data-theme="light"] footer {
   }
 
   .tool-grid,
+  .featured-tools-grid,
   .expertise-grid {
     grid-template-columns: 1fr;
   }
@@ -1852,6 +1937,10 @@ html[data-theme="light"] footer {
   }
 
   .tool-card {
+    min-height: 0;
+  }
+
+  .featured-tool h3 {
     min-height: 0;
   }
 
