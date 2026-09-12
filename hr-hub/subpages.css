@@ -212,15 +212,66 @@
   flex: 0 0 auto;
 }
 
+.tool-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -6px 0 28px;
+}
+
+.tool-filter {
+  min-height: 40px;
+  padding: 8px 17px;
+  border: 1px solid rgba(116, 166, 202, .27);
+  border-radius: 999px;
+  background: rgba(10, 36, 56, .72);
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.tool-filter:hover {
+  transform: translateY(-1px);
+  border-color: rgba(242, 185, 75, .55);
+  color: #fff;
+}
+
+.tool-filter.is-active {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #071827;
+  box-shadow: 0 8px 24px rgba(242, 185, 75, .18);
+}
+
+.tool-filter:focus-visible {
+  outline: 3px solid rgba(92, 159, 255, .45);
+  outline-offset: 3px;
+}
+
+html[data-theme="light"] .tool-filter {
+  background: rgba(255, 255, 255, .78);
+  color: #12324b;
+}
+
+html[data-theme="light"] .tool-filter.is-active {
+  background: #8b610b;
+  color: #fff;
+}
+
 .tool-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
 }
 
 .tool-showcase-card {
   --tool-color: #f2b94b;
+  display: flex;
   overflow: hidden;
+  flex-direction: column;
   border: 1px solid rgba(116, 166, 202, .23);
   border-radius: 24px;
   background: linear-gradient(145deg, rgba(16, 47, 72, .93), rgba(7, 25, 40, .98));
@@ -272,6 +323,7 @@ html[data-theme="light"] .tool-showcase-card {
 .tool-showcase-body {
   display: flex;
   min-height: 330px;
+  flex: 1;
   flex-direction: column;
   align-items: flex-start;
   padding: clamp(22px, 3vw, 32px);
@@ -1186,6 +1238,10 @@ html[data-theme="light"] .route-number {
   .video-category-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .tool-showcase-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
@@ -1264,6 +1320,23 @@ html[data-theme="light"] .route-number {
   .tools-page-toolbar .all-tools-button {
     width: 100%;
     justify-content: center;
+  }
+
+  .tool-filter-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 2px 2px 10px;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .tool-filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tool-filter {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
 
   .tool-showcase-body {

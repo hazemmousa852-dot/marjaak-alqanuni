@@ -182,29 +182,35 @@
     tools: {
       ar: {
         pageTitle: 'أدوات الموارد البشرية | حازم موسى',
-        pageDescription: 'أدوات مجانية وعملية للمرتبات والإجازات ونماذج التأمينات والبحث في قانون العمل، من تطوير حازم موسى.',
+        pageDescription: '12 أداة مجانية وعملية للمرتبات والإجازات والعقود والتأمينات والتدقيق والبحث القانوني والتطوير المهني، من تطوير حازم موسى.',
         toolsCrumb: 'الأدوات',
         toolsHeroTitle: 'أدوات HR <span>توفّر وقتك</span>',
         toolsHeroLead: 'حلول رقمية مجانية صنعتها من واقع العمل اليومي في شئون العاملين والمرتبات؛ افتح الأداة وابدأ مباشرة بدون تحميل أو تسجيل.',
         browseTools: 'استعرض الأدوات',
         askAboutTools: 'اسأل عن الأدوات',
-        toolsProof1: '4 أدوات منشورة',
+        toolsProof1: '12 أداة منشورة',
         toolsProof2: 'استخدام مجاني',
         toolsProof3: 'تعمل من المتصفح',
         toolsSectionEyebrow: 'جاهزة للاستخدام',
         toolsSectionTitle: 'اختر الأداة المناسبة لمهمتك',
-        toolsSectionLead: 'كل أداة مصممة لتبسيط خطوة متكررة وتحويلها إلى عملية أسرع وأوضح.',
+        toolsSectionLead: 'اختر من الحاسبات والنماذج وأدوات الامتثال والبحث والتطوير المهني؛ كل أداة تحوّل خطوة متكررة إلى عملية أسرع وأوضح.',
         showAllTools: 'عرض كل الأدوات',
         toolSearchLabel: 'ابحث عن أداة',
         toolSearchPlaceholder: 'ابحث بالاسم أو المهمة...',
+        toolFilterLabel: 'تصفية الأدوات حسب النوع',
+        filterAll: 'الكل',
+        filterCalculators: 'الحاسبات',
+        filterDocuments: 'النماذج والمستندات',
+        filterLegal: 'القوانين والتدقيق',
+        filterLearning: 'التعلّم والمسار المهني',
         noTools: 'لا توجد أداة مطابقة. جرّب كلمة أقصر.',
         toolResults: 'عدد الأدوات المطابقة: {count}',
         payrollImageAlt: 'واجهة دعائية لحاسبة صافي وشامل المرتب',
         payrollTitle: 'حاسبة صافي / شامل المرتب',
-        payrollDesc: 'أدخل بيانات المرتب وانتقل بين الصافي والشامل بطريقة عملية وسريعة.',
-        payrollBenefit1: 'حساب مباشر حسب البيانات المدخلة',
-        payrollBenefit2: 'مناسبة لمراجعة عروض وبيانات الرواتب',
-        payrollBenefit3: 'واجهة بسيطة تعمل على الهاتف والكمبيوتر',
+        payrollDesc: 'احسب صافي الراتب من الإجمالي أو الإجمالي المطلوب لصافي محدد وفق قواعد 2026، مع تفصيل التأمينات والضرائب.',
+        payrollBenefit1: 'تحويل في الاتجاهين بين الصافي والإجمالي',
+        payrollBenefit2: 'تفصيل الأساسي والبدلات والعمولات',
+        payrollBenefit3: 'استعلام فردي ومعالج جماعي للبيانات',
         leaveImageAlt: 'واجهة دعائية لحاسبة الإجازات السنوية',
         leaveTitle: 'حاسبة الإجازات السنوية',
         leaveDesc: 'احسب رصيد الإجازات المستحق بصورة منظمة بدل الحسابات اليدوية المتكررة.',
@@ -217,41 +223,96 @@
         insuranceBenefit1: 'دعم نماذج س1 وس2 وس6',
         insuranceBenefit2: 'إعداد مجموعة نماذج في وقت أقل',
         insuranceBenefit3: 'ملفات PDF سهلة الحفظ والطباعة',
+        industrialImageAlt: 'واجهة دعائية لدليل المنشآت وحاسبات العمل',
+        industrialTitle: 'دليل المنشآت وحاسبات العمل',
+        industrialDesc: 'اعرف الفروق العملية بين المنشآت الصناعية وغير الصناعية، واحسب العمل الإضافي والإجازة المرضية وفق النظام المنطبق.',
+        industrialBenefit1: 'مقارنة ساعات العمل والراحة لكل نوع منشأة',
+        industrialBenefit2: 'حاسبة للإضافي والراحة الأسبوعية والعطلات',
+        industrialBenefit3: 'حاسبة مرضي بنتيجة وخطوات واضحة',
+        contractImageAlt: 'واجهة دعائية لمنشئ عقد العمل المصري',
+        contractTitle: 'منشئ عقد العمل المصري',
+        contractDesc: 'حرّر عقدًا منظمًا وفق قانون العمل 14 لسنة 2025، وراجع بنوده قبل الطباعة أو التنزيل.',
+        contractBenefit1: 'أنواع عقود وبيانات الطرفين والأجر والعمل',
+        contractBenefit2: 'معاينة A4 وإمكانية تعديل البنود',
+        contractBenefit3: 'تنزيل PDF وWord أو الطباعة مباشرة',
+        formFillerImageAlt: 'واجهة دعائية لأداة معبّي لنماذج التأمينات',
+        formFillerTitle: 'معبّي | نماذج س1 وس6',
+        formFillerDesc: 'املأ نماذج التأمينات س1 وس6 يدويًا أو من Excel، ثم نزّل كل نموذج أو دفعة كاملة من متصفحك.',
+        formFillerBenefit1: 'قالب Excel واستيراد مجموعة بيانات',
+        formFillerBenefit2: 'مراجعة النواقص والبحث والمعاينة',
+        formFillerBenefit3: 'PDF منفرد أو مدمج أو ZIP — والمعالجة محلية',
+        cvImageAlt: 'واجهة دعائية لمنشئ السيرة الذاتية المتوافقة مع ATS',
+        cvTitle: 'منشئ السيرة الذاتية ATS',
+        cvDesc: 'ابنِ سيرة ذاتية عربية أو إنجليزية منظمة ومتوافقة مع ATS، وعدّل أقسامك وشاهد النتيجة فورًا.',
+        cvBenefit1: 'الخبرات والتعليم والشهادات واللغات والمهارات',
+        cvBenefit2: 'إضافة وحذف الأقسام حسب خبرتك',
+        cvBenefit3: 'تنزيل PDF متوافق مع أنظمة التوظيف',
+        auditImageAlt: 'واجهة دعائية لأداة تدقيق شئون العاملين',
+        auditTitle: 'مدقق شئون العاملين القانوني',
+        auditDesc: 'افحص جاهزية ملف شئون العاملين قبل التفتيش عبر 9 محاور و41 بند امتثال، واحصل على تشخيص قابل للطباعة.',
+        auditBenefit1: 'تقييم كل بند: كامل أو جزئي أو غير متوفر',
+        auditBenefit2: 'نسبة امتثال ومستوى مخاطر وغرامات محتملة',
+        auditBenefit3: 'تقرير بالفجوات والاحتياجات والنصائح القانونية',
         legalImageAlt: 'واجهة دعائية للمرجع القانوني',
         legalTitle: 'مرجعك القانوني',
         legalDesc: 'ابحث داخل مواد القانون والقرارات والمواقف العملية من مكان واحد.',
         legalBenefit1: 'وصول أسرع للمادة القانونية',
         legalBenefit2: 'سيناريوهات مرتبطة بواقع العمل',
         legalBenefit3: 'مرجع عملي لمتخصصي الموارد البشرية',
+        laborSearchImageAlt: 'واجهة دعائية لباحث قانون العمل رقم 14 لسنة 2025',
+        laborSearchTitle: 'باحث قانون العمل 14 لسنة 2025',
+        laborSearchDesc: 'صل للمادة التي تحتاجها فورًا داخل 279 مادة كاملة، بالبحث عن كلمة أو رقم المادة.',
+        laborSearchBenefit1: 'بحث مباشر بالكلمة أو رقم المادة',
+        laborSearchBenefit2: 'قسم مستقل للمواد الجزائية والغرامات',
+        laborSearchBenefit3: 'نسخ المادة أو مشاركتها بسهولة',
+        insuranceSearchImageAlt: 'واجهة دعائية لباحث قانون التأمينات رقم 148 لسنة 2019',
+        insuranceSearchTitle: 'باحث قانون التأمينات 148 لسنة 2019',
+        insuranceSearchDesc: 'ابحث بسرعة داخل 170 مادة كاملة من قانون التأمينات الاجتماعية والمعاشات.',
+        insuranceSearchBenefit1: 'وصول مباشر بالكلمة أو رقم المادة',
+        insuranceSearchBenefit2: 'عرض مخصص للمواد الجزائية',
+        insuranceSearchBenefit3: 'نسخ النتائج ومشاركتها من المتصفح',
+        lawGameImageAlt: 'واجهة دعائية للعبة قانون العمل',
+        lawGameTitle: 'لعبة قانون العمل',
+        lawGameDesc: 'اختبر فهمك لقانون العمل 14 لسنة 2025 في تجربة تفاعلية خفيفة تحوّل المراجعة إلى تحدٍ ممتع.',
+        lawGameBenefit1: 'اختبار تفاعلي مع تلميحات ومراجعة سريعة',
+        lawGameBenefit2: 'شرح الإجابات وتقرير تفصيلي للنتيجة',
+        lawGameBenefit3: 'مشاركة الدرجة وطباعة شهادة إنجاز',
+        startChallenge: 'ابدأ التحدي الآن',
         toolsCtaTitle: 'عندك فكرة لأداة HR؟',
         toolsCtaLead: 'شارك معي المشكلة المتكررة في شغلك، وقد تتحول إلى أداة رقمية تخدم مجتمع الموارد البشرية.',
         toolsCtaButton: 'ابعث فكرتك على واتساب'
       },
       en: {
         pageTitle: 'HR Tools | Hazem Moussa',
-        pageDescription: 'Free practical tools for payroll, annual leave, social insurance forms and labor-law research, created by Hazem Moussa.',
+        pageDescription: '12 free practical tools for payroll, leave, contracts, social insurance, compliance, legal research and career development, created by Hazem Moussa.',
         toolsCrumb: 'Tools',
         toolsHeroTitle: 'HR tools that <span>save you time</span>',
         toolsHeroLead: 'Free digital solutions built around everyday personnel and payroll work. Open any tool and get started — no download or account required.',
         browseTools: 'Browse tools',
         askAboutTools: 'Ask about the tools',
-        toolsProof1: '4 published tools',
+        toolsProof1: '12 published tools',
         toolsProof2: 'Free to use',
         toolsProof3: 'Browser based',
         toolsSectionEyebrow: 'Ready to use',
         toolsSectionTitle: 'Choose the right tool for the task',
-        toolsSectionLead: 'Each tool simplifies a recurring step and turns it into a faster, clearer process.',
+        toolsSectionLead: 'Explore calculators, document generators, compliance tools, legal search and career resources — each built to make recurring work faster and clearer.',
         showAllTools: 'Show all tools',
         toolSearchLabel: 'Search for a tool',
         toolSearchPlaceholder: 'Search by name or task...',
+        toolFilterLabel: 'Filter tools by type',
+        filterAll: 'All',
+        filterCalculators: 'Calculators',
+        filterDocuments: 'Forms & documents',
+        filterLegal: 'Law & audit',
+        filterLearning: 'Learning & career',
         noTools: 'No matching tool. Try a shorter keyword.',
         toolResults: 'Matching tools: {count}',
         payrollImageAlt: 'Promotional visual for the Net and Gross Salary Calculator',
         payrollTitle: 'Net / Gross Salary Calculator',
-        payrollDesc: 'Enter salary data and move between net and gross figures in a quick, practical workflow.',
-        payrollBenefit1: 'Instant calculation using your inputs',
-        payrollBenefit2: 'Useful for reviewing salary data and offers',
-        payrollBenefit3: 'A simple mobile and desktop interface',
+        payrollDesc: 'Calculate net pay from gross, or the gross required for a target net salary under 2026 rules, with insurance and tax breakdowns.',
+        payrollBenefit1: 'Convert in both directions between net and gross',
+        payrollBenefit2: 'Break down basic pay, allowances and commissions',
+        payrollBenefit3: 'Individual lookup and batch data processor',
         leaveImageAlt: 'Promotional visual for the Annual Leave Calculator',
         leaveTitle: 'Annual Leave Calculator',
         leaveDesc: 'Calculate annual leave entitlement clearly instead of repeating manual calculations.',
@@ -264,12 +325,61 @@
         insuranceBenefit1: 'Supports S1, S2 and S6 forms',
         insuranceBenefit2: 'Prepare batches in less time',
         insuranceBenefit3: 'PDF files ready to save and print',
+        industrialImageAlt: 'Promotional visual for the establishment guide and labor calculators',
+        industrialTitle: 'Establishment Guide & Labor Calculators',
+        industrialDesc: 'Understand the practical differences between industrial and non-industrial establishments, then calculate overtime and sick leave under the applicable system.',
+        industrialBenefit1: 'Compare working hours and rest rules by establishment type',
+        industrialBenefit2: 'Calculate overtime, rest days and public holidays',
+        industrialBenefit3: 'Sick-leave calculator with clear calculation steps',
+        contractImageAlt: 'Promotional visual for the Egyptian employment contract generator',
+        contractTitle: 'Egyptian Employment Contract Generator',
+        contractDesc: 'Draft a structured contract under Labor Law 14/2025 and review every clause before printing or downloading.',
+        contractBenefit1: 'Contract types plus party, pay and workplace details',
+        contractBenefit2: 'A4 preview with editable clauses',
+        contractBenefit3: 'Download as PDF or Word, or print directly',
+        formFillerImageAlt: 'Promotional visual for the Maabbi insurance-forms tool',
+        formFillerTitle: 'Maabbi | S1 & S6 Forms',
+        formFillerDesc: 'Complete S1 and S6 social-insurance forms manually or from Excel, then download one record or a full batch in your browser.',
+        formFillerBenefit1: 'Excel template and batch data import',
+        formFillerBenefit2: 'Missing-data review, search and preview',
+        formFillerBenefit3: 'Single or merged PDF, or ZIP — processed locally',
+        cvImageAlt: 'Promotional visual for the ATS-friendly CV builder',
+        cvTitle: 'ATS CV Builder',
+        cvDesc: 'Build a structured Arabic or English ATS-friendly CV, edit its sections and see the result instantly.',
+        cvBenefit1: 'Experience, education, certificates, languages and skills',
+        cvBenefit2: 'Add or remove sections to fit your background',
+        cvBenefit3: 'Download an ATS-friendly PDF',
+        auditImageAlt: 'Promotional visual for the personnel legal-audit tool',
+        auditTitle: 'Personnel Legal Audit',
+        auditDesc: 'Check personnel-file readiness before inspection across 9 sections and 41 compliance items, then generate a printable diagnosis.',
+        auditBenefit1: 'Rate each item as complete, partial or unavailable',
+        auditBenefit2: 'Compliance score, risk level and potential fines',
+        auditBenefit3: 'Report covering gaps, needs and legal recommendations',
         legalImageAlt: 'Promotional visual for the legal reference',
         legalTitle: 'Your Legal Reference',
         legalDesc: 'Search legal articles, decisions and practical workplace scenarios in one place.',
         legalBenefit1: 'Faster access to legal provisions',
         legalBenefit2: 'Scenarios connected to real work',
         legalBenefit3: 'A practical reference for HR professionals',
+        laborSearchImageAlt: 'Promotional visual for the Labor Law 14/2025 search tool',
+        laborSearchTitle: 'Labor Law 14/2025 Search',
+        laborSearchDesc: 'Reach the exact provision you need across all 279 articles by searching a keyword or article number.',
+        laborSearchBenefit1: 'Direct search by keyword or article number',
+        laborSearchBenefit2: 'Dedicated penalties and fines view',
+        laborSearchBenefit3: 'Copy or share an article easily',
+        insuranceSearchImageAlt: 'Promotional visual for the Social Insurance Law 148/2019 search tool',
+        insuranceSearchTitle: 'Social Insurance Law 148/2019 Search',
+        insuranceSearchDesc: 'Search all 170 articles of Egypt’s Social Insurance and Pensions Law in seconds.',
+        insuranceSearchBenefit1: 'Direct access by keyword or article number',
+        insuranceSearchBenefit2: 'Dedicated view for penalty provisions',
+        insuranceSearchBenefit3: 'Copy and share results from the browser',
+        lawGameImageAlt: 'Promotional visual for the Labor Law Game',
+        lawGameTitle: 'Labor Law Game',
+        lawGameDesc: 'Test your understanding of Labor Law 14/2025 in a light interactive experience that turns revision into a fun challenge.',
+        lawGameBenefit1: 'Interactive quiz with hints and quick review',
+        lawGameBenefit2: 'Answer explanations and a detailed score report',
+        lawGameBenefit3: 'Share your score and print a completion certificate',
+        startChallenge: 'Start the challenge',
         toolsCtaTitle: 'Have an idea for an HR tool?',
         toolsCtaLead: 'Share the recurring problem you face at work. It may become a digital tool that helps the HR community.',
         toolsCtaButton: 'Send your idea on WhatsApp'
@@ -719,6 +829,7 @@
   const whatsappLinks = [...document.querySelectorAll('[data-whatsapp-link]')];
   const toolSearch = document.querySelector('#toolSearch');
   const toolCards = [...document.querySelectorAll('.search-tool-card')];
+  const toolFilterButtons = [...document.querySelectorAll('[data-tool-filter]')];
   const noTools = document.querySelector('#noTools');
   const resultStatus = document.querySelector('#toolResultStatus');
 
@@ -740,6 +851,7 @@
 
   let currentLanguage = readPreference('hazem-site-language', 'ar');
   if (!common[currentLanguage]) currentLanguage = 'ar';
+  let activeToolFilter = 'all';
 
   const getDictionary = (language) => ({
     ...common[language],
@@ -756,24 +868,36 @@
     .trim();
 
   const filterTools = () => {
-    if (!toolSearch) return;
+    if (!toolCards.length) return;
     const dictionary = getDictionary(currentLanguage);
-    const terms = normalize(toolSearch.value).split(/\s+/).filter(Boolean);
+    const terms = normalize(toolSearch?.value || '').split(/\s+/).filter(Boolean);
     let visibleCount = 0;
 
     toolCards.forEach((card) => {
       const source = currentLanguage === 'ar' ? card.dataset.searchAr : card.dataset.searchEn;
-      const visible = !terms.length || terms.every((term) => normalize(`${source} ${card.textContent}`).includes(term));
+      const matchesCategory = activeToolFilter === 'all' || card.dataset.toolCategory === activeToolFilter;
+      const matchesSearch = !terms.length || terms.every((term) => normalize(`${source} ${card.textContent}`).includes(term));
+      const visible = matchesCategory && matchesSearch;
       card.hidden = !visible;
       if (visible) visibleCount += 1;
     });
 
     if (noTools) noTools.hidden = visibleCount !== 0;
     if (resultStatus) {
-      resultStatus.textContent = terms.length
+      resultStatus.textContent = terms.length || activeToolFilter !== 'all'
         ? dictionary.toolResults.replace('{count}', String(visibleCount))
         : '';
     }
+  };
+
+  const setActiveToolFilter = (filter) => {
+    activeToolFilter = filter;
+    toolFilterButtons.forEach((button) => {
+      const selected = button.dataset.toolFilter === filter;
+      button.classList.toggle('is-active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    filterTools();
   };
 
   const translatePage = (language) => {
@@ -886,8 +1010,12 @@
     });
     document.querySelector('#showAllTools')?.addEventListener('click', () => {
       toolSearch.value = '';
-      filterTools();
+      setActiveToolFilter('all');
       toolSearch.focus();
     });
   }
+
+  toolFilterButtons.forEach((button) => {
+    button.addEventListener('click', () => setActiveToolFilter(button.dataset.toolFilter || 'all'));
+  });
 })();
