@@ -17,9 +17,13 @@
       navContact: 'تواصل معي',
       searchToolsAria: 'ابحث في الأدوات',
       themeAria: 'تغيير المظهر',
+      themeToLight: 'تفعيل الوضع الفاتح',
+      themeToDark: 'تفعيل الوضع الداكن',
+      themeControl: 'تغيير المظهر',
       menuAria: 'فتح القائمة',
       closeMenuAria: 'إغلاق القائمة',
       contactNow: 'واتساب الآن',
+      mobileWhatsapp: 'تواصل عبر واتساب',
       welcome: 'مرحبًا بك في مساحتي المهنية',
       roleManager: 'مدير موارد بشرية',
       roleTrainer: 'مدرب',
@@ -64,6 +68,7 @@
       publishedTool: 'أداة منشورة',
       publishedProject: 'مشروع منشور',
       noTools: 'لا توجد أداة مطابقة. جرّب كلمة أقصر.',
+      toolResults: 'عدد الأدوات المطابقة: {count}',
       spotlightAlt: 'حازم موسى خلال مسيرته المهنية',
       spotlightTitle: 'رحلة تجمع الإدارة والتدريب والتطوير',
       spotlightDesc: 'منذ 2008، تمتد الرحلة بين العمل في إدارة الموارد البشرية داخل مصر والكويت، وتقديم التدريب العملي، وتطوير أدوات رقمية تخدم مجتمع الـHR.',
@@ -79,9 +84,24 @@
       expert3Desc: 'تبسيط النصوص والقرارات وربطها بمواقف HR الفعلية داخل بيئة العمل.',
       expert4Title: 'برامج تدريبية عملية',
       expert4Desc: 'تدريب أونلاين وورش عمل تحول المعرفة إلى خطوات ونماذج قابلة للتطبيق.',
-      servicesCtaTitle: 'محتاج برنامج يناسب فريقك أو تطور مهاراتك؟',
-      servicesCtaText: 'تواصل معي وحدد احتياجك في شئون العاملين أو المرتبات أو قانون العمل.',
-      discussNeeds: 'ناقش احتياجك',
+      programEyebrow: 'برنامج تدريبي متكامل',
+      programTitle: 'شئون العاملين والمرتبات',
+      programLead: 'برنامج أونلاين عملي ينقلك من فهم الإجراءات والقانون إلى تنفيذ مهام شئون العاملين والمرتبات بصورة منظمة.',
+      programFactsLabel: 'معلومات البرنامج',
+      programDuration: '30 ساعة',
+      programDurationLabel: 'تدريب تطبيقي',
+      programDelivery: 'أونلاين',
+      programDeliveryLabel: 'تعلم من أي مكان',
+      programCertificate: 'شهادة حضور',
+      programCertificateLabel: 'في نهاية البرنامج',
+      programCta: 'اطلب المواعيد والسعر',
+      programTopicsTitle: 'ماذا ستتعلم؟',
+      programTopic1: 'قانون العمل رقم 14 لسنة 2025 والقرارات المكملة',
+      programTopic2: 'ملفات العاملين والعقود واللوائح والسجلات',
+      programTopic3: 'التأمينات الاجتماعية والنماذج المرتبطة بها',
+      programTopic4: 'أساسيات المرتبات والاستحقاقات والاستقطاعات',
+      programTopic5: 'استخدام Excel في شئون العاملين والمرتبات',
+      programTopic6: 'حالات ومواقف عملية من بيئة العمل',
       aboutEyebrow: 'من الخبرة إلى الأثر',
       aboutTitle: 'حازم موسى',
       aboutText: 'متخصص في إدارة الموارد البشرية منذ 2008، مع تركيز عملي على شئون العاملين والمرتبات وقانون العمل والامتثال، إلى جانب التدريب وتطوير أدوات رقمية تساعد مجتمع الموارد البشرية على العمل بصورة أسرع وأكثر دقة.',
@@ -96,6 +116,7 @@
       linkedinDesc: 'تابع المحتوى والخبرة المهنية',
       linkedinAction: 'زيارة الصفحة',
       whatsappMessage: 'مرحبًا أستاذ حازم، أرغب في معرفة تفاصيل التدريب أو التعاون المهني.',
+      trainingWhatsAppMessage: 'مرحبًا أستاذ حازم، أرغب في معرفة مواعيد وسعر برنامج شئون العاملين والمرتبات.',
       rights: 'جميع الحقوق محفوظة.'
     },
     en: {
@@ -113,9 +134,13 @@
       navContact: 'Contact',
       searchToolsAria: 'Search HR tools',
       themeAria: 'Switch theme',
+      themeToLight: 'Enable light mode',
+      themeToDark: 'Enable dark mode',
+      themeControl: 'Switch theme',
       menuAria: 'Open menu',
       closeMenuAria: 'Close menu',
       contactNow: 'WhatsApp',
+      mobileWhatsapp: 'Contact me on WhatsApp',
       welcome: 'Welcome to my professional space',
       roleManager: 'HR Manager',
       roleTrainer: 'Trainer',
@@ -160,6 +185,7 @@
       publishedTool: 'Published tool',
       publishedProject: 'Published project',
       noTools: 'No matching tool. Try a shorter keyword.',
+      toolResults: 'Matching tools: {count}',
       spotlightAlt: 'Hazem Moussa during his professional journey',
       spotlightTitle: 'A journey across management, training and development',
       spotlightDesc: 'Since 2008, the journey has combined HR management experience in Egypt and Kuwait, practical training, and digital tools created for the HR community.',
@@ -175,9 +201,24 @@
       expert3Desc: 'Simplifying legal text and decisions and applying them to real HR situations at work.',
       expert4Title: 'Practical Training Programs',
       expert4Desc: 'Online training and workshops that turn knowledge into applicable steps and templates.',
-      servicesCtaTitle: 'Need a program for your team or professional growth?',
-      servicesCtaText: 'Tell me what you need in personnel, payroll or labor law.',
-      discussNeeds: 'Discuss your needs',
+      programEyebrow: 'Complete training program',
+      programTitle: 'Personnel Affairs & Payroll',
+      programLead: 'A practical online program that takes you from understanding procedures and law to carrying out personnel and payroll tasks in an organized way.',
+      programFactsLabel: 'Program information',
+      programDuration: '30 hours',
+      programDurationLabel: 'Practical training',
+      programDelivery: 'Online',
+      programDeliveryLabel: 'Learn from anywhere',
+      programCertificate: 'Attendance certificate',
+      programCertificateLabel: 'At program completion',
+      programCta: 'Request dates and price',
+      programTopicsTitle: 'What will you learn?',
+      programTopic1: 'Egyptian Labor Law No. 14 of 2025 and its implementing decisions',
+      programTopic2: 'Employee files, contracts, workplace policies and records',
+      programTopic3: 'Social insurance and the related official forms',
+      programTopic4: 'Payroll fundamentals, earnings and deductions',
+      programTopic5: 'Using Excel in personnel affairs and payroll',
+      programTopic6: 'Practical cases and real workplace situations',
       aboutEyebrow: 'From experience to impact',
       aboutTitle: 'Hazem Moussa',
       aboutText: 'An HR management professional since 2008, focused on personnel, payroll, labor law and compliance, as well as training and digital tools that help the HR community work faster and more accurately.',
@@ -192,18 +233,20 @@
       linkedinDesc: 'Follow my professional work and content',
       linkedinAction: 'View profile',
       whatsappMessage: 'Hello Hazem, I would like to know more about training or professional collaboration.',
+      trainingWhatsAppMessage: 'Hello Hazem, I would like to know the dates and price of the Personnel Affairs & Payroll program.',
       rights: 'All rights reserved.'
     }
   };
 
   const root = document.documentElement;
   const languageButton = document.querySelector('.language-toggle');
-  const themeButton = document.querySelector('.theme-toggle');
+  const themeButtons = [...document.querySelectorAll('[data-theme-toggle]')];
   const menuButton = document.querySelector('.menu-toggle');
   const mobileNav = document.querySelector('#mobileNav');
   const toolSearch = document.querySelector('#toolSearch');
   const toolCards = [...document.querySelectorAll('.tool-card')];
   const noTools = document.querySelector('#noTools');
+  const toolResultStatus = document.querySelector('#toolResultStatus');
   const description = document.querySelector('meta[name="description"]');
   const themeColor = document.querySelector('meta[name="theme-color"]');
   const openGraphTitle = document.querySelector('meta[property="og:title"]');
@@ -264,14 +307,20 @@
       const key = element.dataset.i18nAria;
       const value = key === 'menuAria' && menuButton.getAttribute('aria-expanded') === 'true'
         ? dictionary.closeMenuAria
+        : key === 'themeAria'
+          ? (root.dataset.theme === 'light' ? dictionary.themeToDark : dictionary.themeToLight)
         : dictionary[key];
       if (value !== undefined) element.setAttribute('aria-label', value);
     });
 
     languageButton.textContent = language === 'ar' ? 'EN' : 'ع';
     languageButton.setAttribute('aria-label', language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
-    const whatsappUrl = `https://wa.me/201030006087?text=${encodeURIComponent(dictionary.whatsappMessage)}`;
-    whatsappLinks.forEach((link) => link.setAttribute('href', whatsappUrl));
+    whatsappLinks.forEach((link) => {
+      const message = link.dataset.whatsappContext === 'training'
+        ? dictionary.trainingWhatsAppMessage
+        : dictionary.whatsappMessage;
+      link.setAttribute('href', `https://wa.me/201030006087?text=${encodeURIComponent(message)}`);
+    });
     savePreference('hazem-site-language', language);
     filterTools();
   };
@@ -279,6 +328,10 @@
   const setTheme = (theme) => {
     root.dataset.theme = theme;
     themeColor.setAttribute('content', theme === 'light' ? '#f8fbfc' : '#071827');
+    const dictionary = translations[currentLanguage];
+    themeButtons.forEach((button) => {
+      button.setAttribute('aria-label', theme === 'light' ? dictionary.themeToDark : dictionary.themeToLight);
+    });
     savePreference('hazem-site-theme', theme);
   };
 
@@ -309,16 +362,21 @@
 
   function filterTools() {
     const query = normalize(toolSearch.value);
+    const terms = query.split(/\s+/).filter(Boolean);
     let visibleCount = 0;
 
     toolCards.forEach((card) => {
       const source = currentLanguage === 'ar' ? card.dataset.searchAr : card.dataset.searchEn;
-      const visible = !query || normalize(`${source} ${card.textContent}`).includes(query);
+      const haystack = normalize(`${source} ${card.textContent}`);
+      const visible = !terms.length || terms.every((term) => haystack.includes(term));
       card.hidden = !visible;
       if (visible) visibleCount += 1;
     });
 
     noTools.hidden = visibleCount !== 0;
+    toolResultStatus.textContent = terms.length
+      ? translations[currentLanguage].toolResults.replace('{count}', String(visibleCount))
+      : '';
   }
 
   document.querySelector('#year').textContent = new Date().getFullYear();
@@ -331,8 +389,10 @@
     translatePage(currentLanguage === 'ar' ? 'en' : 'ar');
   });
 
-  themeButton.addEventListener('click', () => {
-    setTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
+  themeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      setTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
+    });
   });
 
   menuButton.addEventListener('click', () => {
@@ -353,6 +413,11 @@
   });
 
   toolSearch.addEventListener('input', filterTools);
+  toolSearch.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !toolSearch.value) return;
+    toolSearch.value = '';
+    filterTools();
+  });
 
   document.querySelector('#showAllTools').addEventListener('click', () => {
     toolSearch.value = '';
