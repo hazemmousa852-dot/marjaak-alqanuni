@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hazemmousa852-dot.github.io/marjaak-alqanuni/sitemap.xml
