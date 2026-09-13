@@ -651,15 +651,38 @@
         visitChannel: 'تابع قناة حازم موسى',
         topicsEyebrow: 'تصفح حسب الموضوع',
         topicsTitle: 'المكتبة تكبر مع كل شرح جديد',
+        latestEyebrow: 'أحدث إضافة',
+        latestTitle: 'ابدأ بأحدث فيديو في المكتبة',
+        browseLaborVideos: 'كل فيديوهات قانون العمل',
+        backToVideos: 'العودة إلى صفحة الفيديوهات',
+        personnelPageTitle: 'فيديوهات شئون العاملين | حازم موسى',
+        personnelPageDescription: 'فيديوهات عملية مجانية في شئون العاملين والعقود والملفات والإجراءات اليومية مع حازم موسى.',
+        personnelCrumb: 'شئون العاملين',
+        personnelEyebrow: 'مكتبة شئون العاملين',
+        personnelHeroTitle: 'فيديوهات <span>شئون العاملين</span>',
+        personnelHeroLead: 'شروحات عملية تساعدك في العقود والملفات والسجلات والإجراءات اليومية بصورة واضحة وسهلة التطبيق.',
+        personnelListEyebrow: 'فيديوهات التصنيف',
+        personnelListTitle: 'شروحات شئون العاملين',
+        personnelListLead: 'كل فيديوهات شئون العاملين في صفحة مستقلة يسهل الرجوع إليها ومشاركتها.',
+        laborPageTitle: 'فيديوهات قانون العمل | حازم موسى',
+        laborPageDescription: 'فيديوهات مجانية مبسطة في قانون العمل والقرارات الوزارية وتطبيقاتها العملية مع حازم موسى.',
+        laborCrumb: 'قانون العمل',
+        laborEyebrow: 'مكتبة قانون العمل',
+        laborHeroTitle: 'فيديوهات <span>قانون العمل</span>',
+        laborHeroLead: 'شرح مبسط للنصوص والقرارات والإجراءات القانونية وربطها بالمواقف العملية داخل بيئة العمل.',
+        laborListEyebrow: 'فيديوهات التصنيف',
+        laborListTitle: 'شروحات قانون العمل والقرارات',
+        laborListLead: 'كل فيديوهات قانون العمل في صفحة مستقلة ومنظمة مع روابط مباشرة للمشاهدة والمشاركة.',
+        backPanelText: 'استكمل التصفح واكتشف باقي موضوعات مكتبة الفيديو.',
         comingSoon: 'قريبًا',
         availableNow: 'متاح الآن',
-        category1Aria: 'شاهد فيديو شئون العاملين',
+        category1Aria: 'افتح صفحة فيديوهات شئون العاملين',
         category1Title: 'شئون العاملين',
         category1Desc: 'العقود والملفات واللوائح والسجلات والإجراءات اليومية.',
         category1Count: 'فيديو واحد متاح',
         category2Title: 'قانون العمل',
         category2Desc: 'شرح مبسط للنصوص والقرارات والمواقف العملية.',
-        category2Aria: 'شاهد فيديو قانون العمل',
+        category2Aria: 'افتح صفحة فيديوهات قانون العمل',
         category2Count: 'فيديو واحد متاح',
         category3Title: 'المرتبات وExcel',
         category3Desc: 'Payroll والاستحقاقات والاستقطاعات وتطبيقات Excel.',
@@ -712,15 +735,38 @@
         visitChannel: 'Follow Hazem Moussa on YouTube',
         topicsEyebrow: 'Browse by topic',
         topicsTitle: 'The library grows with every new explainer',
+        latestEyebrow: 'Latest addition',
+        latestTitle: 'Start with the newest video in the library',
+        browseLaborVideos: 'All Labor Law videos',
+        backToVideos: 'Back to the video library',
+        personnelPageTitle: 'Personnel Affairs Videos | Hazem Moussa',
+        personnelPageDescription: 'Free practical videos about personnel affairs, employment contracts, employee files and daily procedures with Hazem Moussa.',
+        personnelCrumb: 'Personnel Affairs',
+        personnelEyebrow: 'Personnel Affairs library',
+        personnelHeroTitle: '<span>Personnel Affairs</span> videos',
+        personnelHeroLead: 'Practical explainers covering employment contracts, files, records and daily procedures in a clear, applicable way.',
+        personnelListEyebrow: 'Category videos',
+        personnelListTitle: 'Personnel Affairs explainers',
+        personnelListLead: 'All Personnel Affairs videos in a dedicated page that is easy to revisit and share.',
+        laborPageTitle: 'Labor Law Videos | Hazem Moussa',
+        laborPageDescription: 'Free practical videos about labor law, ministerial decisions and workplace applications with Hazem Moussa.',
+        laborCrumb: 'Labor Law',
+        laborEyebrow: 'Labor Law library',
+        laborHeroTitle: '<span>Labor Law</span> videos',
+        laborHeroLead: 'Clear explanations of legal provisions, ministerial decisions and procedures, connected to real workplace situations.',
+        laborListEyebrow: 'Category videos',
+        laborListTitle: 'Labor Law and decision explainers',
+        laborListLead: 'All Labor Law videos in one organized page with direct watch and share links.',
+        backPanelText: 'Continue browsing and discover the other topics in the video library.',
         comingSoon: 'Coming soon',
         availableNow: 'Available now',
-        category1Aria: 'Watch the Personnel Affairs video',
+        category1Aria: 'Open the Personnel Affairs videos page',
         category1Title: 'Personnel Affairs',
         category1Desc: 'Contracts, files, policies, records and daily procedures.',
         category1Count: '1 video available',
         category2Title: 'Labor Law',
         category2Desc: 'Simple explanations of legal requirements, decisions and cases.',
-        category2Aria: 'Watch the Labor Law video',
+        category2Aria: 'Open the Labor Law videos page',
         category2Count: '1 video available',
         category3Title: 'Payroll & Excel',
         category3Desc: 'Payroll, earnings, deductions and practical Excel applications.',
@@ -889,6 +935,8 @@
 
   const root = document.documentElement;
   const pageName = document.body.dataset.page;
+  const pageTitleKey = document.body.dataset.titleKey || 'pageTitle';
+  const pageDescriptionKey = document.body.dataset.descriptionKey || 'pageDescription';
   const languageButton = document.querySelector('.language-toggle');
   const themeButtons = [...document.querySelectorAll('[data-theme-toggle]')];
   const menuButton = document.querySelector('.menu-toggle');
@@ -980,16 +1028,18 @@
 
   const translatePage = (language) => {
     const dictionary = getDictionary(language);
+    const translatedPageTitle = dictionary[pageTitleKey] || dictionary.pageTitle;
+    const translatedPageDescription = dictionary[pageDescriptionKey] || dictionary.pageDescription;
     currentLanguage = language;
     root.lang = language;
     root.dir = language === 'ar' ? 'rtl' : 'ltr';
-    document.title = dictionary.pageTitle;
-    description?.setAttribute('content', dictionary.pageDescription);
-    openGraphTitle?.setAttribute('content', dictionary.pageTitle);
-    openGraphDescription?.setAttribute('content', dictionary.pageDescription);
+    document.title = translatedPageTitle;
+    description?.setAttribute('content', translatedPageDescription);
+    openGraphTitle?.setAttribute('content', translatedPageTitle);
+    openGraphDescription?.setAttribute('content', translatedPageDescription);
     openGraphLocale?.setAttribute('content', language === 'ar' ? 'ar_EG' : 'en_US');
-    twitterTitle?.setAttribute('content', dictionary.pageTitle);
-    twitterDescription?.setAttribute('content', dictionary.pageDescription);
+    twitterTitle?.setAttribute('content', translatedPageTitle);
+    twitterDescription?.setAttribute('content', translatedPageDescription);
 
     document.querySelectorAll('[data-i18n]').forEach((element) => {
       const value = dictionary[element.dataset.i18n];
