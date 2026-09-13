@@ -993,6 +993,17 @@ html[data-theme="light"] .route-number {
   box-shadow: 0 24px 62px rgba(0, 0, 0, .15);
 }
 
+.featured-video-card.is-latest {
+  border-color: color-mix(in srgb, var(--accent-text) 58%, var(--line));
+  box-shadow: 0 26px 70px rgba(0, 0, 0, .2), 0 0 0 1px rgba(242, 185, 75, .06);
+}
+
+.featured-video-card:not(.is-latest) .featured-video-badge {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, .035);
+  color: var(--text-soft);
+}
+
 .featured-video-card + .featured-video-card {
   margin-top: clamp(32px, 5vw, 56px);
 }
@@ -1703,6 +1714,35 @@ html[data-theme="light"] .linkedin-channel {
   font-size: 14px;
 }
 
+@media (min-width: 1021px) {
+  body[data-page="videos"] .featured-video-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(370px, .82fr);
+    align-items: center;
+  }
+
+  body[data-page="videos"] .featured-video-player {
+    align-self: stretch;
+    min-height: 470px;
+    aspect-ratio: auto;
+  }
+
+  body[data-page="videos"] .featured-video-copy {
+    padding: 36px;
+  }
+
+  body[data-page="videos"] .featured-video-copy h3 {
+    font-size: clamp(25px, 2.4vw, 34px);
+  }
+
+  body[data-page="videos"] .featured-video-actions .primary-cta,
+  body[data-page="videos"] .featured-video-actions .secondary-cta {
+    min-height: 46px;
+    padding-inline: 17px;
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 1020px) {
   .page-hero-grid {
     grid-template-columns: minmax(0, 1fr) minmax(340px, .82fr);
@@ -1932,6 +1972,203 @@ html[data-theme="light"] .linkedin-channel {
 
   .instructor-copy {
     text-align: center;
+  }
+
+  body[data-page="videos"] .page-hero {
+    padding: 34px 0 40px;
+  }
+
+  body[data-page="videos"] .page-hero-grid {
+    gap: 0;
+  }
+
+  body[data-page="videos"] .media-visual {
+    display: none;
+  }
+
+  body[data-page="videos"] .breadcrumb {
+    margin-bottom: 10px;
+  }
+
+  body[data-page="videos"] .page-hero h1 {
+    font-size: clamp(32px, 10vw, 42px);
+  }
+
+  body[data-page="videos"] .page-hero-lead {
+    margin-top: 14px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  body[data-page="videos"] .page-hero-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(105px, .55fr);
+    gap: 8px;
+    margin-top: 21px;
+  }
+
+  body[data-page="videos"] .page-hero-actions .primary-cta,
+  body[data-page="videos"] .page-hero-actions .secondary-cta {
+    width: auto;
+    min-height: 46px;
+    padding-inline: 12px;
+    font-size: 12.5px;
+  }
+
+  body[data-page="videos"] .hero-proof {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 17px;
+  }
+
+  body[data-page="videos"] .hero-proof span {
+    justify-content: center;
+    min-width: 0;
+    padding: 7px 4px;
+    font-size: 10px;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  body[data-page="videos"] #library {
+    padding: 42px 0 50px;
+  }
+
+  body[data-page="videos"] .page-section-heading {
+    margin-bottom: 23px;
+  }
+
+  body[data-page="videos"] .page-section-heading h2 {
+    font-size: clamp(27px, 8.4vw, 34px);
+  }
+
+  body[data-page="videos"] .page-section-heading p:not(.eyebrow) {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  body[data-page="videos"] .featured-video-card {
+    margin-inline: 0;
+    border-inline: 1px solid color-mix(in srgb, var(--accent-text) 24%, var(--line));
+    border-radius: 19px;
+  }
+
+  body[data-page="videos"] .featured-video-card + .featured-video-card {
+    margin-top: 27px;
+  }
+
+  body[data-page="videos"] .featured-video-player {
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+  }
+
+  body[data-page="videos"] .featured-video-copy {
+    padding: 20px 18px 22px;
+  }
+
+  body[data-page="videos"] .featured-video-meta {
+    gap: 7px;
+    margin-bottom: 11px;
+    font-size: 11px;
+  }
+
+  body[data-page="videos"] .featured-video-badge {
+    padding: 5px 9px;
+  }
+
+  body[data-page="videos"] .featured-video-copy h3 {
+    font-size: clamp(21px, 6.4vw, 27px);
+    line-height: 1.35;
+  }
+
+  body[data-page="videos"] .featured-video-copy > p {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  body[data-page="videos"] .video-takeaways {
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  body[data-page="videos"] .video-takeaways li {
+    padding-inline-start: 22px;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  body[data-page="videos"] .featured-video-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  body[data-page="videos"] .featured-video-actions .primary-cta {
+    grid-column: 1 / -1;
+  }
+
+  body[data-page="videos"] .featured-video-actions .primary-cta,
+  body[data-page="videos"] .featured-video-actions .secondary-cta {
+    min-height: 44px;
+    padding: 7px 9px;
+    font-size: 11.5px;
+    line-height: 1.35;
+  }
+
+  body[data-page="videos"] .featured-video-actions .video-channel-link {
+    grid-column: 1 / -1;
+    padding-block: 6px 0;
+    font-size: 12px;
+  }
+
+  body[data-page="videos"] .video-topics-heading {
+    margin: 39px 0 16px;
+  }
+
+  body[data-page="videos"] .video-topics-heading h3 {
+    font-size: 23px;
+  }
+
+  body[data-page="videos"] .video-category-grid {
+    display: flex;
+    gap: 11px;
+    overflow-x: auto;
+    margin-inline: -11px;
+    padding: 2px 11px 13px;
+    scroll-padding-inline: 11px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  body[data-page="videos"] .video-category-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  body[data-page="videos"] .video-category-card {
+    flex: 0 0 min(78vw, 280px);
+    border-radius: 16px;
+    scroll-snap-align: start;
+  }
+
+  body[data-page="videos"] .video-category-body {
+    min-height: 138px;
+    padding: 17px;
+  }
+
+  body[data-page="videos"] .video-category-body h3 {
+    font-size: 17px;
+  }
+
+  body[data-page="videos"] .video-category-body p {
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  body[data-page="videos"] .page-section:not(#library) {
+    padding-block: 48px;
   }
 }
 
