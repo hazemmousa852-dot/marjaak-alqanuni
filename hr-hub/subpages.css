@@ -984,9 +984,9 @@ html[data-theme="light"] .route-number {
 }
 
 .featured-video-card {
-  display: grid;
+  display: block;
   overflow: hidden;
-  grid-template-columns: minmax(0, .88fr) minmax(460px, 1.12fr);
+  scroll-margin-top: calc(var(--header-height) + 18px);
   border: 1px solid color-mix(in srgb, var(--accent-text) 24%, var(--line));
   border-radius: 25px;
   background: var(--panel);
@@ -995,16 +995,14 @@ html[data-theme="light"] .route-number {
 
 .featured-video-player {
   position: relative;
-  grid-column: 2;
-  grid-row: 1;
-  min-height: 100%;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
   background: #02090f;
 }
 
 .featured-video-player::before {
-  display: block;
-  padding-top: 56.25%;
-  content: "";
+  display: none;
 }
 
 .featured-video-player iframe {
@@ -1017,8 +1015,6 @@ html[data-theme="light"] .route-number {
 
 .featured-video-copy {
   display: flex;
-  grid-column: 1;
-  grid-row: 1;
   flex-direction: column;
   justify-content: center;
   padding: clamp(28px, 4vw, 48px);
@@ -1089,6 +1085,34 @@ html[data-theme="light"] .route-number {
   flex-wrap: wrap;
   gap: 11px;
   margin-top: 26px;
+}
+
+.featured-video-actions button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.video-channel-link {
+  padding: 10px 5px;
+  color: var(--accent-text);
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.featured-video-player:fullscreen,
+.featured-video-player:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  aspect-ratio: auto;
+  background: #000;
+}
+
+.featured-video-player:fullscreen iframe,
+.featured-video-player:-webkit-full-screen iframe {
+  width: 100vw;
+  height: 100vh;
 }
 
 .video-topics-heading {
@@ -1656,10 +1680,6 @@ html[data-theme="light"] .linkedin-channel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .featured-video-card {
-    grid-template-columns: minmax(0, .92fr) minmax(390px, 1.08fr);
-  }
-
   .tool-showcase-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1675,18 +1695,11 @@ html[data-theme="light"] .linkedin-channel {
   }
 
   .page-hero-grid,
-  .featured-video-card,
   .tool-showcase-grid,
   .instructor-panel,
   .home-story-grid,
   .about-narrative {
     grid-template-columns: 1fr;
-  }
-
-  .featured-video-player,
-  .featured-video-copy {
-    grid-column: 1;
-    grid-row: auto;
   }
 
   .featured-video-copy {
@@ -1701,6 +1714,16 @@ html[data-theme="light"] .linkedin-channel {
   .featured-video-actions a {
     justify-content: center;
     text-align: center;
+  }
+
+  .featured-video-actions button {
+    width: 100%;
+  }
+
+  .featured-video-card {
+    margin-inline: -11px;
+    border-inline: 0;
+    border-radius: 0;
   }
 
   .about-narrative h2 {

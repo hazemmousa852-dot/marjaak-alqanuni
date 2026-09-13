@@ -632,6 +632,11 @@
         featuredPoint1: 'الوصول إلى الخدمة الصحيحة على المنصة',
         featuredPoint2: 'متابعة خطوات الطلب إلكترونيًا',
         featuredPoint3: 'إنهاء الإجراء بصورة أبسط وأسرع',
+        fullscreenVideo: 'تشغيل بملء الشاشة',
+        shareVideo: 'مشاركة الفيديو',
+        shareVideoText: 'شاهد شرح استخراج كعب العمل من منصة مصر الرقمية مع حازم موسى.',
+        linkCopied: 'تم نسخ رابط الفيديو',
+        shareFailed: 'تعذرت المشاركة',
         watchOnYoutube: 'مشاهدة على يوتيوب',
         visitChannel: 'تابع قناة حازم موسى',
         topicsEyebrow: 'تصفح حسب الموضوع',
@@ -676,6 +681,11 @@
         featuredPoint1: 'Find the correct service on the platform',
         featuredPoint2: 'Follow the online application steps',
         featuredPoint3: 'Complete the process more simply and quickly',
+        fullscreenVideo: 'Play full screen',
+        shareVideo: 'Share video',
+        shareVideoText: 'Watch Hazem Moussa explain how to obtain an employment certificate through Digital Egypt.',
+        linkCopied: 'Video link copied',
+        shareFailed: 'Could not share',
         watchOnYoutube: 'Watch on YouTube',
         visitChannel: 'Follow Hazem Moussa on YouTube',
         topicsEyebrow: 'Browse by topic',
@@ -872,6 +882,10 @@
   const toolFilterButtons = [...document.querySelectorAll('[data-tool-filter]')];
   const noTools = document.querySelector('#noTools');
   const resultStatus = document.querySelector('#toolResultStatus');
+  const videoPlayer = document.querySelector('.featured-video-player');
+  const videoFullscreenButton = document.querySelector('[data-video-fullscreen]');
+  const shareVideoButton = document.querySelector('[data-share-video]');
+  const shareVideoLabel = shareVideoButton?.querySelector('[data-share-label]');
 
   const readPreference = (key, fallback) => {
     try {
@@ -1062,5 +1076,62 @@
 
   toolFilterButtons.forEach((button) => {
     button.addEventListener('click', () => setActiveToolFilter(button.dataset.toolFilter || 'all'));
+  });
+
+  videoFullscreenButton?.addEventListener('click', async () => {
+    if (!videoPlayer) return;
+    try {
+      if (videoPlayer.requestFullscreen) {
+        await videoPlayer.requestFullscreen();
+      } else if (videoPlayer.webkitRequestFullscreen) {
+        videoPlayer.webkitRequestFullscreen();
+      }
+    } catch {
+      videoPlayer.querySelector('iframe')?.focus();
+    }
+  });
+
+  shareVideoButton?.addEventListener('click', async () => {
+    const dictionary = getDictionary(currentLanguage);
+    const url = shareVideoButton.dataset.shareUrl;
+    const copyVideoUrl = async () => {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        return;
+      }
+
+      const temporaryInput = document.createElement('textarea');
+      temporaryInput.value = url;
+      temporaryInput.setAttribute('readonly', '');
+      temporaryInput.style.position = 'fixed';
+      temporaryInput.style.opacity = '0';
+      document.body.appendChild(temporaryInput);
+      temporaryInput.select();
+      const copied = document.execCommand('copy');
+      temporaryInput.remove();
+      if (!copied) throw new Error('Copy unavailable');
+    };
+    const resetLabel = () => {
+      if (shareVideoLabel) shareVideoLabel.textContent = dictionary.shareVideo;
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: dictionary.featuredVideoTitle,
+          text: dictionary.shareVideoText,
+          url
+        });
+        return;
+      }
+
+      await copyVideoUrl();
+      if (shareVideoLabel) shareVideoLabel.textContent = dictionary.linkCopied;
+      window.setTimeout(resetLabel, 2400);
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+      if (shareVideoLabel) shareVideoLabel.textContent = dictionary.shareFailed;
+      window.setTimeout(resetLabel, 2400);
+    }
   });
 })();
