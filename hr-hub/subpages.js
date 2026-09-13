@@ -633,6 +633,7 @@
         featuredPoint2: 'متابعة خطوات الطلب إلكترونيًا',
         featuredPoint3: 'إنهاء الإجراء بصورة أبسط وأسرع',
         fullscreenVideo: 'تشغيل بملء الشاشة',
+        closeVideo: 'إغلاق ملء الشاشة',
         shareVideo: 'مشاركة الفيديو',
         shareVideoText: 'شاهد شرح استخراج كعب العمل من منصة مصر الرقمية مع حازم موسى.',
         linkCopied: 'تم نسخ رابط الفيديو',
@@ -682,6 +683,7 @@
         featuredPoint2: 'Follow the online application steps',
         featuredPoint3: 'Complete the process more simply and quickly',
         fullscreenVideo: 'Play full screen',
+        closeVideo: 'Close full screen',
         shareVideo: 'Share video',
         shareVideoText: 'Watch Hazem Moussa explain how to obtain an employment certificate through Digital Egypt.',
         linkCopied: 'Video link copied',
@@ -884,6 +886,7 @@
   const resultStatus = document.querySelector('#toolResultStatus');
   const videoPlayer = document.querySelector('.featured-video-player');
   const videoFullscreenButton = document.querySelector('[data-video-fullscreen]');
+  const videoCloseButton = document.querySelector('[data-video-close]');
   const shareVideoButton = document.querySelector('[data-share-video]');
   const shareVideoLabel = shareVideoButton?.querySelector('[data-share-label]');
 
@@ -1078,17 +1081,53 @@
     button.addEventListener('click', () => setActiveToolFilter(button.dataset.toolFilter || 'all'));
   });
 
+  const openExpandedVideo = () => {
+    if (!videoPlayer) return;
+    videoPlayer.classList.add('is-expanded');
+    document.body.classList.add('video-expanded');
+  };
+
+  const closeExpandedVideo = async () => {
+    try {
+      if (document.fullscreenElement && document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    } catch {
+      // The in-page full-screen fallback still closes below.
+    }
+    videoPlayer?.classList.remove('is-expanded');
+    document.body.classList.remove('video-expanded');
+  };
+
   videoFullscreenButton?.addEventListener('click', async () => {
     if (!videoPlayer) return;
+    let enteredNativeFullscreen = false;
     try {
       if (videoPlayer.requestFullscreen) {
         await videoPlayer.requestFullscreen();
+        enteredNativeFullscreen = document.fullscreenElement === videoPlayer;
       } else if (videoPlayer.webkitRequestFullscreen) {
         videoPlayer.webkitRequestFullscreen();
+        enteredNativeFullscreen = document.webkitFullscreenElement === videoPlayer;
       }
     } catch {
-      videoPlayer.querySelector('iframe')?.focus();
+      enteredNativeFullscreen = false;
     }
+    if (!enteredNativeFullscreen) openExpandedVideo();
+  });
+
+  videoCloseButton?.addEventListener('click', closeExpandedVideo);
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) closeExpandedVideo();
+  });
+  document.addEventListener('webkitfullscreenchange', () => {
+    if (!document.webkitFullscreenElement) closeExpandedVideo();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && videoPlayer?.classList.contains('is-expanded')) closeExpandedVideo();
   });
 
   shareVideoButton?.addEventListener('click', async () => {
