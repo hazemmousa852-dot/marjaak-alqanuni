@@ -26,3 +26,13 @@ function enhance(){
 new MutationObserver(enhance).observe(results,{childList:true,subtree:true});
 enhance();
 })();
+
+(() => {
+  'use strict';
+  if (document.querySelector('script[data-tools-hub-link]')) return;
+  const script = document.createElement('script');
+  script.src = 'https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tools-hub-link.js?v=1';
+  script.defer = true;
+  script.dataset.toolsHubLink = 'true';
+  document.head.appendChild(script);
+})();
