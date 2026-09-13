@@ -1050,8 +1050,9 @@ html[data-theme="light"] .route-number {
 
 .video-external-poster::before {
   background:
-    linear-gradient(135deg, rgba(4, 16, 26, .4), rgba(4, 16, 26, .78)),
-    var(--video-poster) center / cover no-repeat;
+    radial-gradient(circle at 22% 18%, rgba(73, 148, 195, .22), transparent 31%),
+    radial-gradient(circle at 78% 72%, rgba(242, 185, 75, .2), transparent 29%),
+    linear-gradient(135deg, #0b2940, #04101a 68%);
   transform: scale(1.025);
   transition: transform .35s ease, filter .35s ease;
 }
@@ -1070,12 +1071,26 @@ html[data-theme="light"] .route-number {
 
 .video-external-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   max-width: 620px;
   justify-items: center;
   gap: 14px;
   text-shadow: 0 3px 18px rgba(0, 0, 0, .7);
+}
+
+.video-external-number {
+  position: absolute;
+  z-index: 1;
+  inset-inline-end: clamp(12px, 4vw, 48px);
+  bottom: -.18em;
+  color: rgba(255, 255, 255, .045);
+  font-size: clamp(170px, 25vw, 340px);
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: -.08em;
+  pointer-events: none;
+  text-shadow: none;
 }
 
 .video-external-kicker {
@@ -1124,6 +1139,12 @@ html[data-theme="light"] .route-number {
   color: #fff;
   font-size: 12px;
   font-weight: 900;
+}
+
+.is-external .featured-video-actions .primary-cta svg {
+  fill: currentColor;
+  stroke: none;
+  transform: none;
 }
 
 .video-player-close {
@@ -2243,6 +2264,11 @@ html[data-theme="light"] .linkedin-channel {
     max-width: 310px;
     font-size: clamp(16px, 5vw, 20px);
     line-height: 1.28;
+  }
+
+  body[data-page="videos"] .video-external-number {
+    inset-inline-end: 8px;
+    font-size: 130px;
   }
 
   body[data-page="videos"] .video-external-play {
