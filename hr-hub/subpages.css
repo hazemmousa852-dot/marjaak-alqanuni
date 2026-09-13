@@ -993,6 +993,10 @@ html[data-theme="light"] .route-number {
   box-shadow: 0 24px 62px rgba(0, 0, 0, .15);
 }
 
+.featured-video-card + .featured-video-card {
+  margin-top: clamp(32px, 5vw, 56px);
+}
+
 .featured-video-player {
   position: relative;
   width: 100%;

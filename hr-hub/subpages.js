@@ -625,7 +625,7 @@
         libraryEyebrow: 'مكتبة الفيديو',
         libraryTitle: 'شروحات عملية تبدأ من احتياجك اليومي',
         libraryLead: 'شاهد الفيديو داخل الصفحة، وارجع له في أي وقت عندما تحتاج إلى تطبيق الخطوات في عملك.',
-        featuredBadge: 'أحدث فيديو',
+        featuredBadge: 'فيديو تعليمي',
         featuredCategory: 'شئون العاملين',
         featuredVideoTitle: 'استخراج كعب العمل من منصة مصر الرقمية',
         featuredVideoDesc: 'شرح عملي يوضح طريقة استخراج كعب العمل إلكترونيًا من منصة مصر الرقمية، بخطوات واضحة تساعدك على إتمام الإجراء بسهولة وتوفير الوقت.',
@@ -636,6 +636,14 @@
         closeVideo: 'إغلاق ملء الشاشة',
         shareVideo: 'مشاركة الفيديو',
         shareVideoText: 'شاهد شرح استخراج كعب العمل من منصة مصر الرقمية مع حازم موسى.',
+        video2Badge: 'أحدث فيديو',
+        video2Category: 'قانون العمل • شئون العاملين',
+        video2Title: 'قرار وزير العمل رقم 214 لسنة 2025 — تنظيم كتابة وإيداع عقود العمل',
+        video2Desc: 'شرح عملي لأهم ما جاء بالقرار بشأن تحرير عقد العمل من أربع نسخ، والبيانات الأساسية الواجب تضمينها، وإجراءات إيداع العقود لدى الجهة المختصة.',
+        video2Point1: 'عدد نسخ عقد العمل والجهات التي تحصل عليها',
+        video2Point2: 'البيانات الأساسية التي يجب أن يتضمنها العقد',
+        video2Point3: 'خطوات وإجراءات إيداع عقود العمل',
+        video2ShareText: 'شاهد شرح قرار وزير العمل رقم 214 لسنة 2025 الخاص بكتابة وإيداع عقود العمل مع حازم موسى.',
         linkCopied: 'تم نسخ رابط الفيديو',
         shareFailed: 'تعذرت المشاركة',
         watchOnYoutube: 'مشاهدة على يوتيوب',
@@ -650,6 +658,8 @@
         category1Count: 'فيديو واحد متاح',
         category2Title: 'قانون العمل',
         category2Desc: 'شرح مبسط للنصوص والقرارات والمواقف العملية.',
+        category2Aria: 'شاهد فيديو قانون العمل',
+        category2Count: 'فيديو واحد متاح',
         category3Title: 'المرتبات وExcel',
         category3Desc: 'Payroll والاستحقاقات والاستقطاعات وتطبيقات Excel.',
         category4Title: 'التطوير المهني',
@@ -675,7 +685,7 @@
         libraryEyebrow: 'Video library',
         libraryTitle: 'Content organized by topic',
         libraryLead: 'Watch each video without leaving the page and return whenever you need to apply the steps at work.',
-        featuredBadge: 'Latest video',
+        featuredBadge: 'Educational video',
         featuredCategory: 'Personnel Affairs',
         featuredVideoTitle: 'How to obtain an employment certificate through Digital Egypt',
         featuredVideoDesc: 'A practical walkthrough showing how to obtain your employment certificate online through the Digital Egypt platform, with clear steps that make the process easier and save time.',
@@ -686,6 +696,14 @@
         closeVideo: 'Close full screen',
         shareVideo: 'Share video',
         shareVideoText: 'Watch Hazem Moussa explain how to obtain an employment certificate through Digital Egypt.',
+        video2Badge: 'Latest video',
+        video2Category: 'Labor Law • Personnel Affairs',
+        video2Title: 'Ministerial Decision No. 214 of 2025 — Drafting and Filing Employment Contracts',
+        video2Desc: 'A practical explanation of the decision’s requirements for preparing an employment contract in four copies, the essential information it must contain, and the filing process with the competent authority.',
+        video2Point1: 'The required contract copies and who receives them',
+        video2Point2: 'Essential information every employment contract must contain',
+        video2Point3: 'Steps for filing employment contracts',
+        video2ShareText: 'Watch Hazem Moussa explain Ministerial Decision No. 214 of 2025 on drafting and filing employment contracts.',
         linkCopied: 'Video link copied',
         shareFailed: 'Could not share',
         watchOnYoutube: 'Watch on YouTube',
@@ -700,6 +718,8 @@
         category1Count: '1 video available',
         category2Title: 'Labor Law',
         category2Desc: 'Simple explanations of legal requirements, decisions and cases.',
+        category2Aria: 'Watch the Labor Law video',
+        category2Count: '1 video available',
         category3Title: 'Payroll & Excel',
         category3Desc: 'Payroll, earnings, deductions and practical Excel applications.',
         category4Title: 'Professional Development',
@@ -884,11 +904,10 @@
   const toolFilterButtons = [...document.querySelectorAll('[data-tool-filter]')];
   const noTools = document.querySelector('#noTools');
   const resultStatus = document.querySelector('#toolResultStatus');
-  const videoPlayer = document.querySelector('.featured-video-player');
-  const videoFullscreenButton = document.querySelector('[data-video-fullscreen]');
-  const videoCloseButton = document.querySelector('[data-video-close]');
-  const shareVideoButton = document.querySelector('[data-share-video]');
-  const shareVideoLabel = shareVideoButton?.querySelector('[data-share-label]');
+  const videoPlayers = [...document.querySelectorAll('.featured-video-player')];
+  const videoFullscreenButtons = [...document.querySelectorAll('[data-video-fullscreen]')];
+  const videoCloseButtons = [...document.querySelectorAll('[data-video-close]')];
+  const shareVideoButtons = [...document.querySelectorAll('[data-share-video]')];
 
   const readPreference = (key, fallback) => {
     try {
@@ -1081,13 +1100,19 @@
     button.addEventListener('click', () => setActiveToolFilter(button.dataset.toolFilter || 'all'));
   });
 
-  const openExpandedVideo = () => {
-    if (!videoPlayer) return;
-    videoPlayer.classList.add('is-expanded');
+  const clearExpandedVideoState = () => {
+    videoPlayers.forEach((player) => player.classList.remove('is-expanded'));
+    document.body.classList.remove('video-expanded');
+  };
+
+  const openExpandedVideo = (player) => {
+    if (!player) return;
+    clearExpandedVideoState();
+    player.classList.add('is-expanded');
     document.body.classList.add('video-expanded');
   };
 
-  const closeExpandedVideo = async () => {
+  const closeExpandedVideo = async (player) => {
     try {
       if (document.fullscreenElement && document.exitFullscreen) {
         await document.exitFullscreen();
@@ -1097,80 +1122,94 @@
     } catch {
       // The in-page full-screen fallback still closes below.
     }
-    videoPlayer?.classList.remove('is-expanded');
-    document.body.classList.remove('video-expanded');
+    player?.classList.remove('is-expanded');
+    if (!videoPlayers.some((item) => item.classList.contains('is-expanded'))) {
+      document.body.classList.remove('video-expanded');
+    }
   };
 
-  videoFullscreenButton?.addEventListener('click', async () => {
-    if (!videoPlayer) return;
-    let enteredNativeFullscreen = false;
-    try {
-      if (videoPlayer.requestFullscreen) {
-        await videoPlayer.requestFullscreen();
-        enteredNativeFullscreen = document.fullscreenElement === videoPlayer;
-      } else if (videoPlayer.webkitRequestFullscreen) {
-        videoPlayer.webkitRequestFullscreen();
-        enteredNativeFullscreen = document.webkitFullscreenElement === videoPlayer;
+  videoFullscreenButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const player = button.closest('.featured-video-card')?.querySelector('.featured-video-player');
+      if (!player) return;
+      let enteredNativeFullscreen = false;
+      try {
+        if (player.requestFullscreen) {
+          await player.requestFullscreen();
+          enteredNativeFullscreen = document.fullscreenElement === player;
+        } else if (player.webkitRequestFullscreen) {
+          player.webkitRequestFullscreen();
+          enteredNativeFullscreen = true;
+        }
+      } catch {
+        enteredNativeFullscreen = false;
       }
-    } catch {
-      enteredNativeFullscreen = false;
-    }
-    if (!enteredNativeFullscreen) openExpandedVideo();
+      if (!enteredNativeFullscreen) openExpandedVideo(player);
+    });
   });
 
-  videoCloseButton?.addEventListener('click', closeExpandedVideo);
+  videoCloseButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const player = button.closest('.featured-video-player');
+      closeExpandedVideo(player);
+    });
+  });
   document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) closeExpandedVideo();
+    if (!document.fullscreenElement) clearExpandedVideoState();
   });
   document.addEventListener('webkitfullscreenchange', () => {
-    if (!document.webkitFullscreenElement) closeExpandedVideo();
+    if (!document.webkitFullscreenElement) clearExpandedVideoState();
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && videoPlayer?.classList.contains('is-expanded')) closeExpandedVideo();
+    const expandedPlayer = videoPlayers.find((player) => player.classList.contains('is-expanded'));
+    if (event.key === 'Escape' && expandedPlayer) closeExpandedVideo(expandedPlayer);
   });
 
-  shareVideoButton?.addEventListener('click', async () => {
-    const dictionary = getDictionary(currentLanguage);
-    const url = shareVideoButton.dataset.shareUrl;
-    const copyVideoUrl = async () => {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(url);
-        return;
+  shareVideoButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const dictionary = getDictionary(currentLanguage);
+      const label = button.querySelector('[data-share-label]');
+      const url = button.dataset.shareUrl;
+      const copyVideoUrl = async () => {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(url);
+          return;
+        }
+
+        const temporaryInput = document.createElement('textarea');
+        temporaryInput.value = url;
+        temporaryInput.setAttribute('readonly', '');
+        temporaryInput.style.position = 'fixed';
+        temporaryInput.style.opacity = '0';
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        const copied = document.execCommand('copy');
+        temporaryInput.remove();
+        if (!copied) throw new Error('Copy unavailable');
+      };
+      const resetLabel = () => {
+        if (label) label.textContent = dictionary.shareVideo;
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: dictionary[button.dataset.shareTitle],
+            text: dictionary[button.dataset.shareText],
+            url
+          });
+          return;
+        }
+
+        await copyVideoUrl();
+        if (label) label.textContent = dictionary.linkCopied;
+        window.setTimeout(resetLabel, 2400);
+      } catch (error) {
+        if (error?.name === 'AbortError') return;
+        if (label) label.textContent = dictionary.shareFailed;
+        window.setTimeout(resetLabel, 2400);
       }
-
-      const temporaryInput = document.createElement('textarea');
-      temporaryInput.value = url;
-      temporaryInput.setAttribute('readonly', '');
-      temporaryInput.style.position = 'fixed';
-      temporaryInput.style.opacity = '0';
-      document.body.appendChild(temporaryInput);
-      temporaryInput.select();
-      const copied = document.execCommand('copy');
-      temporaryInput.remove();
-      if (!copied) throw new Error('Copy unavailable');
-    };
-    const resetLabel = () => {
-      if (shareVideoLabel) shareVideoLabel.textContent = dictionary.shareVideo;
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: dictionary.featuredVideoTitle,
-          text: dictionary.shareVideoText,
-          url
-        });
-        return;
-      }
-
-      await copyVideoUrl();
-      if (shareVideoLabel) shareVideoLabel.textContent = dictionary.linkCopied;
-      window.setTimeout(resetLabel, 2400);
-    } catch (error) {
-      if (error?.name === 'AbortError') return;
-      if (shareVideoLabel) shareVideoLabel.textContent = dictionary.shareFailed;
-      window.setTimeout(resetLabel, 2400);
-    }
+    });
   });
 })();
