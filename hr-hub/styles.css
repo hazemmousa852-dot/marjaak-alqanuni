@@ -1454,7 +1454,7 @@ html[data-theme="light"] .program-topics {
 .contact-grid {
   direction: rtl;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 15px;
 }
 
@@ -1485,9 +1485,11 @@ html[data-theme="light"] .contact-card {
 .phone-card { --contact-color: var(--accent-text); }
 .whatsapp-card { --contact-color: #35d07f; }
 .linkedin-card { --contact-color: #63a7ff; }
+.facebook-card { --contact-color: #4f9cff; }
 
 html[data-theme="light"] .whatsapp-card { --contact-color: #0b7040; }
 html[data-theme="light"] .linkedin-card { --contact-color: #1c5f9f; }
+html[data-theme="light"] .facebook-card { --contact-color: #185fba; }
 
 .contact-icon {
   display: grid;
@@ -1507,6 +1509,11 @@ html[data-theme="light"] .linkedin-card { --contact-color: #1c5f9f; }
 
 .linkedin-mark {
   font: 900 24px/1 Arial, sans-serif;
+}
+
+.facebook-mark {
+  font: 900 32px/1 Arial, sans-serif;
+  text-transform: lowercase;
 }
 
 .contact-card-copy {
