@@ -435,7 +435,13 @@
     return location.origin + path;
   })();
 
-  const toolUrl = (slug) => `${pageUrl}?tool=${encodeURIComponent(slug)}`;
+  /* ====== رابط الأداة نفسه (نفس زر «استخدام الأداة الآن» بالظبط) ====== */
+  const toolUrl = (slug) => {
+    const btn = document.querySelector(`.tool-share[data-tool="${CSS.escape(slug)}"]`);
+    const launch = btn ? btn.closest('.tool-actions-wrap')?.querySelector('a.tool-launch') : null;
+    if (launch && launch.getAttribute('href')) return launch.href;
+    return `${pageUrl}?tool=${encodeURIComponent(slug)}`;
+  };
   const toolTitle = (slug) => {
     const entry = TOOLS[slug];
     return entry ? entry[lang()] || entry.ar : 'HR Tool';
