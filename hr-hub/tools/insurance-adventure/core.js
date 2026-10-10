@@ -1,6 +1,6 @@
 (function (root) {
   'use strict';
-  const fresh = () => ({ version: 1, best: {}, seen: [], questionCycle: [], mistakes: [], active: null, lastRun: null, mode: 'path', timed: false, completedAt: null, certificate: null });
+  const fresh = () => ({ version: 1, best: {}, seen: [], questionCycle: [], sickCycle: [], mistakes: [], active: null, lastRun: null, mode: 'path', timed: false, completedAt: null, certificate: null });
   function number(value) {
     if (typeof value === 'number') return Number.isFinite(value) ? value : null;
     if (typeof value !== 'string' || !value.trim()) return null;
@@ -19,14 +19,14 @@
     const ids = new Set(), prompts = new Set();
     return questions.filter(q => { const key = questionKey(q); if (ids.has(q.id) || prompts.has(key)) return false; ids.add(q.id); prompts.add(key); return true; });
   }
-  function rememberQuestions(progress, ids) { progress.questionCycle = [...new Set([...(progress.questionCycle || []), ...ids])]; }
-  function pickQuick(progress, questions, count = 8, rng = Math.random) {
-    const bank = uniqueQuestions(questions), used = new Set(progress.questionCycle || []);
+  function rememberQuestions(progress, ids, cycle = 'questionCycle') { progress[cycle] = [...new Set([...(progress[cycle] || []), ...ids])]; }
+  function pickQuick(progress, questions, count = 8, rng = Math.random, cycle = 'questionCycle') {
+    const bank = uniqueQuestions(questions), used = new Set(progress[cycle] || []);
     let available = bank.filter(q => !used.has(q.id));
     const restarted = bank.length > 0 && available.length === 0;
-    if (restarted) { progress.questionCycle = []; available = bank; }
+    if (restarted) { progress[cycle] = []; available = bank; }
     const picked = shuffle(available,rng).slice(0,count);
-    rememberQuestions(progress,picked.map(q => q.id));
+    rememberQuestions(progress,picked.map(q => q.id),cycle);
     return { questions: picked, restarted };
   }
   function newRun(questions, level, kind, timed) {
@@ -77,6 +77,8 @@
     p.mode = saved.mode === 'free' ? 'free' : 'path'; p.timed = saved.timed === true;
     p.seen = Array.isArray(saved.seen) ? [...new Set(saved.seen.filter(x => ids.has(x)))] : [];
     p.questionCycle = Array.isArray(saved.questionCycle) ? [...new Set(saved.questionCycle.filter(x => ids.has(x)))] : p.seen.slice();
+    const sickIds = new Set(questions.filter(q => q.topic === 'sick').map(q => q.id));
+    p.sickCycle = Array.isArray(saved.sickCycle) ? [...new Set(saved.sickCycle.filter(x => sickIds.has(x)))] : p.questionCycle.filter(x => sickIds.has(x));
     p.mistakes = Array.isArray(saved.mistakes) ? [...new Set(saved.mistakes.filter(x => ids.has(x)))] : [];
     for (let l = 1; l <= 5; l++) { const b = saved.best?.[l]; if (b && Number.isInteger(b.right) && b.right >= 0 && b.right <= 8 && b.total === 8 && Number.isFinite(b.score) && b.score >= 0) p.best[l] = { ...b, stars: stars(b.right, b.total) }; }
     if (Number.isFinite(saved.completedAt) && saved.completedAt > 0) p.completedAt = saved.completedAt;
@@ -87,9 +89,10 @@
       if (c?.version === 1 && certificateName(c.name) && typeof c.id === 'string' && /^MTA-\d{4}-[A-Z0-9]{8}$/.test(c.id) && Number.isFinite(c.issuedAt) && c.issuedAt > 0 && Number.isFinite(c.completedAt) && c.completedAt > 0 && c.total === 40 && Number.isInteger(c.right) && c.right >= 30 && c.right <= report.right && c.percent === Math.round(c.right / 40 * 100) && Number.isFinite(c.score) && c.score >= 0 && c.score <= report.score) p.certificate = { ...c, name: certificateName(c.name) };
     } else p.completedAt = null;
     const a = saved.active;
-    if (a && ['level','quick','review'].includes(a.kind) && Array.isArray(a.ids) && a.ids.length > 0 && a.ids.length <= 40 && new Set(a.ids).size === a.ids.length && a.ids.every(id => ids.has(id)) && Number.isInteger(a.index) && a.index >= 0 && a.index < a.ids.length && Array.isArray(a.answers) && a.answers.length === a.index + (a.resolved ? 1 : 0) && Array.isArray(a.hints) && a.hints.every(id => ids.has(id)) && a.orders && a.ids.every(id => { const q = questions.find(q => q.id === id), order = a.orders[id]; return Array.isArray(order) && order.length === (q.choices || []).length && order.every((v,i,arr) => Number.isInteger(v) && v >= 0 && v < order.length && arr.indexOf(v) === i); }) && a.answers.every((v,i) => v && v.id === a.ids[i] && typeof v.correct === 'boolean') && (a.kind !== 'level' || (a.level >= 1 && a.level <= 5 && a.ids.length === 8 && a.ids.every(id => questions.find(q => q.id === id).level === a.level)))) {
+    if (a && ['level','quick','review','sick'].includes(a.kind) && Array.isArray(a.ids) && a.ids.length > 0 && a.ids.length <= questions.length && new Set(a.ids).size === a.ids.length && a.ids.every(id => ids.has(id)) && Number.isInteger(a.index) && a.index >= 0 && a.index < a.ids.length && Array.isArray(a.answers) && a.answers.length === a.index + (a.resolved ? 1 : 0) && Array.isArray(a.hints) && a.hints.every(id => ids.has(id)) && a.orders && a.ids.every(id => { const q = questions.find(q => q.id === id), order = a.orders[id]; return Array.isArray(order) && order.length === (q.choices || []).length && order.every((v,i,arr) => Number.isInteger(v) && v >= 0 && v < order.length && arr.indexOf(v) === i); }) && a.answers.every((v,i) => v && v.id === a.ids[i] && typeof v.correct === 'boolean') && (a.kind !== 'level' || (a.level >= 1 && a.level <= 5 && a.ids.length === 8 && a.ids.every(id => questions.find(q => q.id === id).level === a.level && !questions.find(q => q.id === id).topic))) && (a.kind !== 'sick' || (a.ids.length <= 8 && a.ids.every(id => sickIds.has(id))))) {
       p.active = { ...a, input: typeof a.input === 'string' ? a.input : '', selection: Number.isInteger(a.selection) ? a.selection : null, timed: a.timed === true, remaining: Number.isFinite(a.remaining) ? Math.min(90, Math.max(0, a.remaining)) : null };
       rememberQuestions(p,p.active.ids);
+      rememberQuestions(p,p.active.ids.filter(id => sickIds.has(id)),'sickCycle');
     }
     return p;
   }
@@ -97,3 +100,4 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
   else root.InsuranceCore = core;
 })(typeof window !== 'undefined' ? window : globalThis);
+
