@@ -27,7 +27,7 @@
   }
   function tokenMatches(term,token){
     if(/^\d+$/.test(term)||/^\d+$/.test(token))return term===token;
-    return term===token||(term.length>=4&&token.length>=4&&Math.abs(term.length-token.length)<=2&&(term.startsWith(token)||token.startsWith(term)));
+    return term===token||token===`و${term}`||term===`و${token}`||(term.length>=4&&token.length>=4&&Math.abs(term.length-token.length)<=2&&(term.startsWith(token)||token.startsWith(term)));
   }
   function matches(item,raw){
     const terms=[...new Set(wordsOf(raw).filter(word=>!['قرار','قرارات','رقم'].includes(word)))];
@@ -41,10 +41,10 @@
     return !text.length||hits>=Math.max(1,Math.ceil(text.length*.6));
   }
   async function files(){
-    const response=await fetch('data/decisions.json?v=20260911-1');
+    const response=await fetch('data/decisions.json?v=20261021-1');
     if(!response.ok)throw new Error();
     const data=await response.json();
-    return (data.files||[]).map(name=>({name,title:titleOf(name)})).sort((a,b)=>numberOf(a.name)-numberOf(b.name)||a.title.localeCompare(b.title,'ar'));
+    return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name)})).sort((a,b)=>numberOf(a.name)-numberOf(b.name)||a.title.localeCompare(b.title,'ar'));
   }
   function row(item,index){
     return `<article class="decision-row"><div class="decision-number">${index+1}</div><div class="decision-name"><h3>${esc(item.title)}</h3><p>ملف PDF متاح للعرض والتنزيل</p></div><div class="decision-actions"><a class="view-decision" href="decision-viewer.html#${encodeURIComponent(item.name)}">عرض القرار</a><a class="download-decision" href="${fileUrl(item.name)}" download>تحميل PDF</a></div></article>`;

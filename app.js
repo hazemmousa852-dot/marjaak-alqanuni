@@ -34,7 +34,7 @@
   function usefulWords(raw){ return [...new Set(wordsOf(raw).filter(w=>w.length>1&&!stopWords.has(w)))]; }
   function tokenMatches(term,token){
     if(/^\d+$/.test(term)||/^\d+$/.test(token)) return term===token;
-    return term===token||(term.length>=4&&token.length>=4&&Math.abs(term.length-token.length)<=2&&(term.startsWith(token)||token.startsWith(term)));
+    return term===token||token===`و${term}`||term===`و${token}`||(term.length>=4&&token.length>=4&&Math.abs(term.length-token.length)<=2&&(term.startsWith(token)||token.startsWith(term)));
   }
   function matchedTerms(terms,text){
     const tokens=wordsOf(text);
@@ -108,7 +108,7 @@
     const queryTokens=wordsOf(raw),numberTerms=queryTokens.filter(word=>/^\d+$/.test(word));
     const textTerms=queryTokens.filter(word=>!/^\d+$/.test(word)&&!decisionGenericWords.has(word));
     return state.decisions.map(filename=>{
-      const title=decisionTitle(filename),tokens=wordsOf(title);
+      const title=state.decisionTitles?.[filename]||decisionTitle(filename),tokens=wordsOf(title);
       if(numberTerms.some(term=>!tokens.includes(term))) return null;
       const textHits=textTerms.filter(term=>tokens.some(token=>tokenMatches(term,token))).length;
       if(textTerms.length&&textHits<Math.max(1,Math.ceil(textTerms.length*.6))) return null;
@@ -240,11 +240,11 @@
       const [lawsRes,scenariosRes,decisionsRes]=await Promise.all([
         fetch(`data/laws.json?v=${dataVersion}`),
         fetch(`data/hr-scenarios.json?v=${dataVersion}`),
-        fetch(`data/decisions.json?v=${dataVersion}`)
+        fetch('data/decisions.json?v=20261021-1')
       ]);
       if(!lawsRes.ok)throw new Error(); state.data=await lawsRes.json();
       if(scenariosRes.ok){const scenarioData=await scenariosRes.json();state.scenarios=scenarioData.scenarios||[];state.scenarioMeta=scenarioData.meta||null;}
-      if(decisionsRes.ok){const decisionsData=await decisionsRes.json();state.decisions=decisionsData.files||[];}
+      if(decisionsRes.ok){const decisionsData=await decisionsRes.json();state.decisions=decisionsData.files||[];state.decisionTitles=decisionsData.titles||{};}
       state.items=state.data.laws.flatMap(l=>l.items); els.total.textContent=state.items.length;
       const p=new URLSearchParams(location.hash.slice(1)); if(p.get('q')){els.query.value=p.get('q');const lr=$(`input[name="law"][value="${p.get('law')}"]`);const kr=$(`input[name="kind"][value="${p.get('kind')}"]`);if(lr)lr.checked=true;if(kr)kr.checked=true;render();}
     }catch{els.results.innerHTML='<div class="empty-state"><strong>تعذر تحميل بيانات القوانين</strong><span>أعد تحميل الصفحة أو تحقق من ملفات الموقع.</span></div>'}
