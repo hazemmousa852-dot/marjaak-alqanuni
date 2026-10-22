@@ -2728,3 +2728,15 @@ html[data-theme="light"] .linkedin-channel {
     font-size: 18px;
   }
 }
+
+/* Shared identity and clearer reading across the Hub. */
+.brand-logo{width:46px;height:46px;border-radius:50%!important;object-fit:cover;flex:0 0 auto;border:1px solid rgba(242,185,75,.5)}
+:root{--muted:#bdcbd6}
+html[data-theme="light"]{--muted:#4b5c6b}
+.featured-tools .tool-showcase-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.featured-tools .tool-showcase-card{min-width:0}
+.featured-tools .tool-showcase-body p{font-size:1rem;line-height:1.8}
+.featured-all{text-align:center;margin-top:28px}
+.contact-intro{max-width:900px}
+.home-route-card p,.stat small,.tool-benefits{font-size:.95rem;line-height:1.7}
+@media(max-width:900px){.featured-tools .tool-showcase-grid{grid-template-columns:1fr}.brand-logo{width:40px;height:40px}}

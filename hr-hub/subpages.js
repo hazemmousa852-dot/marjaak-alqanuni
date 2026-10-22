@@ -87,11 +87,11 @@
         pillarLaw: 'قانون العمل<br>والامتثال',
         pillarTraining: 'تدريب<br>وتطوير',
         pillarTools: 'أدوات عملية<br>تسهّل عملك',
-        discoverStory: 'اعرف قصتي المهنية',
+        discoverStory: 'استخدم أدوات HR المجانية',
         startContact: 'تواصل معي',
         quote: 'لأن تطوير نفسك مش خيار.. ده استثمار',
         statsLabel: 'ملخص الخبرة',
-        yearsExperience: 'سنة خبرة عملية',
+        yearsExperience: 'خبرة عملية منذ',
         regions: 'مصر + مجلس التعاون الخليجي',
         regionalExperience: 'خبرات إقليمية',
         journeyStart: 'بداية الرحلة المهنية',
@@ -102,7 +102,7 @@
         spotlightAlt: 'حازم موسى خلال مسيرته المهنية',
         storyEyebrow: "قوة المؤسسة تبدأ من أفرادها",
         storyTitle: "أربط إدارة الأفراد بأهداف العمل",
-        storyLead: "أنا حازم موسى، مدير موارد بشرية أعمل على بناء أنظمة تدعم كفاءة التشغيل وتطوير أداء العاملين. أجمع بين التوظيف وإدارة الأداء والتحفيز، وبين خبرة تطبيقية في شئون العاملين والمرتبات وتشريعات العمل المصرية والتأمينات. وأشارك هذه الخبرة من خلال التدريب والاستشارات وأدوات رقمية تساعد الممارسين على إنجاز أعمالهم بدقة ووضوح.",
+        storyLead: "أحوّل المهام المتكررة إلى أدوات قابلة للاستخدام: حسابات المرتبات، نماذج التأمينات، والبحث في النصوص القانونية. جرّب الأدوات بنفسك، أو شاهد الشروحات المجانية للتعرّف على أسلوبي في تبسيط التطبيق.",
         readFullBio: "تعرّف على خبرتي وطريقة عملي",
         destinationsEyebrow: 'اكتشف الموقع',
         destinationsTitle: 'كل محتوى في مكانه',
@@ -140,11 +140,11 @@
         pillarLaw: 'Labor Law<br>& Compliance',
         pillarTraining: 'Training<br>& Development',
         pillarTools: 'Practical tools<br>for your work',
-        discoverStory: 'Discover my journey',
+        discoverStory: 'Explore free HR tools',
         startContact: 'Contact me',
         quote: 'Developing yourself is not optional. It is an investment.',
         statsLabel: 'Experience highlights',
-        yearsExperience: 'years of practical experience',
+        yearsExperience: 'Practical experience since',
         regions: 'Egypt + GCC',
         regionalExperience: 'regional experience',
         journeyStart: 'career journey began',
@@ -155,7 +155,7 @@
         spotlightAlt: 'Hazem Moussa during his professional journey',
         storyEyebrow: "An organization's strength begins with its people",
         storyTitle: "Connecting people management with business goals",
-        storyLead: "I am Hazem Moussa, an HR manager who builds systems that support operational efficiency and employee performance. I combine recruitment, performance management and incentive programs with practical expertise in personnel affairs, payroll, Egyptian labor law and social insurance. I also share this experience through training, consulting and digital tools that help HR practitioners work accurately and confidently.",
+        storyLead: "I turn recurring tasks into usable tools for payroll calculations, insurance forms and legal research. Try the tools or watch the free tutorials to see how I explain practical workflows.",
         readFullBio: "Explore my experience and approach",
         destinationsEyebrow: 'Explore the website',
         destinationsTitle: 'Every resource in its own place',
@@ -1126,6 +1126,7 @@
     const dictionary = getDictionary(language);
     const translatedPageTitle = dictionary[pageTitleKey] || dictionary.pageTitle;
     const translatedPageDescription = dictionary[pageDescriptionKey] || dictionary.pageDescription;
+    document.querySelectorAll("[data-copy-ar][data-copy-en]").forEach((node) => { node.textContent = language === "ar" ? node.dataset.copyAr : node.dataset.copyEn; });
     currentLanguage = language;
     root.lang = language;
     root.dir = language === 'ar' ? 'rtl' : 'ltr';
