@@ -481,9 +481,9 @@
       linkedin: 'لينكد إن',
       telegram: 'تيليجرام',
       x: 'X (تويتر)',
-      copy: 'نسخ الرابط',
+      copy: 'نسخ الرسالة والرابط',
       native: 'مشاركة من الجهاز',
-      copied: 'تم نسخ رابط الأداة ✓',
+      copied: 'تم نسخ الرسالة والرابط',
       failed: 'تعذّر النسخ، جرّب مرة أخرى'
     },
     en: {
@@ -496,9 +496,9 @@
       linkedin: 'LinkedIn',
       telegram: 'Telegram',
       x: 'X (Twitter)',
-      copy: 'Copy link',
+      copy: 'Copy message and link',
       native: 'Share from device',
-      copied: 'Tool link copied ✓',
+      copied: 'Message and link copied',
       failed: 'Copy failed, please try again'
     }
   };
@@ -525,6 +525,11 @@
     const entry = TOOLS[slug];
     return entry ? entry[lang()] || entry.ar : 'HR Tool';
   };
+
+  const shareMessage = (slug) => lang() === 'ar'
+    ? `سهّل شغلك ووفّر وقتك مع أداة «${toolTitle(slug)}» من حازم موسى — HR & Payroll Hub.\nجرّبها مجانًا من هنا:`
+    : `Save time on everyday HR tasks with “${toolTitle(slug)}” from Hazem Moussa — HR & Payroll Hub.\nTry it for free:`;
+  const fullMessage = (slug) => `${shareMessage(slug)}\n${toolUrl(slug)}`;
 
   /* ====== إشعار صغير (Toast) ====== */
   let toastEl = null;
@@ -576,7 +581,7 @@
   const shareLinks = (slug) => {
     const url = toolUrl(slug);
     const title = toolTitle(slug);
-    const text = `${title} — ${dict().via}`;
+    const text = shareMessage(slug);
     const u = encodeURIComponent(url);
     const t = encodeURIComponent(text);
     return {
@@ -616,6 +621,8 @@
     const links = shareLinks(slug);
     const box = document.createElement('div');
     box.className = 'tool-share-pop';
+    box.style.maxHeight = 'calc(100dvh - 24px)';
+    box.style.overflowY = 'auto';
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-label', `${d.dialog}: ${toolTitle(slug)}`);
 
@@ -629,6 +636,16 @@
     title.className = 'tool-share-pop-title';
     title.textContent = d.dialog;
     box.appendChild(title);
+    const preview = document.createElement('textarea');
+    preview.readOnly = true;
+    preview.value = fullMessage(slug);
+    preview.setAttribute('aria-label', lang() === 'ar' ? 'معاينة رسالة المشاركة والرابط' : 'Share message and link preview');
+    preview.style.cssText = 'box-sizing:border-box;width:100%;min-height:140px;resize:vertical;padding:10px;margin-bottom:12px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text);font:inherit;font-size:13px;line-height:1.7';
+    box.appendChild(preview);
+    const note = document.createElement('p');
+    note.style.cssText = 'color:var(--muted);font-size:12px;line-height:1.6';
+    note.textContent = lang() === 'ar' ? 'فيسبوك ولينكد إن يشاركان الرابط؛ انسخ الرسالة لإضافتها إلى منشورك.' : 'Facebook and LinkedIn share the link; copy the message to add it to your post.';
+    box.appendChild(note);
 
     const grid = document.createElement('div');
     grid.className = 'tool-share-chips';
@@ -645,7 +662,7 @@
         try {
           await navigator.share({
             title: toolTitle(slug),
-            text: `${toolTitle(slug)} — ${current.via}`,
+            text: shareMessage(slug),
             url: toolUrl(slug)
           });
           closePopover();
@@ -674,7 +691,7 @@
     copyChip.addEventListener('click', async () => {
       const current = dict();
       const url = toolUrl(slug);
-      const done = await copyText(url);
+      const done = await copyText(fullMessage(slug));
       closePopover();
       toast(done ? current.copied : current.failed, !done);
     });
