@@ -41,7 +41,7 @@
     if (document.querySelector('link[data-hm-tool-logo-style]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = BRAND + '/tool-logo.css?v=1';
+    link.href = BRAND + '/tool-logo.css?v=20261022-identity';
     link.setAttribute('data-hm-tool-logo-style', '1');
     document.head.appendChild(link);
   }

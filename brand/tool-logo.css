@@ -52,3 +52,81 @@
   [data-hm-tools-offset-header] { top: 0 !important; }
   .hm-tool-logo { box-shadow: none; }
 }
+
+/* hm-identity-v2: presentation only. Keep tool geometry, controls and print styles. */
+@media screen {
+  .hm-tool-logo {
+    --hm-identity-navy: #071827;
+    --hm-identity-gold: #f2b94b;
+    border-color: var(--hm-identity-gold) !important;
+    background-color: var(--hm-identity-navy) !important;
+    box-shadow: 0 0 0 2px rgba(242, 185, 75, .08), 0 4px 14px rgba(7, 24, 39, .16);
+  }
+
+  /* Tokens belong to brand elements; no global variables enter the tools. */
+  #hm-tools-hub-bar, #hm-tools-hub-footer, #hm-tools-brand-chip {
+    --hm-identity-navy: #071827;
+    --hm-identity-panel: #0b2438;
+    --hm-identity-gold: #f2b94b;
+    --hm-identity-copy: #c5d2de;
+  }
+  html #hm-tools-hub-bar {
+    background: linear-gradient(105deg, var(--hm-identity-navy), var(--hm-identity-panel));
+    border-bottom-color: rgba(242, 185, 75, .4);
+    box-shadow: 0 5px 18px rgba(7, 24, 39, .16);
+  }
+  html #hm-tools-hub-footer {
+    background: linear-gradient(125deg, var(--hm-identity-navy), var(--hm-identity-panel));
+    border-color: rgba(242, 185, 75, .35);
+    box-shadow: 0 12px 30px rgba(7, 24, 39, .14);
+  }
+  html #hm-tools-brand-chip {
+    background: var(--hm-identity-navy);
+    border-color: rgba(242, 185, 75, .4);
+    box-shadow: 0 5px 18px rgba(7, 24, 39, .18);
+  }
+  html #hm-tools-hub-bar .hm-tools-hub-brand,
+  html #hm-tools-hub-footer .hm-tools-hub-footer__title,
+  html #hm-tools-brand-chip .hm-tools-brand-chip__copy strong {
+    color: #f8fbff;
+    font-family: "Cairo", "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+  }
+  html #hm-tools-hub-bar .hm-tools-hub-brand__sub,
+  html #hm-tools-hub-footer .hm-tools-hub-footer__text,
+  html #hm-tools-brand-chip .hm-tools-brand-chip__copy small {
+    color: var(--hm-identity-copy);
+  }
+  html #hm-tools-hub-footer .hm-tools-hub-footer__eyebrow {
+    color: var(--hm-identity-gold);
+  }
+  html #hm-tools-hub-bar .hm-tools-hub-action {
+    color: var(--hm-identity-gold) !important;
+    border-color: var(--hm-identity-gold);
+    background: rgba(242, 185, 75, .06);
+  }
+  html #hm-tools-hub-bar .hm-tools-hub-action:hover,
+  html #hm-tools-hub-footer .hm-tools-hub-footer__button {
+    color: var(--hm-identity-navy) !important;
+    background: var(--hm-identity-gold);
+    box-shadow: 0 5px 16px rgba(242, 185, 75, .14);
+  }
+  html #hm-tools-brand-chip .hm-tools-brand-chip__close {
+    color: var(--hm-identity-copy);
+  }
+  html #hm-tools-brand-chip .hm-tools-brand-chip__close:hover {
+    color: var(--hm-identity-gold);
+    background: rgba(242, 185, 75, .1);
+  }
+  #hm-tools-hub-bar a:focus-visible,
+  #hm-tools-hub-footer a:focus-visible,
+  #hm-tools-brand-chip a:focus-visible,
+  #hm-tools-brand-chip button:focus-visible {
+    outline: 3px solid #f2b94b;
+    outline-offset: 3px;
+  }
+}
+@media screen and (prefers-reduced-motion: reduce) {
+  #hm-tools-hub-bar a, #hm-tools-hub-footer a {
+    transition: none;
+  }
+}
