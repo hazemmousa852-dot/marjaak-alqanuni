@@ -42,6 +42,21 @@
   const button = (action, text, cls = 'secondary', extra = '', symbol = '') => `<button class="${cls}" data-action="${action}" ${extra}>${symbol ? icon(symbol) : ''}<span>${text}</span></button>`;
   function toast(text) { $('toast').textContent = text; $('toast').classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 3500); }
   function save() { try { localStorage.setItem(key, JSON.stringify(progress)); } catch { if (storageOK) { storageOK = false; toast('التقدم متاح في الجلسة الحالية؛ حفظه على الجهاز غير متاح.'); } } }
+  function exportProgress() {
+    const blob = new Blob([JSON.stringify({app:'hazem-insurance-adventure',version:1,progress})],{type:'application/json'});
+    const url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href=url; a.download='insurance-adventure-progress.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast('النسخة تتضمن الاسم والتقدم إن أُصدرت شهادة؛ احتفظ بها على جهازك.');
+  }
+  async function importProgress(file) {
+    try {
+      if(!file || file.size > 1000000) throw new Error('حجم غير صالح');
+      const data=JSON.parse(await file.text());
+      if(data.app!=='hazem-insurance-adventure'||data.version!==1||!data.progress||data.progress.version!==1) throw new Error('ملف غير صالح');
+      const restored=C.read(JSON.stringify(data.progress),D.questions);
+      stopTimer(); progress=restored; resultRun=null; pendingStart=null; save(); home(); toast('تم استرجاع التقدم على هذا الجهاز.');
+    } catch { toast('تعذر استرجاع النسخة؛ لم يتغير تقدمك الحالي.'); }
+  }
   function stopTimer() { clearInterval(timer); timer = null; document.body.classList.remove('print-certificate'); }
   function focusHeading(selector = 'h1') { const el = screen.querySelector(selector); if (el) { el.setAttribute('tabindex', '-1'); el.focus({ preventScroll:true }); } }
   function goTop() { window.scrollTo({ top:0, behavior:'instant' }); }
@@ -69,7 +84,7 @@
         return `<button class="level-card ${!open ? 'locked' : ''} ${current ? 'current' : ''}" style="--level-color:${colors[l.color]}" data-action="intro" data-level="${l.id}" ${!open ? 'disabled' : ''} aria-label="${esc(l.title)}، ${open ? best?.stars > 0 ? 'مكتمل' : 'متاح' : 'مغلق؛ اجتز المستويات السابقة'}"><span class="level-icon">${icon(open ? l.icon : 'lock')}</span><span class="level-info"><span class="level-caption">المستوى ${fmt(l.id)} <span class="mini-dot"></span> ${current ? 'ابدأ من هنا' : best?.stars > 0 ? 'تم اجتيازه' : l.short}</span><h3>${l.title}</h3><p>${l.subtitle}</p></span><span class="level-end">${open && best ? starHTML(best.stars) : icon(open ? 'arrow' : 'lock')}<span class="level-best">${best ? fmt(best.right) + ' / ٨' : '٨ مهمات'}</span></span></button>`;
       }).join('')}</div><div class="play-preferences"><label class="switch-label"><input id="timed-setting" type="checkbox" ${progress.timed ? 'checked' : ''}><span>تحدّي الوقت</span></label><p class="preferences-copy">${progress.timed ? '45 ثانية للأسئلة، 75 للمواقف، و90 للحسابات. الوقت يتوقف عند مغادرة الصفحة.' : 'العب براحتك. فعّل الوقت لو عايز تحدّي أسرع في الجولات الجديدة.'}</p><button class="reset-button" data-action="reset">بداية جديدة</button></div></section>
       <aside class="side-stack"><section class="mission-panel"><div class="panel-label">${icon(active ? 'save' : 'bolt')} ${active ? 'الجولة مستنياك' : completed === 5 ? 'المسار مكتمل' : 'مهمتك القادمة'}</div><h2>${missionTitle}</h2><p>${missionDescription}</p>${button(active ? 'resume' : 'intro', active ? 'كمّل المهمة' : completed === 5 ? 'العب المستوى الأخير' : 'ابدأ المهمة','primary full',active ? '' : `data-level="${next.id}"`,'arrow')}${button('help','إزاي ألعب؟','subtle-button')}</section>
-      <section class="stats-panel"><h3>سجل إنجازك</h3><div class="stats-grid"><div class="stat"><strong>${fmt(completed)}<span> / ٥</span></strong><span>مستويات مكتملة</span></div><div class="stat"><strong>${fmt(totalScore)}</strong><span>نقطة</span></div><div class="stat"><strong>${fmt(totalStars)}</strong><span>نجمة</span></div></div><div class="overall" role="progressbar" aria-label="المهمات التي جربتها" aria-valuemin="0" aria-valuemax="${D.questions.length}" aria-valuenow="${progress.seen.length}"><span style="width:${progress.seen.length/D.questions.length*100}%"></span></div><div class="save-caption">${icon('save')} ${storageOK ? 'التقدم محفوظ على نفس الجهاز' : 'التقدم متاح في الجلسة الحالية'}</div>${button('badges','شوف أوسمتك','subtle-button full')}</section>
+      <section class="stats-panel"><h3>سجل إنجازك</h3><div class="stats-grid"><div class="stat"><strong>${fmt(completed)}<span> / ٥</span></strong><span>مستويات مكتملة</span></div><div class="stat"><strong>${fmt(totalScore)}</strong><span>نقطة</span></div><div class="stat"><strong>${fmt(totalStars)}</strong><span>نجمة</span></div></div><div class="overall" role="progressbar" aria-label="المهمات التي جربتها" aria-valuemin="0" aria-valuemax="${D.questions.length}" aria-valuenow="${progress.seen.length}"><span style="width:${progress.seen.length/D.questions.length*100}%"></span></div><div class="save-caption">${icon('save')} ${storageOK ? 'التقدم محفوظ على نفس الجهاز' : 'التقدم متاح في الجلسة الحالية'}</div>${button('badges','شوف أوسمتك','subtle-button full')}${button('progress-export','حفظ نسخة من التقدم','subtle-button full')}${button('progress-import','استرجاع نسخة تقدم','subtle-button full')}<input id="progress-file" type="file" accept="application/json,.json" hidden></section>
       <section class="quick-card"><div class="quick-heading">${icon('bolt')}<h3>عندك وقت لجولة؟</h3></div><p>لحد ٨ مهمات من غير تكرار بين الجولات السريعة، لحد ما تخلص دورة بنك الأسئلة. أو ارجع لأخطائك للمراجعة.</p><div class="quick-actions">${button('quick','جولة سريعة','secondary','','bolt')}${button('review',`راجع أخطاءك ${progress.mistakes.length ? ' (' + fmt(progress.mistakes.length) + ')' : ''}`,'secondary',progress.mistakes.length ? '' : 'disabled','replay')}</div></section><section class="quick-card" aria-labelledby="sick-title"><div class="quick-heading">${icon('shield')}<h3 id="sick-title">تحدّي الإجازات المرضية</h3></div><p>${fmt(sickQuestions.length)} سؤالًا وحالة عن المنشآت الصناعية والتجارية والخدمية: مدة الإجازة، نسب الأجر والتعويض، والرصيد السنوي. كل جولة لحد ٨ مهمات، ومن غير تكرار لحد اكتمال أسئلة الموضوع.</p><div class="quick-actions">${button('sick','العب تحدّي المرضي','primary','','arrow')}</div></section></aside></div>`;
     screen.insertAdjacentHTML('beforeend',certificateCard(C.achievement(progress)));
     goTop();
@@ -217,6 +232,8 @@
     else if (action === 'resume') { renderQuestion(); goTop(); focusHeading(); }
     else if (action === 'resume-dialog') { closePanel(); pendingStart = null; renderQuestion(); goTop(); focusHeading(); }
     else if (action === 'confirm-start' && pendingStart) { const p = pendingStart; pendingStart = null; closePanel(); start(p.kind,p.level,true,p.replayIds); }
+    else if (action === 'progress-export') exportProgress();
+    else if (action === 'progress-import') $('progress-file').click();
     else if (action === 'choose') choose(Number(target.dataset.choice));
     else if (action === 'submit') submit();
     else if (action === 'hint') { const r = progress.active; if (!r || r.resolved) return; const id = r.ids[r.index]; if (!r.hints.includes(id)) { r.hints.push(id); save(); renderQuestion(); } }
@@ -225,7 +242,7 @@
     else if (action === 'reset') showPanel('بداية جديدة؟', `<p class="dialog-lead">ده هيمسح تقدم اللعبة والجولة الحالية على الجهاز ده، وتبدأ المستويات من الأول.</p><div class="dialog-actions">${button('close-panel','خلّي تقدمي','primary')}${button('confirm-reset','ابدأ من الأول','secondary danger')}</div>`);
     else if (action === 'confirm-reset') { stopTimer(); progress = C.fresh(); resultRun = null; pendingStart = null; save(); closePanel(); home(); toast('جاهز لبداية جديدة.'); }
   });
-  document.addEventListener('change', event => { if (event.target.id === 'timed-setting') { progress.timed = event.target.checked; save(); home(); } });
+  document.addEventListener('change', event => { if(event.target.id==='progress-file') { const file=event.target.files?.[0]; if(file) importProgress(file); return; } if (event.target.id === 'timed-setting') { progress.timed = event.target.checked; save(); home(); } });
   document.addEventListener('input', event => { if (event.target.id === 'numeric-answer' && progress.active && !progress.active.resolved) { progress.active.input = event.target.value; save(); if ($('input-error')) $('input-error').textContent = ''; } else if(event.target.id==='certificate-name' && $('certificate-error'))$('certificate-error').textContent=''; });
   document.addEventListener('keydown', event => {
     if(!panel.open && view==='certificate' && event.target.id==='certificate-name' && event.key==='Enter'){event.preventDefault();if(issueCertificate())renderCertificate(false);return;}

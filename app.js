@@ -162,7 +162,7 @@
     const steps=(s.steps||[]).map(x=>`<li>${esc(x)}</li>`).join('');
     const refs=(s.articles||[]).map(a=>{const i=item(a.law,a.num),l=law(a.law);return i?`<button type="button" data-open="${a.law}:${a.num}">${esc(l.short)} · المادة ${a.num}</button>`:''}).join('');
     const isFaq=s.type==='tax-faq';
-    return `<article class="scenario-card"><div class="scenario-label">${isFaq?'سؤال ضريبي شائع · بدون AI':'موقف عملي · بدون AI'}</div>${s.category?`<p class="scenario-category">${esc(s.category)}</p>`:''}<h3>${esc(s.title)}</h3><p class="scenario-summary">${esc(s.summary)}</p>${steps?`<div class="scenario-steps"><strong>خطوات المراجعة لمسؤول شئون العاملين</strong><ol>${steps}</ol></div>`:''}${refs?`<div class="scenario-refs"><strong>السند القانوني المذكور في الإجابة</strong><div>${refs}</div></div>`:''}${s.source?`<p class="faq-source">المصدر: ${esc(s.source)}${s.sourcePage?` · ص ${s.sourcePage}`:''}</p>`:''}<p class="scenario-notice">${esc(state.scenarioMeta?.notice||'يظل النص الرسمي للقانون والقرارات المنفذة هو المرجع.')}</p></article>`;
+    return `<article class="scenario-card"><div class="scenario-label">${isFaq?'سؤال ضريبي شائع · بدون AI':'موقف مشابه معد مسبقًا · بدون AI'}</div>${s.category?`<p class="scenario-category">${esc(s.category)}</p>`:''}<h3>${esc(s.title)}</h3><p class="scenario-summary">${esc(s.summary)}</p>${steps?`<div class="scenario-steps"><strong>خطوات المراجعة لمسؤول شئون العاملين</strong><ol>${steps}</ol></div>`:''}${refs?`<div class="scenario-refs"><strong>السند القانوني المذكور في الإجابة</strong><div>${refs}</div></div>`:''}${s.source?`<p class="faq-source">المصدر: ${esc(s.source)}${s.sourcePage?` · ص ${s.sourcePage}`:''}</p>`:''}<p class="scenario-notice">${esc(state.scenarioMeta?.notice||'يظل النص الرسمي للقانون والقرارات المنفذة هو المرجع.')}</p></article>`;
   }
 
   function decisionCard(decision){
@@ -203,10 +203,10 @@
     if(scenario){
       const referenced=(scenario.articles||[]).map(a=>item(a.law,a.num)).filter(Boolean);
       const unique=[...new Map(referenced.map(i=>[i.id,i])).values()];
-      els.title.textContent=`${scenario.type==='tax-faq'?'إجابة من دليل الضرائب':'إجابة عملية'} عن «${raw}»`;
+      els.title.textContent=`${scenario.type==='tax-faq'?'إجابة من دليل الضرائب':'موقف مشابه'} عن «${raw}»`;
       els.count.textContent=scenario.type==='tax-faq'?`سؤال شائع${unique.length?` · ${unique.length} مادة مرتبطة`:''}`:`موقف واحد · ${unique.length} مادة مرتبطة`;
       const linkedMarkup=unique.length?`<div class="legal-results-heading"><strong>النصوص القانونية المرتبطة والعقوبات</strong><span>اضغط على رقم أي مادة للانتقال إليها منفردة.</span></div>${unique.map(i=>card(i,'')).join('')}`:'';
-      els.results.innerHTML=scenarioCard(scenario)+linkedMarkup;
+      els.results.innerHTML='<p class="scenario-notice" role="note">المعروض موقف مشابه من إجابات معدة مسبقًا، وليس تحليلًا تلقائيًا لكل تفاصيل سؤالك. راجع تطابق الفروض والتاريخ والقطاع والاستثناءات قبل التطبيق.</p>'+scenarioCard(scenario)+linkedMarkup;
       els.more.hidden=true;
       els.clear.hidden=false;
       syncHash(raw,lawFilter,kindFilter);

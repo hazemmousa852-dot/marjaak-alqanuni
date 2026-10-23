@@ -130,3 +130,9 @@
     transition: none;
   }
 }
+
+/* Keep cross-tool branding from covering the task on narrow screens. */
+@media screen and (max-width: 640px) {
+  #hm-tools-brand-chip { display: none !important; }
+  #hm-tools-hub-bar, #hm-tools-hub-footer { max-width: 100%; box-sizing: border-box; }
+}
