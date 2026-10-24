@@ -56,6 +56,34 @@
 /* Branded covers remain readable without third-party images. */
 .reel-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;padding:22px;background:linear-gradient(155deg,#14364d,#071827 70%);isolation:isolate}.reel-cover:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,24,39,.3),rgba(7,24,39,.96) 75%),url('assets/hazem-portrait.jpg?v=13') center 25%/cover;opacity:.5}.reel-tone-1 .reel-cover{background:linear-gradient(155deg,#18504f,#071827 70%)}.reel-tone-2 .reel-cover{background:linear-gradient(155deg,#49364d,#071827 70%)}.reel-cover-brand{color:#ffd77e;font-size:13px;font-weight:800;letter-spacing:1px;direction:ltr;margin-top:30px;line-height:1.8}.reel-cover-brand small{display:block;font-size:9px;letter-spacing:1.6px;color:#fff}.reel-cover-topic{font-size:12px;color:#fff;border:1px solid #ffffff60;padding:4px 10px;border-radius:20px;margin-top:24px}.reel-cover-title{font-size:25px;line-height:1.65;color:#fff;margin-top:14px;text-wrap:balance}.reel-cover-author{margin-top:14px;font-size:14px;color:#ffd77e}.reel-cover-number{position:absolute;bottom:55px;inset-inline-end:20px;color:#ffffff18;font-size:65px;font-weight:800}.reel-play{top:auto;bottom:18px;left:20px;transform:none;width:42px;height:42px;font-size:18px;z-index:2}.reel-chip{font-size:10px;top:14px;left:18px}.reel-watch{inset-inline-end:70px;bottom:28px;font-size:13px}.reel-body{display:flex;flex-direction:column;align-items:flex-start;flex:1}.reel-card{display:flex;flex-direction:column}.reel-body h3{min-height:87px;font-size:16px}.reel-share{margin-top:auto}.reel-poster{flex-shrink:0}.reels-controls{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:12px 4px}.reels-arrow{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;color:var(--text);background:var(--panel-solid);font-size:24px;cursor:pointer}.reels-arrow:hover:not(:disabled){border-color:var(--gold);color:var(--accent-text)}.reels-arrow:disabled{opacity:.3;cursor:default}.reels-counter{font-size:13px;color:var(--muted);direction:ltr;min-width:45px;text-align:center}.reels-track{scroll-behavior:smooth}.home-reels{padding-block:64px}html[dir=ltr] .reels-arrow{transform:scaleX(-1)}@media(max-width:640px){.home-reels{padding-block:40px}.reel-cover-title{font-size:27px}.reel-body h3{min-height:82px}.reels-controls{justify-content:flex-start}}@media(prefers-reduced-motion:reduce){.reels-track{scroll-behavior:auto}}
 </style>
+<style id="home-stats-refinement">
+body[data-page="home"] .stats-panel{grid-template-columns:repeat(4,minmax(0,1fr))}
+body[data-page="home"] .stat{grid-column:auto;min-height:94px;gap:12px;border:0;border-inline-end:1px solid var(--line);padding:18px}
+body[data-page="home"] .stat:last-child{border-inline-end:0}
+body[data-page="home"] .stat-icon{width:42px;height:42px;flex-basis:42px}
+body[data-page="home"] .stat-icon svg{width:23px;height:23px}
+body[data-page="home"] .stat strong{font-size:17px;line-height:1.6}
+body[data-page="home"] .stat small{font-size:13px;line-height:1.7}
+@media(max-width:900px){
+body[data-page="home"] .stats-panel{grid-template-columns:repeat(2,minmax(0,1fr))}
+body[data-page="home"] .stat{min-height:100px;justify-content:flex-start;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line)}
+body[data-page="home"] .stat:nth-child(2n){border-inline-end:0}
+body[data-page="home"] .stat:nth-child(n+3){border-bottom:0}
+}
+@media(max-width:640px){
+body[data-page="home"] .stat{min-height:98px;padding:14px 10px;gap:9px}
+body[data-page="home"] .stat-icon{width:34px;height:34px;flex-basis:34px}
+body[data-page="home"] .stat-icon svg{width:19px;height:19px}
+body[data-page="home"] .stat strong{font-size:15px}
+body[data-page="home"] .stat small{font-size:12px;line-height:1.7}
+body[data-page="home"] .stat>span:last-child{gap:3px}
+body[data-page="home"] blockquote{margin:16px auto 0;font-size:15px;line-height:1.8}
+body[data-page="home"] blockquote cite{font-size:16px;margin-top:2px}
+body[data-page="home"] .stats-wrap{margin-top:-12px}
+body[data-page="home"] .featured-tools{padding-top:38px}
+}
+@media(max-width:360px){body[data-page="home"] .stat{flex-direction:column;text-align:center;gap:7px}body[data-page="home"] .stat strong{font-size:14px}}
+</style>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -121,12 +149,10 @@
     </section>
 
     <section class="stats-wrap" aria-label="ملخص الخبرة" data-i18n-aria="statsLabel"><div class="shell stats-panel">
-      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"></path></svg></span><span><strong>2008</strong><small data-i18n="yearsExperience">خبرة عملية منذ</small></span></div>
-      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-3v19M12 8h8v13M7 7h2M7 11h2M7 15h2M15 11h2M15 15h2M15 19h2M2 21h20"></path></svg></span><span><strong data-i18n="regions">مصر + مجلس التعاون الخليجي</strong><small data-i18n="regionalExperience">خبرات إقليمية</small></span></div>
-      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><strong>2008</strong><small data-i18n="journeyStart">بداية الرحلة المهنية</small></span></div>
-      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-5 10 5-10 5L2 10Z"></path><path d="M6 12.5V17c3 2.5 9 2.5 12 0v-4.5"></path></svg></span><span><strong data-i18n="practicalTraining">تدريب عملي</strong><small data-i18n="knowledgeToPractice">معرفة مرتبطة بالتطبيق</small></span></div>
-      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3L22 9.3l-5 4.9 1.2 6.8-6.2-3.2L5.8 21 7 14.2 2 9.3l6.9-1L12 2Z"></path></svg></span><span><strong data-i18n="hrContent">محتوى وأدوات</strong><small data-i18n="practicalTrusted">عملية ومتخصصة</small></span></div>
-    </div></section>
+      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"></path></svg></span><span><strong data-copy-ar="منذ ٢٠٠٨" data-copy-en="Since 2008">منذ ٢٠٠٨</strong><small data-copy-ar="خبرة عملية" data-copy-en="Practical experience">خبرة عملية</small></span></div>
+<div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-3v19M12 8h8v13M7 7h2M7 11h2M7 15h2M15 11h2M15 15h2M15 19h2M2 21h20"></path></svg></span><span><strong data-copy-ar="مصر والخليج" data-copy-en="Egypt & the Gulf">مصر والخليج</strong><small data-copy-ar="خبرات إقليمية" data-copy-en="Regional experience">خبرات إقليمية</small></span></div>
+<div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-5 10 5-10 5L2 10Z"></path><path d="M6 12.5V17c3 2.5 9 2.5 12 0v-4.5"></path></svg></span><span><strong data-copy-ar="تدريب عملي" data-copy-en="Practical training">تدريب عملي</strong><small data-copy-ar="معرفة تتحول لتطبيق" data-copy-en="Knowledge into practice">معرفة تتحول لتطبيق</small></span></div>
+<div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3L22 9.3l-5 4.9 1.2 6.8-6.2-3.2L5.8 21 7 14.2 2 9.3l6.9-1L12 2Z"></path></svg></span><span><strong data-copy-ar="أدوات HR" data-copy-en="HR tools">أدوات HR</strong><small data-copy-ar="حلول ومحتوى متخصص" data-copy-en="Tools & specialist content">حلول ومحتوى متخصص</small></span></div></div></section>
 
 <section class="section featured-tools" aria-labelledby="featuredTitle"><div class="shell"><div class="section-heading centered"><p data-copy-ar="ابدأ بمهمة من شغلك" data-copy-en="Start with a task from your work" class="eyebrow">ابدأ بمهمة من شغلك</p><h2 data-copy-ar="أدوات عملية تقدر تجرّبها الآن" data-copy-en="Practical tools to try now" id="featuredTitle">أدوات عملية تقدر تجرّبها الآن</h2><p data-copy-ar="حساب المرتبات، تجهيز النماذج، والوصول للنص القانوني من مكان واحد." data-copy-en="Calculate payroll, prepare forms and find legal provisions in one place." >حساب المرتبات، تجهيز النماذج، والوصول للنص القانوني من مكان واحد.</p></div><div class="tool-showcase-grid"><article class="tool-showcase-card search-tool-card green-card" data-tool-category="calculators" data-search-ar="حاسبة صافي شامل مرتب راتب payroll اجور ضرائب تأمينات فردي جماعي" data-search-en="net gross salary payroll calculator wages tax insurance individual batch">
             <div class="tool-showcase-image"><img src="assets/tools/payroll-calculator-v2.webp?v=22" width="960" height="640" alt="واجهة دعائية لحاسبة صافي وشامل المرتب" loading="lazy" decoding="async"></div>
