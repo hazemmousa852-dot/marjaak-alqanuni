@@ -198,6 +198,52 @@ body[data-page=home] .reels-library .reels-track{grid-template-columns:repeat(2,
 body[data-page=home] .reels-library .reel-card{max-width:none}
 body[data-page=home] .home-reels .reel-cover-title{font-size:15px}
 }
+</style><style id="home-spacing-and-discovery">
+body[data-page=home] .section{padding-block:48px}
+body[data-page=home] .featured-tools{padding-block:38px}
+body[data-page=home] .home-reels{padding-block:32px}
+body[data-page=home] .home-story{padding-block:38px}
+body[data-page=home] .trainee-reviews{padding-block:42px}
+body[data-page=home] .home-destinations{padding-block:42px}
+body[data-page=home] .home-final{padding-block:32px}
+body[data-page=home] .section-heading{margin-bottom:24px}
+body[data-page=home] .reels-status:empty{display:none}
+body[data-page=home] .reels-track{padding-bottom:12px}
+body[data-page=home] .home-story-grid{gap:32px;align-items:center}
+body[data-page=home] .home-story-photo{max-height:310px}
+body[data-page=home] .home-story-photo img{width:100%;height:310px;object-fit:cover}
+body[data-page=home] .home-story-copy h2{font-size:clamp(26px,3vw,38px);line-height:1.5;margin-block:10px}
+body[data-page=home] .home-route-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+body[data-page=home] .home-route-card{grid-column:span 3;min-height:0;padding:20px;display:flex;flex-direction:column;gap:8px}
+body[data-page=home] .home-route-card:nth-child(n+5){grid-column:span 4}
+body[data-page=home] .route-number{font-size:24px;line-height:1.2}
+body[data-page=home] .home-route-card h3{font-size:19px;line-height:1.5;margin:0}
+body[data-page=home] .home-route-card p{font-size:13px;line-height:1.8;margin:0 0 8px}
+body[data-page=home] .route-action{font-size:12px;margin-top:auto}
+body[data-page=home] .home-destinations .section-heading h2{font-size:clamp(26px,3vw,36px)}
+body[data-page=home] .cta-panel{padding:28px;gap:24px}
+body[data-page=home] .cta-panel h2{font-size:clamp(26px,3vw,36px)}
+@media(max-width:900px){
+body[data-page=home] .home-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+body[data-page=home] .home-route-card,body[data-page=home] .home-route-card:nth-child(n+5){grid-column:auto}
+body[data-page=home] .home-route-card:last-child{grid-column:1/-1}
+}
+@media(max-width:640px){
+body[data-page=home] .section{padding-block:30px}
+body[data-page=home] .featured-tools{padding-top:28px}
+body[data-page=home] .section-heading{margin-bottom:20px}
+body[data-page=home] .reels-heading{gap:12px}
+body[data-page=home] .home-story-grid{gap:20px}
+body[data-page=home] .home-story-photo{max-height:250px}
+body[data-page=home] .home-story-photo img{height:250px}
+body[data-page=home] .home-route-card{padding:15px;gap:7px;border-radius:16px}
+body[data-page=home] .home-route-card h3{font-size:17px}
+body[data-page=home] .home-route-card p{font-size:12px;line-height:1.75}
+body[data-page=home] .route-number{font-size:20px}
+body[data-page=home] .home-final{padding-block:24px}
+body[data-page=home] .cta-panel{padding:22px}
+}
+@media(max-width:350px){body[data-page=home] .home-route-grid{grid-template-columns:1fr}}
 </style></head>
 <body data-page="home">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -221,7 +267,7 @@ body[data-page=home] .home-reels .reel-cover-title{font-size:15px}
         <a class="round-button search-jump" href="tools/" aria-label="ابحث في الأدوات" data-i18n-aria="searchToolsAria"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg></a>
         <button class="round-button theme-toggle" type="button" aria-label="تفعيل الوضع الفاتح" data-i18n-aria="themeAria" data-theme-toggle><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.3A8.5 8.5 0 0 1 8.7 4 8.5 8.5 0 1 0 20 15.3Z"></path></svg><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
         <button class="language-toggle" type="button" aria-label="Switch to English">EN</button>
-        <a class="contact-button" href="contact/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-8-8 18-2-7-8-3Z"></path><path d="m11 14 4-4"></path></svg><span data-i18n="contactNow">تواصل الآن</span></a>
+        <a class="contact-button" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D8%A7%D8%B2%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D8%A3%D9%88%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-8-8 18-2-7-8-3Z"></path><path d="m11 14 4-4"></path></svg><span data-copy-ar="للتدريب والتعاون" data-copy-en="Training & collaboration">للتدريب والتعاون</span></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="فتح القائمة" data-i18n-aria="menuAria"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -256,7 +302,7 @@ body[data-page=home] .home-reels .reel-cover-title{font-size:15px}
             <div class="pillar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-5 10 5-10 5L2 10Z"></path><path d="M6 12.5V17c3 2.5 9 2.5 12 0v-4.5M22 10v6"></path></svg><strong data-i18n="pillarTraining">تدريب<br>وتطوير</strong></div>
             <div class="pillar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"></path></svg><strong data-i18n="pillarTools">أدوات عملية<br>تسهّل عملك</strong></div>
           </div>
-          <div class="hero-actions"><a class="primary-cta" href="tools/"><span data-i18n="discoverStory">استخدم أدوات HR المجانية</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><a class="secondary-cta" href="contact/"><span data-i18n="startContact">تواصل معي</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
+          <div class="hero-actions"><a class="primary-cta" href="tools/"><span data-i18n="discoverStory">استخدم أدوات HR المجانية</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><a class="secondary-cta" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D8%A7%D8%B2%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D8%A3%D9%88%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A."><span data-copy-ar="تواصل للتدريب والتعاون" data-copy-en="Discuss training & collaboration">تواصل للتدريب والتعاون</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div>
           <blockquote><span data-i18n="quote">لأن تطوير نفسك مش خيار.. ده استثمار</span><cite>Hazem Moussa</cite></blockquote>
         </div>
       </div>
@@ -305,7 +351,7 @@ body[data-page=home] .home-reels .reel-cover-title{font-size:15px}
       <a class="home-route-card" href="reels/"><span class="route-number">07</span><h3 data-copy-ar="ريلز HR" data-copy-en="HR Shorts">ريلز HR</h3><p data-copy-ar="معلومة سريعة من واقع شؤون العاملين والرواتب والتأمينات." data-copy-en="Quick insights into personnel, payroll and social insurance.">معلومة سريعة من واقع شؤون العاملين والرواتب والتأمينات.</p><span class="route-action" data-copy-ar="شاهد كل الريلز" data-copy-en="Browse all Shorts">شاهد كل الريلز</span></a></div>
     </div></section>
 
-    <section class="page-section home-final"><div class="shell cta-panel"><div><p class="eyebrow" data-i18n="finalEyebrow">تواصل مهني</p><h2 data-i18n="finalTitle">خلّينا نحوّل المعرفة إلى تطبيق</h2><p data-i18n="finalLead">للتدريب وورش العمل والتعاون المهني أو الاستفسار عن أدوات الموارد البشرية.</p></div><a class="primary-cta" href="contact/"><span data-i18n="goContact">اذهب لصفحة التواصل</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></section>
+    <section class="page-section home-final"><div class="shell cta-panel"><div><p class="eyebrow" data-i18n="finalEyebrow">تواصل مهني</p><h2 data-i18n="finalTitle">خلّينا نحوّل المعرفة إلى تطبيق</h2><p data-copy-ar="للتنسيق لمحاضرة أو ورشة عمل أو مناقشة فرصة تعاون مهني، يسعدني تواصلك." data-copy-en="Get in touch to arrange a lecture, workshop or professional collaboration.">للتنسيق لمحاضرة أو ورشة عمل أو مناقشة فرصة تعاون مهني، يسعدني تواصلك.</p></div><a class="primary-cta" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D8%A7%D8%B2%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D8%A3%D9%88%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A."><span data-copy-ar="تواصل للتدريب والتعاون" data-copy-en="Discuss training & collaboration">تواصل للتدريب والتعاون</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></section>
   </main>
 
   <footer><div class="shell footer-inner"><div class="footer-brand"><strong>Hazem Moussa</strong><span>HR &amp; Payroll Hub</span></div><p>© <span id="year"></span> Hazem Moussa. <span data-i18n="rights">جميع الحقوق محفوظة.</span></p><div class="social-links"><a href="tel:+201030006087" aria-label="Phone" title="01030006087">TEL</a><a href="https://wa.me/201030006087" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-whatsapp-link>WA</a><a href="https://www.linkedin.com/in/hazem-moussa-986b9798/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a><a href="https://www.facebook.com/share/18ngCpG8YP/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a><a href="https://www.youtube.com/@hazemmosa" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube — Hazem Moussa"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M23 7s-.2-1.7-1-2.4c-.9-.9-1.9-.9-2.3-1C16.5 3.4 12 3.4 12 3.4s-4.5 0-7.7.2c-.4.1-1.4.1-2.3 1C1.2 5.3 1 7 1 7S.8 9 .8 11v2C.8 15 1 17 1 17s.2 1.7 1 2.4c.9.9 2.1.9 2.6 1 1.9.2 7.4.2 7.4.2s4.5 0 7.7-.2c.4-.1 1.4-.1 2.3-1 .8-.7 1-2.4 1-2.4s.2-2 .2-4v-2C23.2 9 23 7 23 7ZM9.7 15.4V8.5l6 3.5-6 3.4Z"/></svg></a></div></div></footer>
