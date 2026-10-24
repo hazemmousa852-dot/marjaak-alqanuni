@@ -164,7 +164,9 @@ body[data-page=home] .reels-heading{gap:12px}
 </style><style id="home-horizontal-overflow-fix">
 html{overflow-x:hidden}
 body[data-page="home"]{width:100%;max-width:100%;overflow-x:hidden}
-@supports(overflow:clip){html{overflow-x:clip}body[data-page="home"]{overflow-x:clip}}
+body[data-page="home"]{position:relative}
+body[data-page="home"] main{overflow-x:clip}
+body[data-page="home"] .home-reels,body[data-page="home"] .trainee-reviews,body[data-page="home"] .featured-tools{overflow:hidden}
 body[data-page="home"] main,body[data-page="home"] main>section{min-width:0;max-width:100%}
 body[data-page="home"] .shell{min-width:0}
 body[data-page="home"] .reels-track,body[data-page="home"] .trainee-reviews-grid,body[data-page="home"] .featured-tools .tool-showcase-grid{width:100%;max-width:100%;min-width:0;box-sizing:border-box;overscroll-behavior-x:contain}
