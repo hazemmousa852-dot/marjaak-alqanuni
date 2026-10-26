@@ -25,6 +25,10 @@
     const match=toLatin(name).match(/^2026_(\d+)|رقم\s*(\d+)|قرار\s+(\d+)/);
     return Number(match?.[1]||match?.[2]||match?.[3]||Number.MAX_SAFE_INTEGER);
   }
+  function yearOf(name){
+    const value=toLatin(name);
+    return Number(value.match(/لسنة\s*(\d{4})/)?.[1]||value.match(/^(\d{4})_/)?.[1]||0);
+  }
   function tokenMatches(term,token){
     if(/^\d+$/.test(term)||/^\d+$/.test(token))return term===token;
     return term===token||token===`و${term}`||term===`و${token}`||(term.length>=4&&token.length>=4&&Math.abs(term.length-token.length)<=2&&(term.startsWith(token)||token.startsWith(term)));
@@ -41,13 +45,13 @@
     return !text.length||hits>=Math.max(1,Math.ceil(text.length*.6));
   }
   async function files(){
-    const response=await fetch('data/decisions.json?v=20261026-1');
+    const response=await fetch('data/decisions.json?v=20261026-2');
     if(!response.ok)throw new Error();
     const data=await response.json();
-    return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name)})).sort((a,b)=>numberOf(a.name)-numberOf(b.name)||a.title.localeCompare(b.title,'ar'));
+    return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name),url:data.urls?.[name]||fileUrl(name),page:data.pages?.[name]||1})).sort((a,b)=>yearOf(a.name)-yearOf(b.name)||numberOf(a.name)-numberOf(b.name)||a.title.localeCompare(b.title,'ar'));
   }
   function row(item,index){
-    return `<article class="decision-row"><div class="decision-number">${index+1}</div><div class="decision-name"><h3>${esc(item.title)}</h3><p>ملف PDF متاح للعرض والتنزيل</p></div><div class="decision-actions"><a class="view-decision" href="decision-viewer.html#${encodeURIComponent(item.name)}">عرض القرار</a><a class="download-decision" href="${fileUrl(item.name)}" download>تحميل PDF</a></div></article>`;
+    return `<article class="decision-row"><div class="decision-number">${index+1}</div><div class="decision-name"><h3>${esc(item.title)}</h3><p>ملف PDF متاح للعرض والتنزيل</p></div><div class="decision-actions"><a class="view-decision" href="decision-viewer.html#${encodeURIComponent(item.name)}">عرض القرار</a><a class="download-decision" href="${esc(item.url)}" download>تحميل PDF</a></div></article>`;
   }
   async function list(){
     const host=document.querySelector('#decisionsList');
@@ -57,7 +61,7 @@
       const all=await files();
       const render=()=>{
         const shown=all.filter(item=>matches(item,search.value));
-        count.textContent=search.value.trim()?`${shown.length} من ${all.length} قرارًا وملفًا`:`${all.length} قرارًا وملفًا`;
+        count.textContent=search.value.trim()?`${shown.length} من ${all.length} قرارًا`:`${all.length} قرارًا`;
         host.innerHTML=shown.length?shown.map(row).join(''):'<div class="empty-state"><strong>لا يوجد قرار مطابق</strong><span>جرّب رقم القرار فقط أو كلمة أقصر من موضوعه.</span></div>';
       };
       let timer;
@@ -76,7 +80,7 @@
       const item=all.find(entry=>entry.name===requested);
       if(!item)throw new Error();
       document.title=`${item.title} | مرجعك القانوني`;
-      host.innerHTML=`<div class="viewer-head"><h1>${esc(item.title)}</h1><a class="download-decision" href="${fileUrl(item.name)}" download>تحميل PDF</a></div><iframe title="${esc(item.title)}" src="${fileUrl(item.name)}#view=FitH"></iframe><p class="viewer-note">إذا لم يظهر الملف في المتصفح، استخدم زر التحميل لفتحه على جهازك.</p>`;
+      host.innerHTML=`<div class="viewer-head"><h1>${esc(item.title)}</h1><a class="download-decision" href="${esc(item.url)}" download>تحميل PDF</a></div><iframe title="${esc(item.title)}" src="${esc(item.url)}#page=${item.page}&view=FitH"></iframe><p class="viewer-note">إذا لم يظهر الملف في المتصفح، استخدم زر التحميل لفتحه على جهازك.</p>`;
     }catch{
       host.innerHTML='<div class="empty-state"><strong>القرار غير متاح</strong><span>ارجع إلى فهرس القرارات واختر ملفًا موجودًا.</span></div>';
     }
