@@ -41,7 +41,7 @@
     return !text.length||hits>=Math.max(1,Math.ceil(text.length*.6));
   }
   async function files(){
-    const response=await fetch('data/decisions.json?v=20261021-1');
+    const response=await fetch('data/decisions.json?v=20261026-1');
     if(!response.ok)throw new Error();
     const data=await response.json();
     return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name)})).sort((a,b)=>numberOf(a.name)-numberOf(b.name)||a.title.localeCompare(b.title,'ar'));
