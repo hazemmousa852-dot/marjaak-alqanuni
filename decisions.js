@@ -37,7 +37,7 @@
     const terms=[...new Set(wordsOf(raw).filter(word=>!['قرار','قرارات','رقم'].includes(word)))];
     if(!raw.trim())return true;
     if(!terms.length)return true;
-    const tokens=wordsOf(item.title);
+    const tokens=wordsOf(`${item.title} ${item.summary}`);
     const numeric=terms.filter(term=>/^\d+$/.test(term));
     if(numeric.some(term=>!tokens.includes(term)))return false;
     const text=terms.filter(term=>!/^\d+$/.test(term));
@@ -45,13 +45,13 @@
     return !text.length||hits>=Math.max(1,Math.ceil(text.length*.6));
   }
   async function files(){
-    const response=await fetch('data/decisions.json?v=20261026-2');
+    const response=await fetch('data/decisions.json?v=20261026-3');
     if(!response.ok)throw new Error();
     const data=await response.json();
-    return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name),url:data.urls?.[name]||fileUrl(name),page:data.pages?.[name]||1})).sort((a,b)=>yearOf(a.name)-yearOf(b.name)||numberOf(a.name)-numberOf(b.name)||a.title.localeCompare(b.title,'ar'));
+    return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name),summary:data.summaries?.[name]||'',url:data.urls?.[name]||fileUrl(name),page:data.pages?.[name]||1})).sort((a,b)=>numberOf(a.name)-numberOf(b.name)||yearOf(a.name)-yearOf(b.name)||a.title.localeCompare(b.title,'ar'));
   }
   function row(item,index){
-    return `<article class="decision-row"><div class="decision-number">${index+1}</div><div class="decision-name"><h3>${esc(item.title)}</h3><p>ملف PDF متاح للعرض والتنزيل</p></div><div class="decision-actions"><a class="view-decision" href="decision-viewer.html#${encodeURIComponent(item.name)}">عرض القرار</a><a class="download-decision" href="${esc(item.url)}" download>تحميل PDF</a></div></article>`;
+    return `<article class="decision-row"><div class="decision-number">${index+1}</div><div class="decision-name"><h3>${esc(item.title)}</h3><p>${esc(item.summary)}</p></div><div class="decision-actions"><a class="view-decision" href="decision-viewer.html#${encodeURIComponent(item.name)}">عرض القرار</a><a class="download-decision" href="${esc(item.url)}" download>تحميل PDF</a></div></article>`;
   }
   async function list(){
     const host=document.querySelector('#decisionsList');
