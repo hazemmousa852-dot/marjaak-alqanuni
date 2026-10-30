@@ -9,3 +9,5 @@ body{background:var(--hm-canvas)}
 h1,h2{color:var(--hm-navy)}
 .brand-logo{border-color:var(--hm-gold);background:var(--hm-navy)}
 }
+
+@media screen {body[data-hm-theme="v1"] main{max-width:1180px}body[data-hm-theme="v1"] h1{font-size:clamp(28px,3vw,40px);line-height:1.6}body[data-hm-theme="v1"] .hero{gap:40px;margin-bottom:32px}body[data-hm-theme="v1"] .hero aside{border-radius:16px;border-bottom-width:3px}body[data-hm-theme="v1"] .hero aside strong{font:700 30px/1.5 Cairo,Tahoma,sans-serif}body[data-hm-theme="v1"] .notice{font-size:12px}body[data-hm-theme="v1"] .stats{padding:10px}}
