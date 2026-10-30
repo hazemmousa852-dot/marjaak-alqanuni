@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict');const C=require('../core.js');const d=(day,h,m=0)=>new Date(2026,9,day,h,m);
+assert.deepEqual(C.splitOvertime(d(1,21),d(2,7)),{day:120,night:480});
+assert.deepEqual(C.splitOvertime(d(1,16),d(1,18)),{day:120,night:0});
+assert.deepEqual(C.splitOvertime(d(1,23),d(2,2)),{day:0,night:180});
+assert.deepEqual(C.splitOvertime(d(1,7),d(1,8),360,1320),{day:0,night:60});
+const base={id:'001|2026-10-01',dayType:'work',actualIn:d(1,8),actualOut:d(1,18),lateMinutes:20,earlyMinutes:0,regularOvertimeMinutes:120,workMinutes:600};
+assert.throws(()=>C.aggregate([{...base,isMissing:true,actualOut:null}],{},{}));
+assert.throws(()=>C.aggregate([{...base,isMissing:true,actualOut:null}],{[base.id]:{action:'include',reason:'test'}},{}));
+assert.equal(C.aggregate([{...base,isMissing:true,actualOut:null}],{[base.id]:{action:'exclude',reason:'corrected separately'}},{}).late,0);
+assert.equal(C.aggregate([{...base,isAbsent:true,actualIn:null,actualOut:null}],{[base.id]:{action:'include',reason:'approved absence'}},{}).absence,1);
+assert.equal(C.aggregate([{...base,dayType:'rest',isWorkedShiftDay:true}],{[base.id]:{action:'include',reason:'manual settlement'}},{}).day,0);
+let a=C.aggregate([base],{}, {nightStart:1320,nightEnd:360});assert.equal(a.day,120);assert.equal(a.late,20);
+const p={basic:10000,allowance:1500,fraction:1,incentive:100,special:0,insurance:1100,tax:500,fund:5,loan:200,other:0},s={basis:'basic',days:30,hours:8,dayFactor:1.35,nightFactor:1.7,deductLate:true,deductEarly:true};
+let m=C.calculate(p,{day:120,night:120,absence:1,late:30,early:0},s);assert.equal(m.dayPay,112.5);assert.equal(m.nightPay,141.67);assert.equal(m.net,9695.01);assert.equal(C.round(m.gross-m.deductions-m.net),0);
+console.log('PASS: day/night splits, midnight, missing punches, absence approval, rest separation and salary reconciliation');

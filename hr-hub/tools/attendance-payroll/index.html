@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="من البصمة للراتب: تحليل الحضور ومراجعة الاستثناءات ومسير الرواتب في أداة واحدة من حازم موسى.">
+  <title>من البصمة للراتب | حازم موسى</title>
+  <link rel="icon" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/brand/logo-512.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="https://hazemmousa852-dot.github.io/marjaak-alqanuni/brand/logo-512.png" alt="Hazem Moussa HR & Payroll Hub" class="brand-logo">
+        <div>
+          <p class="eyebrow">HR & PAYROLL HUB</p>
+          <h1 data-i18n="appTitle">نظام الحضور والانصراف</h1>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="setup">
+          <span class="nav-icon">01</span><span data-i18n="navSetup">الإعداد والاستيراد</span>
+        </button>
+        <button class="nav-item" data-view="dashboard" disabled>
+          <span class="nav-icon">02</span><span data-i18n="navDashboard">لوحة النتائج</span>
+        </button>
+        <button class="nav-item" data-view="daily" disabled>
+          <span class="nav-icon">03</span><span data-i18n="navDaily">التقرير اليومي</span>
+        </button>
+        <button class="nav-item" data-view="summary" disabled>
+          <span class="nav-icon">04</span><span data-i18n="navSummary">ملخص الموظفين</span>
+        </button>
+      <button class="nav-item" data-view="payroll" disabled><span class="nav-icon">05</span><span>المراجعة والمرتبات</span></button></nav>
+
+      <div class="privacy-note">
+        <span class="privacy-dot"></span>
+        <div>
+          <strong data-i18n="localOnly">يعمل محليًا</strong>
+          <p data-i18n="privacyText">لا يتم رفع بيانات الموظفين إلى أي خادم.</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="breadcrumb" data-i18n="productName">Attendance Intelligence</p>
+          <h2 id="page-title" data-i18n="setupTitle">إعداد التقرير</h2>
+        </div>
+        <div class="top-actions">
+          <a href="../" class="ghost-button hub-back">كل الأدوات</a><button id="demo-pipeline" class="ghost-button" type="button">جرّب ببيانات افتراضية</button><button hidden id="lang-toggle" class="ghost-button" type="button">English</button>
+          <button id="export-button" class="gold-button hidden" type="button" data-i18n="exportExcel">تصدير Excel</button>
+        </div>
+      </header>
+
+      <section id="view-setup" class="view active-view">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="section-kicker" data-i18n="localWorkspace">مساحة عمل محلية وآمنة</span>
+            <h3 data-i18n="heroTitle">حوّل ملف جهاز البصمة إلى تقرير حضور واضح خلال دقائق.</h3>
+            <p data-i18n="heroText">ارفع ملف الحركات وقالب الموظفين، راجع الإعدادات، ثم أنشئ التقرير. جميع المعالجة تتم داخل المتصفح.</p>
+          </div>
+          <div class="hero-mark"><img src="https://hazemmousa852-dot.github.io/marjaak-alqanuni/brand/logo-512.png" width="100" height="100" alt="شعار حازم موسى"></div>
+        </div>
+
+        <div class="setup-grid">
+          <article class="panel upload-panel">
+            <div class="panel-heading">
+              <span class="step-number">1</span>
+              <div>
+                <h3 data-i18n="punchFileTitle">ملف جهاز البصمة</h3>
+                <p data-i18n="punchFileHelp">يدعم XLS وXLSX وCSV ويكتشف الأعمدة العربية أو الإنجليزية.</p>
+              </div>
+            </div>
+            <label class="drop-zone" for="punch-file">
+              <input id="punch-file" type="file" accept=".xls,.xlsx,.csv" hidden>
+              <span class="upload-symbol">↑</span>
+              <strong data-i18n="choosePunchFile">اختر ملف الحركات</strong>
+              <small data-i18n="orDrop">أو اسحبه إلى هنا</small>
+            </label>
+            <div id="punch-status" class="file-status" data-state="empty" data-i18n="noFile">لم يتم اختيار ملف</div>
+          </article>
+
+          <article class="panel upload-panel">
+            <div class="panel-heading">
+              <span class="step-number">2</span>
+              <div>
+                <h3 data-i18n="employeesFileTitle">قالب الموظفين والمؤثرات</h3>
+                <p data-i18n="employeesFileHelp">قالب واحد للموظفين والإجازات والأذونات والإجازات الرسمية.</p>
+              </div>
+            </div>
+            <p><a href="https://hazemmousa852-dot.github.io/hm-attendance-intelligence/assets/HM_Attendance_Inputs_Template.xlsx" download>قالب الحضور المتقدم: الورديات والإجازات والأذونات (Excel)</a> — أضف الأجور داخل الأداة بعد الاستيراد.</p>
+            <div class="split-actions">
+              <button id="download-template" class="outline-button" type="button" data-i18n="downloadTemplate">تنزيل القالب</button>
+              <label class="compact-upload" for="employees-file">
+                <input id="employees-file" type="file" accept=".xls,.xlsx,.csv" hidden>
+                <span data-i18n="uploadEmployees">رفع القالب المكتمل</span>
+              </label>
+            </div>
+            <div id="employees-status" class="file-status" data-state="empty" data-i18n="noFile">لم يتم اختيار ملف</div>
+          </article>
+        </div>
+
+        <article class="panel settings-panel">
+          <div class="panel-heading">
+            <span class="step-number">3</span>
+            <div>
+              <h3 data-i18n="settingsTitle">إعدادات الحساب</h3>
+              <p data-i18n="settingsHelp">يمكن تعديل هذه القيم في كل مرة قبل إنشاء التقرير.</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <label><span data-i18n="periodStart">بداية الفترة</span><input id="period-start" class="date-entry" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" maxlength="10" autocomplete="off" aria-label="Period start: day/month/year"></label>
+            <label><span data-i18n="periodEnd">نهاية الفترة</span><input id="period-end" class="date-entry" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" maxlength="10" autocomplete="off" aria-label="Period end: day/month/year"></label>
+            <label><span data-i18n="lateGrace">سماح التأخير (دقيقة)</span><input id="late-grace" type="number" min="0" value="15"></label>
+            <label><span data-i18n="earlyGrace">سماح الانصراف المبكر (دقيقة)</span><input id="early-grace" type="number" min="0" value="15"></label>
+            <label><span data-i18n="overtimeAfter">بدء الإضافي بعد نهاية الوردية (دقيقة)</span><input id="overtime-after" type="number" min="0" value="30"></label>
+            <label><span data-i18n="weekendOvertime">عمل يوم الراحة</span>
+              <select id="rest-overtime">
+                <option value="all" data-i18n="allHoursOvertime">كل الوقت إضافي</option>
+                <option value="after" data-i18n="afterShiftOnly">بعد نهاية الوردية فقط</option>
+              </select>
+            </label>
+          </div>
+          <div class="validation-row">
+            <div id="validation-message" class="validation-message" data-i18n="readyHint">ارفع الملفين لإتاحة إنشاء التقرير.</div>
+            <button id="generate-report" class="primary-button" type="button" disabled data-i18n="generateReport">إنشاء التقرير</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="view-dashboard" class="view">
+        <div id="kpi-grid" class="kpi-grid"></div>
+        <div class="dashboard-grid">
+          <article class="panel chart-panel">
+            <div class="panel-title-row">
+              <div><span class="section-kicker" data-i18n="analysis">تحليل</span><h3 data-i18n="topLate">أعلى الموظفين تأخيرًا</h3></div>
+            </div>
+            <div id="late-chart" class="bar-chart"></div>
+          </article>
+          <article class="panel insight-panel">
+            <div class="panel-title-row">
+              <div><span class="section-kicker" data-i18n="dataQuality">جودة البيانات</span><h3 data-i18n="attentionRequired">حالات تحتاج مراجعة</h3></div>
+            </div>
+            <div id="quality-list" class="quality-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-daily" class="view">
+        <article class="panel report-panel">
+          <div class="report-toolbar">
+            <div>
+              <span class="section-kicker" data-i18n="details">التفاصيل</span>
+              <h3 data-i18n="dailyAttendance">الحضور اليومي</h3>
+            </div>
+            <div class="filter-group">
+              <input id="daily-search" type="search" data-i18n-placeholder="searchEmployee" placeholder="بحث بالكود أو الاسم">
+              <select id="daily-status-filter">
+                <option value="all" data-i18n="allStatuses">كل الحالات</option>
+                <option value="absence" data-i18n="absence">غياب</option>
+                <option value="missing" data-i18n="missingPunch">بصمة ناقصة</option>
+                <option value="late" data-i18n="late">تأخير</option>
+                <option value="overtime" data-i18n="overtime">إضافي</option>
+              </select>
+            </div>
+          </div>
+          <p class="edit-hint" data-i18n="editHint">يمكن تعديل وقت الدخول والخروج والملاحظات مباشرة من الجدول، وسيُعاد حساب الملخص تلقائيًا.</p>
+          <div class="report-legend" aria-label="Report legend">
+            <span><i class="legend-dot regular"></i><b data-i18n="regularOvertime">إضافي بعد العمل</b></span>
+            <span><i class="legend-dot rest"></i><b data-i18n="restOvertime">إضافي الراحة الأسبوعية</b></span>
+            <span><i class="legend-dot holiday"></i><b data-i18n="holidayOvertime">إضافي الإجازة الرسمية</b></span>
+            <span><i class="legend-dot leave"></i><b data-i18n="leave">إجازة</b></span>
+            <span><i class="legend-dot permission"></i><b data-i18n="permission">إذن</b></span>
+          </div>
+          <div class="table-wrap"><table id="daily-table"></table></div>
+          <div class="pagination">
+            <button id="prev-page" class="ghost-button" type="button" data-i18n="previous">السابق</button>
+            <span id="page-info"></span>
+            <button id="next-page" class="ghost-button" type="button" data-i18n="next">التالي</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="view-summary" class="view">
+        <article class="panel report-panel">
+          <div class="report-toolbar">
+            <div>
+              <span class="section-kicker" data-i18n="monthlyView">نظرة مجمعة</span>
+              <h3 data-i18n="employeesSummary">ملخص الموظفين</h3>
+            </div>
+            <input id="summary-search" type="search" data-i18n-placeholder="searchEmployee" placeholder="بحث بالكود أو الاسم">
+          </div>
+          <div class="table-wrap"><table id="summary-table"></table></div>
+        </article>
+      </section>
+<section id="view-payroll" class="view"><article class="panel pipeline-intro"><p class="section-kicker">ATTENDANCE → REVIEW → PAYROLL</p><h3>من البصمة… لمسير جاهز للمراجعة</h3><p>١. راجع الاستثناءات. ٢. أكمل بيانات الأجر والمتغيرات. ٣. اعتمد النتائج ثم نزّل Excel. أي تعديل بعد الاعتماد يلغي الاعتماد السابق.</p><div class="pipeline-links"><a href="../payroll-sheet-builder/">صانع الشيتات المستقل</a><a href="https://hazemmousa852-dot.github.io/hm-attendance-intelligence/">نظام الحضور المستقل</a></div></article>
+<article class="panel"><h3>إعدادات ربط الرواتب</h3><div class="form-grid" id="pay-config"><label>اسم المنشأة<input id="pay-company" value="منشأتي" maxlength="100" required></label><label>أيام أساس الحساب<input id="pay-days" type="number" value="30" min="1" max="31" step="1" required></label><label>ساعات أساس الأجر اليومية<input id="pay-hours" type="number" value="8" min="1" max="24" step="0.5" required></label><label>أساس أجر اليوم والساعة<select id="pay-basis"><option value="fixed">الأساسي + البدلات الثابتة</option><option value="basic">الأساسي فقط — حسب مراجعة أساس الأجر</option></select></label><label>معامل الإضافي النهاري<input id="pay-day-factor" type="number" value="1.35" min="1.35" max="10" step="0.05" required></label><label>معامل الإضافي الليلي<input id="pay-night-factor" type="number" value="1.70" min="1.70" max="10" step="0.05" required></label><label>بداية فترة تصنيف الليل<input id="pay-night-start" type="time" value="22:00" required></label><label>نهاية فترة تصنيف الليل<input id="pay-night-end" type="time" value="06:00" required></label><label>ترحيل التأخير كخصم<select id="pay-late"><option value="yes">نعم، بعد المراجعة</option><option value="no">لا</option></select></label><label>ترحيل الخروج المبكر كخصم<select id="pay-early"><option value="yes">نعم، بعد المراجعة</option><option value="no">لا</option></select></label></div><p class="pipeline-note">الإضافي النهاري والليلي يُفصل حسب توقيت الدقائق الفعلية في الفترة التي حددتها. تصنيف الليل إعداد تشغيلي قابل للتعديل؛ راجعه حسب النظام المنطبق. الإضافي المحسوب هنا بعد نهاية الوردية فقط، ويُستبعد منه وقت بدء الإضافي المحدد في إعدادات الحضور. الراحة الأسبوعية والعطلات والعمل أثناء الإجازة والمرضيات لا تُسوّى تلقائيًا: أدخل التسوية المالية المراجَعة مع سببها. التأمين والضريبة وصندوق التكريم إدخال يدوي.</p></article>
+<article class="panel"><div class="panel-title-row"><h3>استثناءات تحتاج قرارك</h3><strong id="review-counter"></strong></div><p>صحّح الحركات الناقصة في التقرير اليومي، أو استبعد أثر اليوم المالي مع ذكر السبب. الغياب لا يُخصم إلا بعد اعتماد «احتساب»؛ والاستبعاد لا يلغي الأجر الثابت المستحق.</p><p id="source-quality" role="status"></p><div id="unknown-review" hidden><label>سبب استبعاد حركات الأكواد غير المطابقة/غير المسندة للفترة<input id="unknown-reason" placeholder="صحّح الملف أو اكتب سبب الاستبعاد" maxlength="300"></label></div><div class="filter-group"><input id="review-search" type="search" placeholder="ابحث في الاستثناءات بالكود أو الاسم" aria-label="بحث الاستثناءات"></div><div class="table-wrap"><table id="review-table"></table></div></article>
+<article class="panel"><div class="panel-title-row"><h3>الأجور والمتغيرات الشهرية</h3><label class="salary-import">استيراد أجور CSV<input id="pay-salary-import" type="file" accept=".csv" hidden></label></div><p>أكواد الموظفين نصية للحفاظ على الأصفار. استيراد الأجور: الكود، الأساسي، البدلات. نسبة الاستحقاق للفترة تُحسب أوليًا حسب الأيام التقويمية بين التعيين ونهاية الخدمة، ويمكن تعديلها بعد المراجعة. كل المبالغ بالجنيه.</p><div class="table-wrap"><table id="pay-inputs"></table></div><p class="pipeline-note">«تسوية خاصة» للاستحقاقات المراجَعة للراحة/العطلات وغيرها، و«استقطاع آخر» للتسويات اليدوية مثل المرضيات. اكتب سبب التسوية. هذا ليس حسابًا تلقائيًا للاستحقاقات القانونية الخاصة.</p></article>
+<article class="panel"><h3>المسير قبل الاعتماد</h3><div id="pay-kpis" class="kpi-grid"></div><div class="table-wrap"><table id="pay-preview"></table></div><p id="pay-blockers" class="pipeline-note" role="status"></p><label class="approval-check"><input id="pay-confirm" type="checkbox">راجعت الحضور والاستثناءات وأساس الأجر والتسويات، وأوافق على ترحيل النتائج الحالية للمسير.</label><div class="pipeline-actions"><button id="pay-approve" type="button" class="primary-button">اعتماد وترحيل النتائج</button><button id="pay-export" type="button" class="gold-button" disabled>تحميل مسير الرواتب المتكامل .xlsx</button></div><p id="pay-status" role="status" aria-live="polite">لم يُعتمد المسير بعد.</p></article></section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="vendor/xlsx.full.min.js"></script>
+  <script src="core.js"></script><script src="excel.js"></script><script src="pipeline.js"></script><script src="attendance.js"></script>
+</body>
+</html>
