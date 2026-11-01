@@ -1,13 +1,15 @@
 (() => {
   'use strict';
-  const $=id=>document.getElementById(id), E=window.PensionEngine;
+  const $=id=>document.getElementById(id), E=window.PensionEngine, D=window.PensionDates;
+  const dateFields=['birth','event','endDate'];
+  const setDate=(id,iso)=>{$(id).value=D.display(iso);};
   const labels={normal:'معاش بلوغ السن',early:'المعاش المبكر',disability:'معاش العجز',death:'معاش الوفاة'};
   const money=n=>new Intl.NumberFormat('ar-EG',{maximumFractionDigits:2,minimumFractionDigits:2}).format(n)+' جنيه';
   const number=n=>new Intl.NumberFormat('ar-EG',{maximumFractionDigits:4}).format(n);
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let kind='normal', rowId=0;
   const form=$('pensionForm');
-  const value=id=>$(id).value, checked=id=>Boolean($(id)?.checked);
+  const value=id=>dateFields.includes(id)?D.toISO($(id).value):$(id).value, checked=id=>Boolean($(id)?.checked);
   const fields=['birth','event','retirementAge','minWage','maxWage','preMonths','prePension','preWage','preSource','wageMode','postMonths','settlement','inflation','lastSettlement','cause','timing','endDate','disabilityType','disabilityRate'];
   const conditionNames=['ageConfirmed','ended','notInsured','applied','dues','medical','noAlternative','shortQualifying','noLump','injuryApproved'];
   const show=(id,on)=>{$(id).hidden=!on;};
@@ -69,13 +71,13 @@
     let formula=injury?(r.payment==='lump'?'التعويض = ٨٠٪ × أجر التسوية × نسبة العجز × ٤٨ شهرًا.':'معاش الإصابة = ٨٠٪ × أجر التسوية × نسبة العجز (١٠٠٪ للكلي أو الوفاة).'):`جزء ما بعد ٢٠٢٠ = ${money(r.settlement)} × (${number(r.postMonths)} ÷ ١٢) ÷ ${number(r.factor)}، بحد ٨٠٪ من أجر التسوية.`;
     const notes=r.notes.map(t=>`<li>${esc(t)}</li>`).join('');
     const checks=r.checks.map(c=>`<li class="${c.ok?'passed':'failed'}"><b>${c.ok?'✓ تحقق':'○ لم يتحقق أو لم يُؤكد'} — ${esc(c.label)}</b><small>${esc(c.detail)}</small></li>`).join('');
-    const inputSnapshot=[['نوع الحساب',labels[kind]],['تاريخ الميلاد',d.birth],['تاريخ الواقعة',d.event],['سن الشيخوخة',d.retirementAge],['حد أجر الاشتراك الأدنى',money(Number(d.minWage))],['حد أجر الاشتراك الأقصى',money(Number(d.maxWage))],['أشهر قبل ٢٠٢٠',r.preMonths],['أشهر من ٢٠٢٠',r.postMonths],['أكبر أجر تسوية سابق',money(r.preWage)],['مصدر القيم السابقة',r.preMonths?(d.preSource||'لم يذكر المستخدم مصدرًا'):'لا توجد مدة سابقة']];
+    const inputSnapshot=[['نوع الحساب',labels[kind]],['تاريخ الميلاد',D.display(d.birth)],['تاريخ الواقعة',D.display(d.event)],['سن الشيخوخة',d.retirementAge],['حد أجر الاشتراك الأدنى',money(Number(d.minWage))],['حد أجر الاشتراك الأقصى',money(Number(d.maxWage))],['أشهر قبل ٢٠٢٠',r.preMonths],['أشهر من ٢٠٢٠',r.postMonths],['أكبر أجر تسوية سابق',money(r.preWage)],['مصدر القيم السابقة',r.preMonths?(d.preSource||'لم يذكر المستخدم مصدرًا'):'لا توجد مدة سابقة']];
     if(kind==='early')inputSnapshot.push(['أجر التسوية الأخير لفحص المبكر',money(Number(d.lastSettlement))]);
     if(['disability','death'].includes(kind)){
       inputSnapshot.push(['سبب الواقعة',injury?'إصابة عمل معتمدة':'غير إصابي']);
       if(kind==='disability')inputSnapshot.push(['نوع العجز',d.disabilityType==='total'?'كلي مستديم':'جزئي مستديم']);
       if(injury&&kind==='disability'&&d.disabilityType==='partial')inputSnapshot.push(['نسبة العجز',d.disabilityRate+'٪']);
-      if(!injury)inputSnapshot.push(['توقيت الواقعة',({during:'أثناء الخدمة',within:'خلال سنة من انتهاء الخدمة',after:'بعد انقضاء سنة من انتهاء الخدمة'})[d.timing]],['تاريخ انتهاء الخدمة',d.timing==='during'?'بسبب الواقعة':d.endDate]);
+      if(!injury)inputSnapshot.push(['توقيت الواقعة',({during:'أثناء الخدمة',within:'خلال سنة من انتهاء الخدمة',after:'بعد انقضاء سنة من انتهاء الخدمة'})[d.timing]],['تاريخ انتهاء الخدمة',d.timing==='during'?'بسبب الواقعة':D.display(d.endDate)]);
     }
     if(d.wageMode==='periods') d.rows.forEach((row,i)=>inputSnapshot.push(['فترة أجور '+(i+1),row.from+' ← '+row.to+' | '+money(Number(row.wage))]));
     const title=r.payment==='lump'?'تعويض إصابة دفعة واحدة':'المعاش الشهري التقديري';
@@ -90,14 +92,15 @@
   }));
   form.addEventListener('input',()=>{invalidate();agePreview();});
   form.addEventListener('change',event=>{invalidate();if(event.target.id==='event')setLimits();if(['cause','timing','disabilityType','wageMode','preMonths'].includes(event.target.id))sync();});
+  dateFields.forEach(id=>$(id).addEventListener('blur',()=>{const iso=D.toISO($(id).value);if(iso)setDate(id,iso);}));
   $('addPeriod').addEventListener('click',()=>{addPeriod();invalidate();});
   form.addEventListener('submit',event=>{
-    event.preventDefault();try{const d=read();render(E.estimate(d),d);show('errors',false);}catch(error){invalidate();$('errors').textContent=error.message;show('errors',true);$('errors').focus();}
+    event.preventDefault();try{for(const id of ['birth','event',...(['disability','death'].includes(kind)&&value('cause')!=='injury'&&value('timing')!=='during'?['endDate']:[])]){if(!value(id))throw Error('أدخل '+({birth:'تاريخ الميلاد',event:'تاريخ الواقعة',endDate:'تاريخ انتهاء الخدمة'})[id]+' كتاريخ صحيح بصيغة يوم / شهر / سنة، مثل 25/12/1980.');}const d=read();render(E.estimate(d),d);show('errors',false);}catch(error){invalidate();$('errors').textContent=error.message;show('errors',true);$('errors').focus();}
   });
-  form.addEventListener('reset',()=>{setTimeout(()=>{kind='normal';document.querySelectorAll('[data-kind]').forEach(b=>{b.classList.toggle('active',b.dataset.kind===kind);b.setAttribute('aria-pressed',String(b.dataset.kind===kind));});$('wageRows').replaceChildren();addPeriod();$('event').value=new Date().toLocaleDateString('en-CA',{timeZone:'Africa/Cairo'});conditionNames.forEach(id=>{if($(id))$(id).checked=false;});setLimits();sync();invalidate();},0);});
+  form.addEventListener('reset',()=>{setTimeout(()=>{kind='normal';document.querySelectorAll('[data-kind]').forEach(b=>{b.classList.toggle('active',b.dataset.kind===kind);b.setAttribute('aria-pressed',String(b.dataset.kind===kind));});$('wageRows').replaceChildren();addPeriod();setDate('event',new Date().toLocaleDateString('en-CA',{timeZone:'Africa/Cairo'}));conditionNames.forEach(id=>{if($(id))$(id).checked=false;});setLimits();sync();invalidate();},0);});
   $('sample').addEventListener('click',()=>{
     // Explicit fictional input: avoids presenting made-up inflation or pre-2020 values as official.
-    $('birth').value=kind==='early'?'1971-11-01':kind==='normal'?'1966-11-01':'1980-11-01';$('event').value='2026-11-01';$('retirementAge').value='60';setLimits();
+    setDate('birth',kind==='early'?'1971-11-01':kind==='normal'?'1966-11-01':'1980-11-01');setDate('event','2026-11-01');$('retirementAge').value='60';setLimits();
     $('preMonths').value=kind==='early'||kind==='normal'?'240':'120';$('prePension').value='3000';$('preWage').value='7000';$('preSource').value='مثال تعليمي افتراضي — ليست تسوية حقيقية';$('wageMode').value='ready';$('postMonths').value='82';$('settlement').value='10000';$('lastSettlement').value='10000';$('cause').value='natural';$('timing').value='during';$('disabilityType').value='total';
     $('wageRows').replaceChildren();addPeriod();sync();conditionNames.forEach(id=>{if($(id))$(id).checked=false;});$('calculator').scrollIntoView({behavior:'smooth'});invalidate();
   });
@@ -107,5 +110,5 @@
     const message='افهم حساب معاشك خطوة بخطوة، وافحص شروط المعاش المبكر مبدئيًا مع حاسبة حازم موسى. نتائج تقديرية تعليمية.';
     try{if(navigator.share){await navigator.share({title:'حاسبة المعاش التقديري | حازم موسى',text:message,url});$('shareStatus').textContent='';}else{await navigator.clipboard.writeText(message+'\n'+url);$('shareStatus').textContent='تم نسخ رسالة المشاركة والرابط.';}}catch(e){if(e.name!=='AbortError')$('shareStatus').textContent='يمكنك نسخ رابط الأداة من شريط العنوان.';}
   });
-  $('event').value=new Date().toLocaleDateString('en-CA',{timeZone:'Africa/Cairo'});addPeriod();setLimits();sync();
+  setDate('event',new Date().toLocaleDateString('en-CA',{timeZone:'Africa/Cairo'}));addPeriod();setLimits();sync();
 })();
