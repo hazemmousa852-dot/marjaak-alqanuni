@@ -137,7 +137,7 @@ function sheet(name,rows,editable=false){sheets.push({name,rows,editable})}
 sheet('دليل الاستخدام',[
 [s.company+' — صانع شيت الرواتب'],['الشهر',s.month],
 ['١. عدّل الإعدادات وبيانات الموظفين؛ الخلايا الزرقاء للإدخال.'],
-['٢. أدخل المتغيرات الشهرية ولا تغيّر ترتيب الأكواد بين الأوراق.'],
+['٢. أوراق الموظفين والمتغيرات وكشف الرواتب جداول Excel فعلية بفلاتر وصفوف ملوّنة؛ أدخل المتغيرات ولا تغيّر ترتيب الأكواد.'],
 ['٣. راجع كشف الرواتب والملخص ثم اختر رقم الموظف في قسيمة الراتب.'],
 ['٤. تأمينات العامل وصاحب العمل تُحسب من أجر الاشتراك المسجل وحدود السنة ونسب الإعدادات.'],
 ['٥. ضريبة المرتبات تُحسب تراكميًا وفق قانون 7 لسنة 2024؛ أدخل الأشهر والدخل والضريبة السابقة عند وجودها.'],
@@ -224,7 +224,8 @@ sheet('قسيمة الراتب',[['قسيمة راتب',s.company],['رقم ال
 
 return{sheets,count,s}
 }
-function buildXlsx(model){const {sheets,count}=model,files={};
+function buildXlsx(model){const {sheets,count}=model,files={},tableSheets={2:{id:1,name:'EmployeesTable'},3:{id:2,name:'VariablesTable'},4:{id:3,name:'PayrollTable'}};
+const uniqueHeaders=row=>{let seen={};return row.map(v=>{let base=String(v??'عمود'),n=(seen[base]||0)+1;seen[base]=n;return n===1?base:`${base} (${n})`})};
 let styles=`<?xml version="1.0" encoding="UTF-8"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="3"><font><sz val="11"/><name val="Arial"/></font><font><b/><color rgb="FFFFFFFF"/><sz val="11"/><name val="Arial"/></font><font><color rgb="FF1670A5"/><sz val="11"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B2334"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="5"><xf fontId="0" fillId="0" borderId="0" numFmtId="0" applyAlignment="1"><alignment horizontal="right"/></xf><xf fontId="1" fillId="2" borderId="0" numFmtId="0" applyAlignment="1"><alignment horizontal="right"/></xf><xf fontId="2" fillId="0" borderId="0" numFmtId="0" applyProtection="1" applyAlignment="1"><alignment horizontal="right"/><protection locked="0"/></xf><xf fontId="0" fillId="0" borderId="0" numFmtId="4" applyNumberFormat="1" applyAlignment="1"><alignment horizontal="right"/></xf><xf fontId="2" fillId="0" borderId="0" numFmtId="10" applyNumberFormat="1" applyProtection="1" applyAlignment="1"><alignment horizontal="right"/><protection locked="0"/></xf></cellXfs></styleSheet>`;
 
 files['xl/styles.xml']=styles;
@@ -232,15 +233,15 @@ files['_rels/.rels']='<Relationships xmlns="http://schemas.openxmlformats.org/pa
 files['xl/workbook.xml']='<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+sheets.map((s,i)=>`<sheet name="${esc(s.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')+'</sheets><calcPr calcId="191029" fullCalcOnLoad="1" forceFullCalc="1"/></workbook>';
 files['xl/_rels/workbook.xml.rels']='<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+sheets.map((s,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')+`<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
 
-sheets.forEach((s,i)=>{let cols=Math.max(...s.rows.map(r=>r.length));
-let xml='<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0" rightToLeft="1"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="25"/><cols>'+Array.from({length:cols},(_,c)=>`<col min="${c+1}" max="${c+1}" width="${i===0?100:c===1?30:24}" customWidth="1"/>`).join('')+'</cols><sheetData>';
+sheets.forEach((s,i)=>{let cols=Math.max(...s.rows.map(r=>r.length)),tableMeta=tableSheets[i];
+if(tableMeta)s.rows[0]=uniqueHeaders(s.rows[0]);
+let tableRef=`A1:${col(cols-1)}${s.rows.length}`,xml='<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheetViews><sheetView workbookViewId="0" rightToLeft="1"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="25"/><cols>'+Array.from({length:cols},(_,c)=>`<col min="${c+1}" max="${c+1}" width="${i===0?100:c===1?30:24}" customWidth="1"/>`).join('')+'</cols><sheetData>';
 s.rows.forEach((row,r)=>{xml+=`<row r="${r+1}">`;
 row.forEach((v,c)=>{let input=s.editable&&r>0&&!(v&&typeof v==='object')&&(i!==6||(r===1&&c===1))&&(i!==1||c===1),style=r===0?1:input&&i===1&&c===1&&[9,10].includes(r)?4:input?2:typeof v==='number'||v&&v.f?3:0,pos=col(c)+(r+1);
 xml+=v&&v.f?`<c r="${pos}" s="${style}"><f>${esc(v.f)}</f></c>`:typeof v==='number'?`<c r="${pos}" s="${style}"><v>${v}</v></c>`:`<c r="${pos}" s="${style}" t="inlineStr"><is><t xml:space="preserve">${esc(v??'')}</t></is></c>`});
 xml+='</row>'});
 xml+='</sheetData>';
 if(i!==0)xml+='<sheetProtection sheet="1" objects="1" scenarios="1" selectLockedCells="0" selectUnlockedCells="0"/>';
-if([2,3,4].includes(i))xml+=`<autoFilter ref="A1:${col(cols-1)}${s.rows.length}"/>`;
 let rules=[];
 const rule=(range,min,max,whole=false)=>rules.push(`<dataValidation type="${whole?'whole':'decimal'}" operator="between" allowBlank="1" showErrorMessage="1" errorStyle="stop" errorTitle="قيمة غير صحيحة" error="أدخل قيمة داخل النطاق المسموح" sqref="${range}"><formula1>${min}</formula1><formula2>${max}</formula2></dataValidation>`);
 if(i===1){rule('B4',1,31,true);
@@ -261,9 +262,15 @@ rule(`J2:K${count+1}`,0,1000000000)}
 if(i===3&&cols>2)rule(`C2:${col(cols-1)}${count+1}`,0,1000000000);
 if(i===6)rule('B2',1,count,true);
 if(rules.length)xml+=`<dataValidations count="${rules.length}">${rules.join('')}</dataValidations>`;
-xml+='<pageSetup orientation="landscape" paperSize="9"/></worksheet>';
-files[`xl/worksheets/sheet${i+1}.xml`]=xml});
-files['[Content_Types].xml']='<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'+sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')+'</Types>';
+xml+='<pageSetup orientation="landscape" paperSize="9"/>';
+if(tableMeta)xml+='<tableParts count="1"><tablePart r:id="rId1"/></tableParts>';
+xml+='</worksheet>';
+files[`xl/worksheets/sheet${i+1}.xml`]=xml;
+if(tableMeta){
+files[`xl/worksheets/_rels/sheet${i+1}.xml.rels`]=`<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/table" Target="../tables/table${tableMeta.id}.xml"/></Relationships>`;
+files[`xl/tables/table${tableMeta.id}.xml`]=`<?xml version="1.0" encoding="UTF-8"?><table xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" id="${tableMeta.id}" name="${tableMeta.name}" displayName="${tableMeta.name}" ref="${tableRef}" totalsRowShown="0"><autoFilter ref="${tableRef}"/><tableColumns count="${cols}">${s.rows[0].map((h,c)=>`<tableColumn id="${c+1}" name="${esc(h)}"/>`).join('')}</tableColumns><tableStyleInfo name="TableStyleMedium2" showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0"/></table>`}
+});
+files['[Content_Types].xml']='<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'+sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')+Object.values(tableSheets).map(t=>`<Override PartName="/xl/tables/table${t.id}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"/>`).join('')+'</Types>';
 return zip(files)}
 function zip(files){let chunks=[],central=[],offset=0;
 const enc=new TextEncoder(),u16=(v,n,x)=>v.setUint16(n,x,true),u32=(v,n,x)=>v.setUint32(n,x,true);
