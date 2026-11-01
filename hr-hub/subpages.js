@@ -1403,5 +1403,50 @@
       }
     });
   });
+
+  function mountFloatingContact() {
+    if (document.querySelector('[data-floating-contact]')) return;
+
+    const widget = document.createElement('div');
+    widget.className = 'floating-contact';
+    widget.dataset.floatingContact = '';
+    widget.innerHTML = `
+      <button class="floating-contact__top" type="button" aria-label="العودة إلى أعلى الصفحة" title="العودة إلى أعلى الصفحة">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"/></svg>
+      </button>
+      <a class="floating-contact__whatsapp" href="https://wa.me/201030006087" target="_blank" rel="noopener noreferrer" aria-label="تواصل الآن عبر واتساب">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.2-4.3a8.5 8.5 0 1 1 15.8-4.5Z"/><path d="M8.1 7.7c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.5l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.5.9 1.2 1.6 2.1 2.1.3.2.5.2.7 0l.8-1c.2-.2.4-.3.7-.2l1.9.9c.3.2.4.3.4.5 0 .3-.1 1.5-.8 2.1-.6.6-1.5.8-2.4.5-1.1-.3-2.5-.8-4.2-2.3-2-1.8-3.2-4-3.3-5.2 0-.6.1-1 .3-1.4Z"/></svg>
+        <span>تواصل الآن</span>
+      </a>`;
+
+    const topButton = widget.querySelector('.floating-contact__top');
+    const whatsappButton = widget.querySelector('.floating-contact__whatsapp');
+
+    function syncLanguage() {
+      const english = document.documentElement.lang === 'en';
+      const topLabel = english ? 'Back to top' : 'العودة إلى أعلى الصفحة';
+      topButton.setAttribute('aria-label', topLabel);
+      topButton.title = topLabel;
+      whatsappButton.setAttribute('aria-label', english ? 'Contact now on WhatsApp' : 'تواصل الآن عبر واتساب');
+      whatsappButton.querySelector('span').textContent = english ? 'Contact Now' : 'تواصل الآن';
+      const dictionary = getDictionary(english ? 'en' : 'ar');
+      whatsappButton.href = `https://wa.me/201030006087?text=${encodeURIComponent(dictionary.whatsappMessage)}`;
+    }
+
+    function syncScrollState() {
+      topButton.classList.toggle('is-visible', window.scrollY > 360);
+    }
+
+    topButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    window.addEventListener('scroll', syncScrollState, { passive: true });
+    new MutationObserver(syncLanguage).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    document.body.append(widget);
+    syncLanguage();
+    syncScrollState();
+  }
+
+  mountFloatingContact();
 })();
 
