@@ -4,7 +4,7 @@ const TAB_ = 'الأسئلة';
 function ownerEmail_(){return PropertiesService.getScriptProperties().getProperty('OWNER_EMAIL')||'';}
 const CATEGORIES_ = ['شؤون العاملين','المرتبات والضرائب','التأمينات الاجتماعية','الإجازات والحضور','العقود وإنهاء الخدمة','موارد بشرية عامة'];
 function doGet(){return HtmlService.createHtmlOutputFromFile('Index').setTitle('اسأل حازم | شؤون العاملين والمرتبات').addMetaTag('viewport','width=device-width, initial-scale=1');}
-function onOpen(){SpreadsheetApp.getUi().createMenu('اسأل حازم').addItem('تهيئة الربط والتحقق من الصلاحيات','setup_').addItem('إرسال إجابة الصف المحدد بالإيميل','sendSelectedEmail_').addItem('تجهيز واتساب للصف المحدد','prepareWhatsApp_').addItem('تحديث رابط متابعة الصف المحدد','updateSelectedTracking_').addToUi();}
+function onOpen(){SpreadsheetApp.getUi().createMenu('اسأل حازم').addItem('تهيئة الربط والتحقق من الصلاحيات','setup_').addItem('إرسال إجابة الصف المحدد بالإيميل','sendSelectedEmail_').addItem('تجهيز واتساب للصف المحدد','prepareWhatsApp_').addItem('تحديث رابط متابعة الصف المحدد','updateSelectedTracking_').addSeparator().addItem('تفعيل ملخص الأسئلة الجديدة','enableOwnerNotifications').addItem('إيقاف ملخص الأسئلة الجديدة','disableOwnerNotifications').addItem('فحص الأسئلة الجديدة وإرسال الملخص','sendOwnerDigest').addToUi();}
 function sheet_(){return SpreadsheetApp.openById(sheetId_()).getSheetByName(TAB_);}
 function owner_(){if(Session.getActiveUser().getEmail().toLowerCase()!==ownerEmail_().toLowerCase())throw new Error('هذه العملية متاحة لحازم موسى فقط.');}
 function setup_(){const book=SpreadsheetApp.getActiveSpreadsheet();if(!book)throw new Error('افتح السكربت من داخل الشيت.');const owner=book.getOwner().getEmail();if(!owner||Session.getActiveUser().getEmail().toLowerCase()!==owner.toLowerCase())throw new Error('التهيئة متاحة لمالك الشيت فقط.');PropertiesService.getScriptProperties().setProperties({SPREADSHEET_ID:book.getId(),OWNER_EMAIL:owner});const s=sheet_();if(!s)throw new Error('تبويب الأسئلة غير موجود');s.setRightToLeft(true);s.setFrozenRows(1);s.hideColumns(16);const quota=MailApp.getRemainingDailyQuota();SpreadsheetApp.getUi().alert('الشيت جاهز. رصيد مستلمي البريد اليوم: '+quota+'\nانشره كتطبيق ويب يعمل باسمك ومتاح لأي شخص.');}
@@ -53,4 +53,52 @@ function doPost(e){
  }catch(err){response.error=String(err.message||'تعذر تنفيذ الطلب.');}
  const json=JSON.stringify(response).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');
  return HtmlService.createHtmlOutput('<!doctype html><html><body><script>window.top.postMessage('+json+',"https://hazemmousa852-dot.github.io");<\/script></body></html>').setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+
+// Hourly owner digest. The time-driven trigger is installed in the Apps Script UI.
+// Only question IDs/categories leave the sheet; contact details and question text stay private.
+function enableOwnerNotifications(){
+ owner_();const p=PropertiesService.getScriptProperties();
+ if(!p.getProperty('OWNER_NOTIFY_SINCE'))p.setProperty('OWNER_NOTIFY_SINCE',new Date().toISOString());
+ p.setProperty('OWNER_NOTIFY_ENABLED','true');
+ console.log('تم تفعيل ملخص الأسئلة الجديدة على إيميل مالك الشيت.');
+}
+function disableOwnerNotifications(){owner_();PropertiesService.getScriptProperties().setProperty('OWNER_NOTIFY_ENABLED','false');console.log('تم إيقاف ملخص الأسئلة الجديدة.');}
+function digestRows_(rows,since,until){
+ return rows.slice(1).filter(r=>{
+  const time=r[1] instanceof Date?r[1].getTime():Date.parse(String(r[1]||''));
+  return Boolean(r[0])&&Number.isFinite(time)&&time>since&&time<=until;
+ });
+}
+function sendOwnerDigest(e){
+ const book=SpreadsheetApp.getActiveSpreadsheet();
+ if(!book||book.getId()!==sheetId_())throw new Error('التنبيه متاح من الشيت أو المهمة الدورية فقط.');
+ if(e&&e.triggerUid){if(Session.getEffectiveUser().getEmail().toLowerCase()!==ownerEmail_().toLowerCase())throw new Error('غير مصرح.');}
+ else owner_();
+ ownerQuestionDigest_();
+}
+function ownerQuestionDigest_(){
+ const lock=LockService.getScriptLock();if(!lock.tryLock(10000))return;
+ try{
+  const p=PropertiesService.getScriptProperties();
+  if(p.getProperty('OWNER_NOTIFY_ENABLED')!=='true'){console.log('الإشعارات متوقفة.');return;}
+  const since=Date.parse(p.getProperty('OWNER_NOTIFY_SINCE')||'');
+  if(!Number.isFinite(since))throw new Error('فعّل التنبيهات أولًا.');
+  const now=new Date(),last=Date.parse(p.getProperty('OWNER_NOTIFY_LAST_SENT')||'');
+  // Repeated manual runs and duplicate triggers cannot consume a second email in this hour.
+  if(Number.isFinite(last)&&now.getTime()-last<60*60*1000){console.log('أُرسل ملخص خلال الساعة الماضية.');return;}
+  const rows=digestRows_(sheet_().getDataRange().getValues(),since,now.getTime());
+  if(!rows.length){console.log('لا توجد أسئلة جديدة منذ آخر ملخص.');return;}
+  if(MailApp.getRemainingDailyQuota()<=20){console.log('الملخص مؤجل للحفاظ على 20 مستلمًا للردود. سيعاد فحصه في التشغيل التالي.');return;}
+  const email=ownerEmail_();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('إيميل مالك الشيت غير مضبوط.');
+  const sheetUrl='https://docs.google.com/spreadsheets/d/'+sheetId_()+'/edit';
+  const list=rows.slice(0,20).map(r=>String(r[0])+' — '+String(r[3]||'')).join('\n');
+  const subject='اسأل حازم | '+rows.length+' سؤال جديد';
+  const body='مرحبًا حازم،\n\nوصل إلى اسأل حازم '+rows.length+' سؤال جديد منذ آخر ملخص.\n\n'+list+(rows.length>20?'\nوباقي الأسئلة موجودة في الشيت.':'')+'\n\nافتح الشيت لمراجعة الأسئلة والرد عليها:\n'+sheetUrl+'\n\nهذا ملخص دوري للأسئلة الجديدة فقط. لا يُرسل إيميل إن لم تصل أسئلة جديدة.\nيمكن إيقافه من قائمة «اسأل حازم» في الشيت.';
+  MailApp.sendEmail({to:email,subject:subject,body:body,name:'تنبيهات اسأل حازم'});
+  // Do not advance this checkpoint on quota exhaustion or email failure: next run retries.
+  p.setProperties({OWNER_NOTIFY_SINCE:now.toISOString(),OWNER_NOTIFY_LAST_SENT:now.toISOString()});
+  console.log('تم إرسال ملخص '+rows.length+' سؤال جديد إلى مالك الشيت.');
+ }finally{lock.releaseLock();}
 }
