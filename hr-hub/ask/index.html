@@ -11,7 +11,7 @@ window.addEventListener('message',e=>{
  if(!/^https:\/\/([a-z0-9-]+\.)?script\.googleusercontent\.com$/.test(e.origin))return;
  const d=e.data;if(!d||d.type!=='ask-hazem-response'||typeof d.requestId!=='string')return;
  const p=pending.get(d.requestId);if(!p)return;
- pending.delete(d.requestId);clearTimeout(p.timer);p.frame.remove();
+ pending.delete(d.requestId);clearTimeout(p.timer);p.frame.remove();p.form.remove();
  d.ok?p.resolve(d.result):p.reject(new Error(d.error||'تعذر تنفيذ الطلب.'));
 });
 function api(action,payload={}){return new Promise((resolve,reject)=>{
@@ -19,8 +19,8 @@ function api(action,payload={}){return new Promise((resolve,reject)=>{
  frame.name='ask-'+id;frame.hidden=true;frame.title='اتصال آمن بخدمة الأسئلة';frame.referrerPolicy='no-referrer';document.body.append(frame);
  form.method='POST';form.action=endpoint;form.target=frame.name;form.hidden=true;
  for(const [key,value] of Object.entries({action,requestId:id,payload:JSON.stringify(payload)})){const input=document.createElement('input');input.type='hidden';input.name=key;input.value=value;form.append(input);}
- const timer=setTimeout(()=>{pending.delete(id);frame.remove();reject(new Error(action==='submitQuestion'?'الاتصال أخد وقت أطول من المتوقع. قد يكون سؤالك اتسجّل؛ احتفظ بالصفحة وحاول بعد قليل.':'تعذر الاتصال الآن. أعد المحاولة بعد قليل.'));},60000);
- pending.set(id,{resolve,reject,frame,timer});document.body.append(form);form.submit();form.remove();
+ const timer=setTimeout(()=>{pending.delete(id);frame.remove();form.remove();reject(new Error(action==='submitQuestion'?'الاتصال أخد وقت أطول من المتوقع. قد يكون سؤالك اتسجّل؛ احتفظ بالصفحة وحاول بعد قليل.':'تعذر الاتصال الآن. أعد المحاولة بعد قليل.'));},60000);
+ pending.set(id,{resolve,reject,frame,form,timer});document.body.append(form);form.submit();
 });}
 $('channel').onchange=()=>{const wa=$('channel').value==='واتساب';$('contact').type=wa?'tel':'email';$('contact').value='';$('contact').placeholder=wa?'+201030006087':'name@example.com';$('contactLabel').textContent=wa?'رقم واتساب بكود الدولة':'البريد الإلكتروني';};
 $('askForm').onsubmit=async e=>{e.preventDefault();$('submit').disabled=true;$('submit').textContent='جارٍ تسجيل سؤالك…';$('error').textContent='';const f=new FormData(e.target),b=Object.fromEntries(f.entries());b.consent=f.has('consent');try{
