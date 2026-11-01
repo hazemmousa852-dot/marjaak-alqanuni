@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  if (!document.getElementById('hm-tool-header-loader')) {
+    var headerLoader=document.createElement('script');
+    headerLoader.id='hm-tool-header-loader';
+    headerLoader.src='https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tool-header.js?v=20261101';
+    document.head.appendChild(headerLoader);
+  }
+
   if (window.__hazemToolsHubLinkLoaded) return;
   window.__hazemToolsHubLinkLoaded = true;
 
