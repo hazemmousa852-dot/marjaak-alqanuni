@@ -184,12 +184,12 @@
         pageTitle: 'أدوات الموارد البشرية | حازم موسى',
         pageDescription: '16 أداة مجانية وعملية للحضور والمرتبات والإجازات والعقود والتأمينات والتدقيق والبحث القانوني والتطوير المهني، من تطوير حازم موسى.',
         attendancePayrollTitle: 'من البصمة للراتب',
-        attendancePayrollDesc: 'حلّل البصمة، راجع الاستثناءات، واعتمد ترحيل الحضور لمسير الرواتب في دورة واحدة.',
+        attendancePayrollDesc: 'ابدأ بالبصمة وبيانات الأجور، وراجع الحضور قبل ترحيله إلى مسير الرواتب وقسائم الراتب في ملف Excel مترابط.',
         attendancePayrollBenefit1: '١٠ أوراق تشمل الحضور والمسير وقسيمة الراتب وسجل المراجعة',
         attendancePayrollBenefit2: 'ورديات وإجازات وأذونات وإضافي نهاري وليلي',
         attendancePayrollBenefit3: 'مراجعة واعتماد قبل الترحيل — البيانات على جهازك',
         payrollBuilderTitle: 'صانع شيت الرواتب',
-        payrollBuilderDesc: 'ابنِ شيت Excel حسب نظام منشأتك، ببنود مرنة ومعادلات مترابطة، مباشرة من المتصفح.',
+        payrollBuilderDesc: 'أدخل بيانات الموظفين وبنود الأجر لتجهيز شيت رواتب Excel بالمعادلات؛ مناسب عندما تكون ملخصات الحضور جاهزة لديك.',
         payrollBuilderBenefit1: '٧ أوراق تشمل المسير والملخص وقسيمة الراتب',
         payrollBuilderBenefit2: 'إضافي نهاري وليلي وبنود استحقاقات واستقطاعات مخصصة',
         payrollBuilderBenefit3: 'إدخال موظفين أو استيراد CSV — البيانات على جهازك',
@@ -203,7 +203,7 @@
         pensionBenefit1: 'بلوغ السن والمبكر والعجز والوفاة في حسابات مستقلة',
         pensionBenefit2: 'فصل المدد قبل وبعد ٢٠٢٠ ومدخلات يدوية واضحة',
         pensionBenefit3: 'شرح النتيجة وطباعة تقرير تقديري أو حفظه PDF',
-        toolsProof1: '16 أداة منشورة',
+        toolsProof1: '16 أداة مجانية + اسأل حازم',
         toolsProof2: 'استخدام مجاني',
         toolsProof3: 'تعمل من المتصفح',
         toolsSectionEyebrow: 'جاهزة للاستخدام',
@@ -222,7 +222,7 @@
         toolResults: 'عدد الأدوات المطابقة: {count}',
         attendanceImageAlt: 'واجهة نظام تحليل الحضور والانصراف والورديات',
         attendanceTitle: 'نظام تحليل الحضور والانصراف',
-        attendanceDesc: 'حوّل ملف جهاز البصمة إلى تقرير يومي وملخص لكل موظف، مع قراءة الورديات الثابتة والمتغيرة والليلية وحساب التأخير والإضافي.',
+        attendanceDesc: 'ابدأ بملف البصمة وإعدادات الورديات، واحصل على تقرير حضور وتأخير وإضافي لكل موظف بصيغة Excel.',
         attendanceBenefit1: 'استيراد Excel وتحليل أول وآخر بصمة تلقائيًا',
         attendanceBenefit2: 'إجازات وأذونات وراحات أسبوعية وعطلات رسمية',
         attendanceBenefit3: 'فصل إضافي العمل والراحة والعطلات مع تصدير تقرير Excel',
@@ -301,12 +301,12 @@
         pageTitle: 'HR Tools | Hazem Moussa',
         pageDescription: '16 free practical tools for attendance, payroll, leave, contracts, social insurance, compliance, legal research and career development, created by Hazem Moussa.',
         attendancePayrollTitle: 'Attendance to Payroll',
-        attendancePayrollDesc: 'Analyze punches, review exceptions and approve attendance inputs for a linked payroll workbook.',
+        attendancePayrollDesc: 'Start with punch records and pay data; review attendance before transferring it into linked Excel payroll and payslips.',
         attendancePayrollBenefit1: '10 sheets: attendance, payroll, payslip and review trail',
         attendancePayrollBenefit2: 'Shifts, leave, permissions and day/night overtime',
         attendancePayrollBenefit3: 'Review before transfer — data stays on your device',
         payrollBuilderTitle: 'Payroll Sheet Builder',
-        payrollBuilderDesc: 'Create an Excel workbook tailored to your company, with flexible payroll items and linked formulas in your browser.',
+        payrollBuilderDesc: 'Enter employee and pay-item data to build a formula-based Excel payroll workbook; use it when attendance summaries are already prepared.',
         payrollBuilderBenefit1: '7 sheets including payroll, summary and payslip',
         payrollBuilderBenefit2: 'Separate day/night overtime and custom earnings and deductions',
         payrollBuilderBenefit3: 'Enter employees or import CSV — data stays on your device',
@@ -320,7 +320,7 @@
         pensionBenefit1: 'Separate retirement, early retirement, disability and death calculations',
         pensionBenefit2: 'Distinct pre/post-2020 periods and clear manual inputs',
         pensionBenefit3: 'Explained results and a printable report / Save as PDF',
-        toolsProof1: '16 published tools',
+        toolsProof1: '16 free tools + Ask Hazem',
         toolsProof2: 'Free to use',
         toolsProof3: 'Browser based',
         toolsSectionEyebrow: 'Ready to use',
@@ -339,7 +339,7 @@
         toolResults: 'Matching tools: {count}',
         attendanceImageAlt: 'Attendance, timekeeping and shift-analysis interface',
         attendanceTitle: 'HM Attendance Intelligence',
-        attendanceDesc: 'Turn fingerprint-device exports into daily attendance and employee summaries, with fixed, variable and overnight shifts plus lateness and overtime calculations.',
+        attendanceDesc: 'Start with punch records and shift settings; export an Excel attendance, lateness and overtime report for each employee.',
         attendanceBenefit1: 'Import Excel files and identify the first and last punch automatically',
         attendanceBenefit2: 'Handle leave, permissions, weekly rest and official holidays',
         attendanceBenefit3: 'Split regular, rest-day and holiday overtime and export an Excel report',
@@ -1148,9 +1148,7 @@
 
     if (noTools) noTools.hidden = visibleCount !== 0;
     if (resultStatus) {
-      resultStatus.textContent = terms.length || activeToolFilter !== 'all'
-        ? dictionary.toolResults.replace('{count}', String(visibleCount))
-        : '';
+      resultStatus.textContent = dictionary.toolResults.replace('{count}', String(visibleCount));
     }
   };
 
