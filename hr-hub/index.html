@@ -163,7 +163,8 @@ body[data-page=home] .reels-heading{gap:12px}
 }
 </style><style id="home-horizontal-overflow-fix">
 html{overflow-x:hidden}
-body[data-page="home"]{width:100%;max-width:100%;overflow-x:hidden}
+body[data-page="home"]{width:100%;max-width:100%}
+body[data-page="home"]:not(.menu-open){overflow-x:clip}
 body[data-page="home"]{position:relative}
 body[data-page="home"] main{overflow-x:clip}
 body[data-page="home"] .home-reels,body[data-page="home"] .trainee-reviews,body[data-page="home"] .featured-tools{overflow:hidden}
@@ -213,21 +214,13 @@ body[data-page=home] .home-story-grid{gap:32px;align-items:center}
 body[data-page=home] .home-story-photo{max-height:310px}
 body[data-page=home] .home-story-photo img{width:100%;height:310px;object-fit:cover}
 body[data-page=home] .home-story-copy h2{font-size:clamp(26px,3vw,38px);line-height:1.5;margin-block:10px}
-body[data-page=home] .home-route-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
-body[data-page=home] .home-route-card{grid-column:span 3;min-height:0;padding:20px;display:flex;flex-direction:column;gap:8px}
-body[data-page=home] .home-route-card:nth-child(n+5){grid-column:span 4}
-body[data-page=home] .route-number{font-size:24px;line-height:1.2}
+body[data-page=home] .home-route-card{width:min(100%,540px);margin-inline:auto;min-height:0;padding:20px;display:flex;flex-direction:column;gap:8px}
 body[data-page=home] .home-route-card h3{font-size:19px;line-height:1.5;margin:0}
 body[data-page=home] .home-route-card p{font-size:13px;line-height:1.8;margin:0 0 8px}
 body[data-page=home] .route-action{font-size:12px;margin-top:auto}
 body[data-page=home] .home-destinations .section-heading h2{font-size:clamp(26px,3vw,36px)}
 body[data-page=home] .cta-panel{padding:28px;gap:24px}
 body[data-page=home] .cta-panel h2{font-size:clamp(26px,3vw,36px)}
-@media(max-width:900px){
-body[data-page=home] .home-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-body[data-page=home] .home-route-card,body[data-page=home] .home-route-card:nth-child(n+5){grid-column:auto}
-body[data-page=home] .home-route-card:last-child{grid-column:1/-1}
-}
 @media(max-width:640px){
 body[data-page=home] .section{padding-block:30px}
 body[data-page=home] .featured-tools{padding-top:28px}
@@ -239,7 +232,6 @@ body[data-page=home] .home-story-photo img{height:250px}
 body[data-page=home] .home-route-card{padding:15px;gap:7px;border-radius:16px}
 body[data-page=home] .home-route-card h3{font-size:17px}
 body[data-page=home] .home-route-card p{font-size:12px;line-height:1.75}
-body[data-page=home] .route-number{font-size:20px}
 body[data-page=home] .home-final{padding-block:24px}
 body[data-page=home] .cta-panel{padding:22px}
 }
@@ -479,17 +471,12 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
 <dialog class="reel-dialog" aria-labelledby="reelDialogTitle"><div class="reel-dialog-bar"><h2 id="reelDialogTitle">فيديوهات حازم موسى</h2><form method="dialog"><button class="reel-close" aria-label="Close / إغلاق">×</button></form></div><div class="reel-screen"></div><a class="reel-youtube" target="_blank" rel="noopener noreferrer" data-copy-ar="افتح الفيديو على يوتيوب" data-copy-en="Open video on YouTube">افتح الفيديو على يوتيوب</a></dialog>
 
 
-<section class="section home-destinations" aria-labelledby="destinationsTitle"><div class="shell">
-      <div class="section-heading centered"><p class="eyebrow" data-i18n="destinationsEyebrow">اكتشف الموقع</p><h2 id="destinationsTitle" data-i18n="destinationsTitle">كل محتوى في مكانه</h2><p data-i18n="destinationsLead">اختر المسار الذي تحتاجه وانتقل إلى صفحته المستقلة.</p><span class="heading-line" aria-hidden="true"></span></div>
-      <div class="home-route-grid"><a class="home-route-card" href="gallery/"><span class="route-number">08</span><h3 data-copy-ar="من قلب التدريب" data-copy-en="Training moments">من قلب التدريب</h3><p data-copy-ar="صور من اللقاءات التدريبية والمناقشات مع المشاركين." data-copy-en="Photos from training sessions and discussions with participants.">صور من اللقاءات التدريبية والمناقشات مع المشاركين.</p><span class="route-action" data-copy-ar="شاهد معرض الصور" data-copy-en="Browse photo gallery">شاهد معرض الصور</span></a><a class="home-route-card" href="ask/" style="border-color:#c6a768"><span class="route-number">Q&amp;A</span><h3 data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</h3><p data-copy-ar="سؤالك في شؤون العاملين والمرتبات، وإجابته بمراجعة حازم موسى." data-copy-en="Personnel and payroll questions, reviewed by Hazem Moussa.">سؤالك في شؤون العاملين والمرتبات، وإجابته بمراجعة حازم موسى.</p><span class="route-action" data-copy-ar="اكتب سؤالك" data-copy-en="Submit a question">اكتب سؤالك</span></a>
-        <a class="home-route-card" href="about/"><span class="route-number">01</span><h3 data-i18n="routeAboutTitle">من أنا</h3><p data-i18n="routeAboutDesc">قيادتي للموارد البشرية، وتخصصي العملي، والنتائج التي حققتها، ومحطات مسيرتي.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
-        <a class="home-route-card" href="tools/"><span class="route-number">02</span><h3 data-i18n="routeToolsTitle">أدوات HR</h3><p data-i18n="routeToolsDesc">أدوات مجانية للحسابات والنماذج والبحث.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
-        <a class="home-route-card" href="training/"><span class="route-number">03</span><h3 data-i18n="routeTrainingTitle">التدريب</h3><p data-i18n="routeTrainingDesc">برامج عملية تربط المعرفة بالتطبيق.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
-        <a class="home-route-card" href="videos/"><span class="route-number">04</span><h3 data-i18n="routeVideosTitle">فيديوهات مجانية</h3><p data-i18n="routeVideosDesc">محتوى مرئي منظم حسب موضوعات الـHR.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
-        <a class="home-route-card" href="jobs/"><span class="route-number">05</span><h3 data-i18n="routeJobsTitle">الوظائف</h3><p data-i18n="routeJobsDesc">فرص مختارة مع طريقة تقديم واضحة.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
-        <a class="home-route-card" href="../"><span class="route-number">06</span><h3 data-i18n="routeLegalTitle">مرجعك القانوني</h3><p data-i18n="routeLegalDesc">قانون العمل والقرارات والمواقف العملية.</p><span class="route-action" data-i18n="openReference">افتح المرجع</span></a>
-      <a class="home-route-card" href="reels/"><span class="route-number">07</span><h3 data-copy-ar="ريلز HR" data-copy-en="HR Shorts">ريلز HR</h3><p data-copy-ar="معلومة سريعة من واقع شؤون العاملين والرواتب والتأمينات." data-copy-en="Quick insights into personnel, payroll and social insurance.">معلومة سريعة من واقع شؤون العاملين والرواتب والتأمينات.</p><span class="route-action" data-copy-ar="شاهد كل الريلز" data-copy-en="Browse all Shorts">شاهد كل الريلز</span></a></div>
-    </div></section>
+<section class="section home-destinations" aria-labelledby="destinationsTitle">
+  <div class="shell">
+    <div class="section-heading centered"><h2 id="destinationsTitle" data-i18n="destinationsEyebrow">اكتشف الموقع</h2></div>
+    <a class="home-route-card" href="../"><h3 data-i18n="routeLegalTitle">مرجعك القانوني</h3><p data-i18n="routeLegalDesc">قانون العمل والقرارات والمواقف العملية.</p><span class="route-action" data-i18n="openReference">افتح المرجع</span></a>
+  </div>
+</section>
 
 <section class="page-section home-final"><div class="shell cta-panel"><div><p class="eyebrow" data-i18n="finalEyebrow">تواصل مهني</p><h2 data-i18n="finalTitle">خلّينا نحوّل المعرفة إلى تطبيق</h2><p data-copy-ar="للتنسيق لمحاضرة أو ورشة عمل أو مناقشة فرصة تعاون مهني، يسعدني تواصلك." data-copy-en="Get in touch to arrange a lecture, workshop or professional collaboration.">للتنسيق لمحاضرة أو ورشة عمل أو مناقشة فرصة تعاون مهني، يسعدني تواصلك.</p></div><a class="primary-cta" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D8%A7%D8%B2%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D8%A3%D9%88%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A."><span data-copy-ar="تواصل للتدريب والتعاون" data-copy-en="Discuss training & collaboration">تواصل للتدريب والتعاون</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></section>
 </main>
