@@ -273,14 +273,26 @@ body[data-page=home] .home-video-library{padding-block:clamp(20px,3vw,32px)}
 .home-reel-preview{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
 .home-reel-link{display:flex;align-items:center;gap:12px;flex:1;color:inherit;text-decoration:none;min-width:0}
 @media(hover:hover){.home-reel-link:hover h3{text-decoration:underline}}
-.home-reel-icon{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;border:1px solid var(--line);color:var(--accent-text)}
+.home-video-thumb{position:relative;display:grid;place-items:center;flex:0 0 clamp(104px,28%,180px);aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:var(--panel-solid)}
+.home-video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.home-reel-icon{position:relative;display:grid;place-items:center;width:34px;height:26px;border-radius:8px;background:#dc1534;color:white}
+.reel-dialog{width:min(760px,calc(100% - 24px))}
+.reel-screen{width:min(100%,115dvh);aspect-ratio:16/9}
+body[data-page=home] .training-photo-carousel{display:block;position:relative;min-width:0}
+.training-photo-slide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}
+.training-photo-slide[hidden],.training-photo-controls[hidden]{display:none}
+.training-photo-controls{position:absolute;inset-inline-end:8px;inset-block-end:8px;display:flex;gap:4px;direction:ltr}
+.training-photo-controls button{width:34px;height:34px;border:1px solid #ffffff65;border-radius:50%;background:#071827e8;color:white;font:inherit;cursor:pointer}
+.home-reel-link>div{min-width:0}
 .home-reel-link h3{font-size:15px;line-height:1.5;margin:0}
 .home-reel-link p{font-size:13px;line-height:1.5;margin:4px 0 0;color:var(--text-soft)}
-body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-space:nowrap}
+body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-space:nowrap;margin:0}
+@media(min-width:681px) and (max-width:960px){.home-reel-preview{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}.home-reel-preview .reel-share{justify-self:end}}
 @media(max-width:680px){
   .home-reel-previews{grid-template-columns:minmax(0,1fr)}
   .home-reel-preview{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
   .home-reel-preview .reel-share{justify-self:end}
+  .home-reel-link p{font-size:12px}
   .home-video-library .reels-heading{flex-wrap:wrap}
 }
 </style>
@@ -357,7 +369,19 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
 <section class="section brand-overview" id="experience" aria-labelledby="experienceTitle"><div class="shell brand-overview-inner"><div><h2 data-copy-ar="مسيرتي المهنية" data-copy-en="My professional journey" id="experienceTitle">مسيرتي المهنية</h2><p data-copy-ar="خبرة منذ 2008 في قيادة الموارد البشرية وشئون العاملين والمرتبات، عبر قطاعات متنوعة في مصر ودول الخليج." data-copy-en="Experience since 2008 in HR leadership, personnel and payroll across different sectors in Egypt and the Gulf." >خبرة منذ 2008 في قيادة الموارد البشرية وشئون العاملين والمرتبات، عبر قطاعات متنوعة في مصر ودول الخليج.</p><p data-copy-ar="الماجستير المهني في إدارة الأعمال — جامعة الإسكندرية" data-copy-en="Professional Master of Business Administration — Alexandria University" class="brand-education">الماجستير المهني في إدارة الأعمال — جامعة الإسكندرية</p></div><a class="secondary-cta" href="about/"><span data-copy-ar="شاهد مسيرتي المهنية" data-copy-en="Explore my professional journey" >شاهد مسيرتي المهنية</span></a></div></section>
 
 <section class="section brand-presence" id="professional-presence" aria-labelledby="presenceTitle"><div class="shell"><div class="section-heading centered"><p data-copy-ar="مشاركة الخبرة" data-copy-en="Sharing professional experience" class="eyebrow">مشاركة الخبرة</p><h2 data-copy-ar="التدريب ومشاركة الخبرة" data-copy-en="Training and knowledge sharing" id="presenceTitle">التدريب ومشاركة الخبرة</h2><p data-copy-ar="شرح وتطبيق ومناقشات من واقع العمل." data-copy-en="Practical explanations, applications and workplace discussions." >شرح وتطبيق ومناقشات من واقع العمل.</p></div>
-<div class="brand-presence-grid"><article class="brand-training"><div class="brand-training-photos"><img src="gallery/images/1.webp" alt="حازم موسى مع المشاركين في لقاء تدريبي" loading="lazy" width="1600" height="900"><img src="gallery/images/2.webp" alt="حازم موسى أثناء الشرح والمناقشة" loading="lazy" width="900" height="1600"></div><div class="brand-presence-body"><h3 data-copy-ar="تدريب يربط المعرفة بالممارسة" data-copy-en="Training that connects knowledge with practice" >تدريب يربط المعرفة بالممارسة</h3><p data-copy-ar="أشارك خبرتي في شئون العاملين والمرتبات وتشريعات العمل والتأمينات وExcel للموارد البشرية، بالشرح والحالات التطبيقية." data-copy-en="I share experience in personnel, payroll, labor legislation, social insurance and Excel for HR through clear explanations and practical cases." >أشارك خبرتي في شئون العاملين والمرتبات وتشريعات العمل والتأمينات وExcel للموارد البشرية، بالشرح والحالات التطبيقية.</p><div class="brand-inline-links"><a href="training/"><span data-copy-ar="استكشف التدريب ←" data-copy-en="Explore training →" >استكشف التدريب ←</span></a><a href="gallery/"><span data-copy-ar="شاهد صور اللقاءات ←" data-copy-en="Browse training photos →" >شاهد صور اللقاءات ←</span></a></div></div></article>
+<div class="brand-presence-grid"><article class="brand-training"><div class="brand-training-photos training-photo-carousel" aria-label="صور اللقاءات التدريبية / Training photos">
+  <div id="trainingPhotoSlides">
+    <div class="training-photo-slide"><img src="gallery/images/1-thumb.webp" alt="لقطات جماعية من اللقاءات التدريبية — حازم موسى" loading="lazy" width="480" height="360"><img src="gallery/images/2-thumb.webp" alt="من أجواء الشرح والمناقشة — حازم موسى" loading="lazy" width="480" height="360"></div>
+    <div class="training-photo-slide" hidden><img src="gallery/images/3-thumb.webp" alt="لقطات جماعية من اللقاءات التدريبية — حازم موسى" loading="lazy" width="480" height="360"><img src="gallery/images/24-thumb.webp" alt="من أجواء الشرح والمناقشة — حازم موسى" loading="lazy" width="480" height="360"></div>
+    <div class="training-photo-slide" hidden><img src="gallery/images/12-thumb.webp" alt="لقطات جماعية من اللقاءات التدريبية — حازم موسى" loading="lazy" width="480" height="360"><img src="gallery/images/5-thumb.webp" alt="لحظات مع المشاركين — حازم موسى" loading="lazy" width="480" height="360"></div>
+    <div class="training-photo-slide" hidden><img src="gallery/images/22-thumb.webp" alt="لحظات مع فريق التدريب — حازم موسى" loading="lazy" width="480" height="360"><img src="gallery/images/6-thumb.webp" alt="لحظات مع المشاركين — حازم موسى" loading="lazy" width="480" height="360"></div>
+  </div>
+  <div class="training-photo-controls" hidden>
+    <button type="button" data-training-step="-1" aria-controls="trainingPhotoSlides" aria-label="الصور السابقة / Previous photos">‹</button>
+    <button type="button" data-training-toggle aria-controls="trainingPhotoSlides" aria-label="إيقاف التبديل / Pause slideshow">Ⅱ</button>
+    <button type="button" data-training-step="1" aria-controls="trainingPhotoSlides" aria-label="الصور التالية / Next photos">›</button>
+  </div>
+</div><div class="brand-presence-body"><h3 data-copy-ar="تدريب يربط المعرفة بالممارسة" data-copy-en="Training that connects knowledge with practice" >تدريب يربط المعرفة بالممارسة</h3><p data-copy-ar="أشارك خبرتي في شئون العاملين والمرتبات وتشريعات العمل والتأمينات وExcel للموارد البشرية، بالشرح والحالات التطبيقية." data-copy-en="I share experience in personnel, payroll, labor legislation, social insurance and Excel for HR through clear explanations and practical cases." >أشارك خبرتي في شئون العاملين والمرتبات وتشريعات العمل والتأمينات وExcel للموارد البشرية، بالشرح والحالات التطبيقية.</p><div class="brand-inline-links"><a href="training/"><span data-copy-ar="استكشف التدريب ←" data-copy-en="Explore training →" >استكشف التدريب ←</span></a><a href="gallery/"><span data-copy-ar="شاهد صور اللقاءات ←" data-copy-en="Browse training photos →" >شاهد صور اللقاءات ←</span></a></div></div></article>
 </div>
 </div></section>
 
@@ -390,23 +414,7 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
       <div><p class="eyebrow" data-copy-ar="يوميات HR مع حازم موسى" data-copy-en="HR insights with Hazem Moussa">يوميات HR مع حازم موسى</p><h2 id="reelsTitle" data-copy-ar="ريلز HR" data-copy-en="HR Shorts">ريلز HR</h2><p data-copy-ar="لقطات سريعة من واقع الشغل." data-copy-en="Quick insights from everyday HR work.">لقطات سريعة من واقع الشغل.</p></div>
       <a class="secondary-cta" href="reels/" data-copy-ar="كل الريلز" data-copy-en="All Shorts">كل الريلز</a>
     </div>
-    <div class="home-reel-previews">
-      <article class="home-reel-preview" id="reel-BpCyJG8zEFA">
-        <a class="home-reel-link" href="https://www.youtube.com/shorts/BpCyJG8zEFA" target="_blank" rel="noopener noreferrer" data-reel-id="BpCyJG8zEFA" aria-labelledby="reel-title-BpCyJG8zEFA">
-          <span class="home-reel-icon" aria-hidden="true">▶</span>
-          <div><h3 id="reel-title-BpCyJG8zEFA" data-copy-ar="هتقدم على وظيفة؟ رتّب أفكارك كويس" data-copy-en="Applying for a job? Organize your thoughts">هتقدم على وظيفة؟ رتّب أفكارك كويس</h3><p data-copy-ar="رتّب أفكارك قبل التقديم على وظيفة." data-copy-en="Organize your thoughts before applying for a job." class="reel-description">رتّب أفكارك قبل التقديم على وظيفة.</p></div>
-        </a>
-        <button type="button" class="reel-share" data-reel-share="BpCyJG8zEFA" data-copy-ar="مشاركة الريل" data-copy-en="Share Short">مشاركة الريل</button>
-      </article>
-      <article class="home-reel-preview" id="reel-3L3Jw71knhs">
-        <a class="home-reel-link" href="https://www.youtube.com/shorts/3L3Jw71knhs" target="_blank" rel="noopener noreferrer" data-reel-id="3L3Jw71knhs" aria-labelledby="reel-title-3L3Jw71knhs">
-          <span class="home-reel-icon" aria-hidden="true">▶</span>
-          <div><h3 id="reel-title-3L3Jw71knhs" data-copy-ar="سيرة ذاتية احترافية وحقوقك عند التعيين" data-copy-en="Professional CV and your rights when starting a job">سيرة ذاتية احترافية وحقوقك عند التعيين</h3><p data-copy-ar="السيرة الذاتية وحقوقك عند بداية العمل." data-copy-en="CV preparation and your rights when starting work." class="reel-description">السيرة الذاتية وحقوقك عند بداية العمل.</p></div>
-        </a>
-        <button type="button" class="reel-share" data-reel-share="3L3Jw71knhs" data-copy-ar="مشاركة الريل" data-copy-en="Share Short">مشاركة الريل</button>
-      </article>
-    </div>
-    <p class="reels-status" role="status" aria-live="polite"></p>
+
   </div>
 </section>
 <section class="section home-video-library" aria-labelledby="homeVideosTitle">
@@ -415,10 +423,27 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
       <div><h2 id="homeVideosTitle" data-copy-ar="مكتبة الفيديوهات" data-copy-en="Video Library">مكتبة الفيديوهات</h2><p data-copy-ar="شروحات ومحاضرات مرتبة حسب الموضوع، من التطوير المهني لشئون العاملين وقانون العمل." data-copy-en="Explainers and lectures organized by topic, from career development to personnel affairs and labor law.">شروحات ومحاضرات مرتبة حسب الموضوع، من التطوير المهني لشئون العاملين وقانون العمل.</p></div>
       <a class="secondary-cta" href="videos/" data-copy-ar="تصفح الفيديوهات" data-copy-en="Browse videos">تصفح الفيديوهات</a>
     </div>
+    <div class="home-reel-previews">
+      <article class="home-reel-preview" id="preview-videoJobApplication">
+        <a class="home-reel-link" href="https://youtu.be/4lye0UP6UKM" target="_blank" rel="noopener noreferrer" data-video-id="4lye0UP6UKM" aria-labelledby="preview-title-videoJobApplication">
+          <span class="home-video-thumb"><img src="https://i.ytimg.com/vi/4lye0UP6UKM/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="home-reel-icon" aria-hidden="true">▶</span></span>
+          <div><h3 id="preview-title-videoJobApplication" data-copy-ar="هتقدّم على وظيفة؟ رتّب أفكارك الأول" data-copy-en="Applying for a Job? Organize Your Thoughts First">هتقدّم على وظيفة؟ رتّب أفكارك الأول</h3><p data-copy-ar="حازم موسى يوضح إزاي ترتّب أفكارك قبل التقديم على وظيفة، عشان تعرض خبرتك ومهاراتك بشكل واضح يناسب الفرصة." data-copy-en="Hazem Moussa explains how to organize your thoughts before applying so you can present your experience and skills clearly and relate them to the role.">حازم موسى يوضح إزاي ترتّب أفكارك قبل التقديم على وظيفة، عشان تعرض خبرتك ومهاراتك بشكل واضح يناسب الفرصة.</p></div>
+        </a>
+        <button type="button" class="reel-share" data-video-share data-copy-ar="مشاركة الفيديو" data-copy-en="Share video">مشاركة الفيديو</button>
+      </article>
+      <article class="home-reel-preview" id="preview-videoWriteYourCV">
+        <a class="home-reel-link" href="https://youtu.be/gs5xhp1BS54" target="_blank" rel="noopener noreferrer" data-video-id="gs5xhp1BS54" aria-labelledby="preview-title-videoWriteYourCV">
+          <span class="home-video-thumb"><img src="https://i.ytimg.com/vi/gs5xhp1BS54/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="home-reel-icon" aria-hidden="true">▶</span></span>
+          <div><h3 id="preview-title-videoWriteYourCV" data-copy-ar="اكتب الـCV صح… وخلّي خبرتك واضحة" data-copy-en="Write a CV That Makes Your Experience Clear">اكتب الـCV صح… وخلّي خبرتك واضحة</h3><p data-copy-ar="حازم موسى يشرح إزاي تجهّز سيرة ذاتية واضحة، وتبرز فيها خبراتك ومهاراتك اللي تهم مسؤول التوظيف." data-copy-en="Hazem Moussa explains how to write a clear CV and highlight the experience and skills that matter to recruiters.">حازم موسى يشرح إزاي تجهّز سيرة ذاتية واضحة، وتبرز فيها خبراتك ومهاراتك اللي تهم مسؤول التوظيف.</p></div>
+        </a>
+        <button type="button" class="reel-share" data-video-share data-copy-ar="مشاركة الفيديو" data-copy-en="Share video">مشاركة الفيديو</button>
+      </article>
+    </div>
+    <p class="reels-status" role="status" aria-live="polite"></p>
   </div>
 </section>
 
-<dialog class="reel-dialog" aria-labelledby="reelDialogTitle"><div class="reel-dialog-bar"><h2 id="reelDialogTitle">ريلز حازم موسى</h2><form method="dialog"><button class="reel-close" aria-label="Close / إغلاق">×</button></form></div><div class="reel-screen"></div><a class="reel-youtube" target="_blank" rel="noopener noreferrer" data-copy-ar="افتح الفيديو على يوتيوب" data-copy-en="Open video on YouTube">افتح الفيديو على يوتيوب</a></dialog>
+<dialog class="reel-dialog" aria-labelledby="reelDialogTitle"><div class="reel-dialog-bar"><h2 id="reelDialogTitle">فيديوهات حازم موسى</h2><form method="dialog"><button class="reel-close" aria-label="Close / إغلاق">×</button></form></div><div class="reel-screen"></div><a class="reel-youtube" target="_blank" rel="noopener noreferrer" data-copy-ar="افتح الفيديو على يوتيوب" data-copy-en="Open video on YouTube">افتح الفيديو على يوتيوب</a></dialog>
 
 <section class="page-section home-ask-hazem" aria-labelledby="askHazemTitle"><div class="shell cta-panel"><div><p class="eyebrow" data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</p><h2 id="askHazemTitle" data-copy-ar="موقف في شؤون العاملين أو المرتبات محيّرك؟" data-copy-en="Have a personnel or payroll question?">موقف في شؤون العاملين أو المرتبات محيّرك؟</h2><p data-copy-ar="سجّل سؤالك لحازم موسى، وتابع الإجابة من رابطك الخاص بعد المراجعة." data-copy-en="Submit your question to Hazem Moussa and follow the reviewed answer through your private link.">سجّل سؤالك لحازم موسى، وتابع الإجابة من رابطك الخاص بعد المراجعة.</p><small class="ask-hosting-note" data-copy-ar="سجّل سؤالك هنا وتابع الإجابة من رابطك الخاص." data-copy-en="Submit your question here and track the answer privately.">سجّل سؤالك هنا وتابع الإجابة من رابطك الخاص.</small></div><a class="primary-cta" href="ask/" data-copy-ar="سجّل سؤالك ←" data-copy-en="Ask your question">سجّل سؤالك ←</a></div></section>
 
@@ -447,13 +472,13 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
  const screen = dialog.querySelector('.reel-screen');
  let opener;
  const isEnglish = () => document.documentElement.lang === 'en';
- document.querySelectorAll('[data-reel-id]').forEach(link => link.addEventListener('click', event => {
+ document.querySelectorAll('[data-video-id]').forEach(link => link.addEventListener('click', event => {
    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !dialog.showModal) return;
    event.preventDefault(); opener = link;
    const title = link.closest('article').querySelector('h3').textContent;
    dialog.querySelector('h2').textContent = title;
    const player = document.createElement('iframe');
-   player.src = 'https://www.youtube-nocookie.com/embed/' + link.dataset.reelId + '?autoplay=1&playsinline=1&rel=0';
+   player.src = 'https://www.youtube-nocookie.com/embed/' + link.dataset.videoId + '?autoplay=1&playsinline=1&rel=0';
    player.title = title; player.allow = 'autoplay; encrypted-media; picture-in-picture; web-share'; player.allowFullscreen = true;
    player.referrerPolicy = 'strict-origin-when-cross-origin';
    screen.replaceChildren(player); dialog.querySelector('.reel-youtube').href = link.href;
@@ -461,16 +486,53 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
  }));
  dialog.addEventListener('close', () => { screen.replaceChildren(); opener?.focus(); });
  dialog.addEventListener('click', event => { if(event.target === dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();} });
- document.querySelectorAll('[data-reel-share]').forEach(button => button.addEventListener('click', async () => {
+ document.querySelectorAll('[data-video-share]').forEach(button => button.addEventListener('click', async () => {
    const title = button.closest('article').querySelector('h3').textContent;
-   const url = 'https://www.youtube.com/shorts/' + button.dataset.reelShare;
+   const url = button.closest('article').querySelector('[data-video-id]').href;
    const text = isEnglish() ? 'Practical HR insights with Hazem Moussa: ' + title : 'معلومة من واقع شغلك مع حازم موسى: ' + title;
    const status = document.querySelector('.reels-status');
    try {
      if (navigator.share) await navigator.share({title, text, url});
-     else { await navigator.clipboard.writeText(text + '\n' + url); status.textContent = isEnglish() ? 'Link copied.' : 'تم نسخ رسالة المشاركة ورابط الريل.'; }
-   } catch(error) { if(error.name !== 'AbortError') { status.textContent = isEnglish() ? 'Copy this link: ' + url : 'يمكنك نسخ رابط الريل: ' + url; } }
+     else { await navigator.clipboard.writeText(text + '\n' + url); status.textContent = isEnglish() ? 'Link copied.' : 'تم نسخ رسالة المشاركة ورابط الفيديو.'; }
+   } catch(error) { if(error.name !== 'AbortError') { status.textContent = isEnglish() ? 'Copy this link: ' + url : 'يمكنك نسخ رابط الفيديو: ' + url; } }
  }));
+})();
+</script>
+<script>
+(() => {
+ const carousel = document.querySelector('.training-photo-carousel');
+ const slides = [...carousel.querySelectorAll('.training-photo-slide')];
+ const controls = carousel.querySelector('.training-photo-controls');
+ const toggle = controls.querySelector('[data-training-toggle]');
+ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+ let index = 0, timer, visible = false, hovered = false, paused = reduced.matches;
+ const move = step => {
+   slides[index].hidden = true;
+   index = (index + step + slides.length) % slides.length;
+   slides[index].hidden = false;
+ };
+ const schedule = () => {
+   clearTimeout(timer);
+   if (paused || hovered || !visible || document.hidden || carousel.contains(document.activeElement)) return;
+   timer = setTimeout(() => { move(1); schedule(); }, 6500);
+ };
+ const updateToggle = () => {
+   toggle.textContent = paused ? '▶' : 'Ⅱ';
+   toggle.setAttribute('aria-label', paused ? 'تشغيل التبديل / Play slideshow' : 'إيقاف التبديل / Pause slideshow');
+ };
+ controls.hidden = false;
+ controls.querySelectorAll('[data-training-step]').forEach(button => {
+   button.addEventListener('click', () => { move(Number(button.dataset.trainingStep)); schedule(); });
+ });
+ toggle.addEventListener('click', () => { paused = !paused; updateToggle(); schedule(); });
+ carousel.addEventListener('mouseenter', () => { hovered = true; schedule(); });
+ carousel.addEventListener('mouseleave', () => { hovered = false; schedule(); });
+ carousel.addEventListener('focusin', schedule);
+ carousel.addEventListener('focusout', () => requestAnimationFrame(schedule));
+ document.addEventListener('visibilitychange', schedule);
+ reduced.addEventListener('change', () => { paused = reduced.matches; updateToggle(); schedule(); });
+ new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); }, {threshold:.25}).observe(carousel);
+ updateToggle();
 })();
 </script>
 <script>
