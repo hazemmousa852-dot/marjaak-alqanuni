@@ -145,7 +145,7 @@ body[data-page=home] .reel-play{width:32px;height:32px;font-size:14px;left:14px;
 body[data-page=home] .reel-watch{font-size:11px;bottom:20px;inset-inline-start:14px}
 body[data-page=home] .reel-body{padding:10px}
 body[data-page=home] .reel-body h3{position:absolute;width:1px;height:1px;min-height:0;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-body[data-page=home] .reel-share{font-size:12px;padding:5px 10px;width:100%}
+body[data-page=home] .reel-share{font-size:12px;padding:5px 10px}
 body[data-page=home] .reels-hint{margin:16px 0 8px;font-size:12px}
 body[data-page=home] .reels-controls{margin:8px 4px}
 body[data-page=home] .reels-arrow{height:36px;width:36px;font-size:20px}
@@ -272,12 +272,17 @@ body[data-page=home] .home-video-library{padding-block:clamp(20px,3vw,32px)}
 .home-reel-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
 .home-reel-preview{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
 .home-reel-link{display:flex;align-items:center;gap:12px;flex:1;color:inherit;text-decoration:none;min-width:0}
-.home-reel-link:hover h3{text-decoration:underline}
+@media(hover:hover){.home-reel-link:hover h3{text-decoration:underline}}
 .home-reel-icon{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;border:1px solid var(--line);color:var(--accent-text)}
 .home-reel-link h3{font-size:15px;line-height:1.5;margin:0}
 .home-reel-link p{font-size:13px;line-height:1.5;margin:4px 0 0;color:var(--text-soft)}
-.home-reel-preview .reel-share{flex:none}
-@media(max-width:680px){.home-reel-previews{grid-template-columns:minmax(0,1fr)}.home-video-library .reels-heading{flex-wrap:wrap}}
+body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-space:nowrap}
+@media(max-width:680px){
+  .home-reel-previews{grid-template-columns:minmax(0,1fr)}
+  .home-reel-preview{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .home-reel-preview .reel-share{justify-self:end}
+  .home-video-library .reels-heading{flex-wrap:wrap}
+}
 </style>
 </head>
 <body data-page="home">
