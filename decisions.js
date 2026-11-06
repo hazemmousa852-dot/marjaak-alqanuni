@@ -80,7 +80,7 @@
       const item=all.find(entry=>entry.name===requested);
       if(!item)throw new Error();
       document.title=`${item.title} | مرجعك القانوني`;
-      host.innerHTML=`<div class="viewer-head"><h1>${esc(item.title)}</h1><a class="download-decision" href="${esc(item.url)}" download>تحميل PDF</a></div><iframe title="${esc(item.title)}" src="${esc(item.url)}#page=${item.page}&view=FitH"></iframe><p class="viewer-note">إذا لم يظهر الملف في المتصفح، استخدم زر التحميل لفتحه على جهازك.</p>`;
+      host.innerHTML=`<div class="viewer-head"><h1>${esc(item.title)}</h1><a class="download-decision" href="${esc(item.url)}" download>تحميل PDF</a></div><div class="pdf-mobile-open"><p>لعرض القرار على الهاتف، افتحه مباشرة في عارض PDF.</p><a class="view-decision" href="${esc(item.url)}" target="_blank" rel="noopener">فتح PDF</a></div><iframe title="${esc(item.title)}" src="${esc(item.url)}#page=${item.page}&view=FitH"></iframe><p class="viewer-note">إذا لم يظهر الملف في المتصفح، استخدم زر التحميل لفتحه على جهازك.</p>`;
     }catch{
       host.innerHTML='<div class="empty-state"><strong>القرار غير متاح</strong><span>ارجع إلى فهرس القرارات واختر ملفًا موجودًا.</span></div>';
     }
