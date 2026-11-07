@@ -45,7 +45,7 @@
     return !text.length||hits>=Math.max(1,Math.ceil(text.length*.6));
   }
   async function files(){
-    const response=await fetch('data/decisions.json?v=20261026-3');
+    const response=await fetch('data/decisions.json?v=20261107-1');
     if(!response.ok)throw new Error();
     const data=await response.json();
     return (data.files||[]).map(name=>({name,title:data.titles?.[name]||titleOf(name),summary:data.summaries?.[name]||'',url:data.urls?.[name]||fileUrl(name),page:data.pages?.[name]||1})).sort((a,b)=>numberOf(a.name)-numberOf(b.name)||yearOf(a.name)-yearOf(b.name)||a.title.localeCompare(b.title,'ar'));
