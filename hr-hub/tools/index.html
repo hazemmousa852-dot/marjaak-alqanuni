@@ -122,7 +122,7 @@
         "position": 14,
         "url": "https://hazemmousa852-dot.github.io/hm-attendance-intelligence/",
         "name": "HM Attendance Intelligence",
-        "image": "https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/assets/tools/attendance-intelligence-v2.webp"
+        "image": "https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/assets/tools/attendance-explainer-20261107.jpg"
       },
       {
         "@type": "ListItem",
@@ -359,6 +359,25 @@
 .tool-share-pop-title { padding-inline-end:34px; }
 </style>
 <style id="ask-hazem-portrait">#ask-hazem .tool-showcase-image{aspect-ratio:1/1}#ask-hazem .tool-showcase-image img{width:100%;height:100%;object-fit:contain}#ask-hazem .tool-showcase-image::before{display:none}</style>
+<style id="compact-tool-cards">
+/* Keep card content natural-height and thumbnails fully visible. */
+.tool-showcase-grid { gap:18px; }
+.tool-showcase-card .tool-showcase-image,
+#ask-hazem .tool-showcase-image { aspect-ratio:16/9; }
+.tool-showcase-card .tool-showcase-body { min-height:0; padding:18px; }
+.tool-showcase-body h2 { font-size:clamp(20px,2vw,25px); margin:8px 0; }
+.tool-showcase-body > p { font-size:14px; line-height:1.7; }
+.tool-showcase-body .tool-benefits { gap:5px; margin:12px 0 16px; }
+.tool-showcase-body .tool-benefits li { line-height:1.65; padding-inline-start:17px; }
+.tool-actions-wrap { gap:8px; padding-top:8px; }
+.tool-actions-wrap .tool-launch { min-width:0; min-height:44px; font-size:14px; }
+.tool-actions-wrap .tool-share { min-height:44px; padding:0 12px; font-size:13px; }
+.tool-tutorial { display:flex; width:100%; min-height:44px; align-items:center; justify-content:center; gap:8px; border:1px solid var(--line); border-radius:999px; color:var(--text-soft); font-size:14px; font-weight:800; margin-bottom:4px; }
+.tool-tutorial::before { content:"▶"; font-size:12px; color:var(--tool-color); }
+.tool-tutorial:hover { color:var(--tool-color); border-color:var(--tool-color); }
+.tool-tutorial:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+@media(max-width:640px) { .tool-showcase-card .tool-showcase-body { padding:16px; } }
+</style>
 </head>
 <body data-page="tools">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -440,8 +459,8 @@
 <div class="tool-showcase-image"><img src="../assets/tools/pension-estimator-v2.svg" width="960" height="640" alt="ساعة للتقاعد وحاسبة وأرصدة مالية ودرع حماية — حاسبة المعاش التقديري والمبكر" loading="lazy" decoding="async"></div>
 <div class="tool-showcase-body"><span class="tool-status" data-i18n="publishedTool">أداة منشورة</span><h2 data-i18n="pensionTitle">حاسبة المعاش التقديري والمبكر</h2><p data-i18n="pensionDesc">قدّر المعاش وافهم الحساب خطوة بخطوة للعاملين بالقطاع الخاص، مع فحص مبدئي للشروط.</p><ul class="tool-benefits"><li data-i18n="pensionBenefit1">بلوغ السن والمبكر والعجز والوفاة في حسابات مستقلة</li><li data-i18n="pensionBenefit2">فصل المدد قبل وبعد ٢٠٢٠ ومدخلات يدوية واضحة</li><li data-i18n="pensionBenefit3">شرح النتيجة وطباعة تقرير تقديري أو حفظه PDF</li></ul><div class="tool-actions-wrap"><a class="tool-launch" href="./pension-estimator/" target="_blank" rel="noopener noreferrer"><span data-i18n="useTool">استخدم الأداة الآن</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><button class="tool-share" type="button" data-tool="pension-estimator" aria-haspopup="dialog" aria-expanded="false" aria-label="شارك حاسبة المعاش التقديري والمبكر"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 10.6 6.8-4m-6.8 6.8 6.8 4"></path></svg><span data-share-label>مشاركة</span></button></div></div></article>
           <article class="tool-showcase-card search-tool-card gold-card" id="attendance-intelligence" data-tool-category="calculators" data-search-ar="حضور انصراف بصمة موظفين ورديات متغيرة ليلية تأخير إضافي راحة أسبوعية إجازات أذونات تقرير اكسل" data-search-en="attendance timekeeping fingerprint punches employees variable night shifts lateness overtime weekly rest leave permissions Excel report">
-            <div class="tool-showcase-image"><img src="../assets/tools/attendance-intelligence-v2.webp" width="960" height="640" alt="واجهة نظام تحليل الحضور والانصراف والورديات" loading="lazy" decoding="async" data-i18n-alt="attendanceImageAlt"></div>
-            <div class="tool-showcase-body"><span class="tool-status" data-i18n="publishedTool">أداة منشورة</span><h2 data-i18n="attendanceTitle">نظام تحليل الحضور والانصراف</h2><p data-i18n="attendanceDesc">ابدأ بملف البصمة وإعدادات الورديات، واحصل على تقرير حضور وتأخير وإضافي لكل موظف بصيغة Excel.</p><ul class="tool-benefits"><li data-i18n="attendanceBenefit1">استيراد Excel وتحليل أول وآخر بصمة تلقائيًا</li><li data-i18n="attendanceBenefit2">إجازات وأذونات وراحات أسبوعية وعطلات رسمية</li><li data-i18n="attendanceBenefit3">فصل إضافي العمل والراحة والعطلات مع تصدير تقرير Excel</li></ul><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/hm-attendance-intelligence/" target="_blank" rel="noopener noreferrer"><span data-i18n="useTool">استخدم الأداة الآن</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><button class="tool-share" type="button" data-tool="attendance" aria-haspopup="dialog" aria-expanded="false" aria-label="شارك هذه الأداة: نظام تحليل الحضور والانصراف"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 10.6 6.8-4"></path><path d="m8.6 13.4 6.8 4"></path></svg><span data-share-label>مشاركة</span></button></div></div>
+            <div class="tool-showcase-image"><img src="../assets/tools/attendance-explainer-20261107.jpg" width="960" height="640" alt="واجهة نظام تحليل الحضور والانصراف والورديات" loading="lazy" decoding="async" data-i18n-alt="attendanceImageAlt"></div>
+            <div class="tool-showcase-body"><span class="tool-status" data-i18n="publishedTool">أداة منشورة</span><h2 data-i18n="attendanceTitle">نظام تحليل الحضور والانصراف</h2><p data-i18n="attendanceDesc">ابدأ بملف البصمة وإعدادات الورديات، واحصل على تقرير حضور وتأخير وإضافي لكل موظف بصيغة Excel.</p><ul class="tool-benefits"><li data-i18n="attendanceBenefit1">استيراد Excel وتحليل أول وآخر بصمة تلقائيًا</li><li data-i18n="attendanceBenefit2">إجازات وأذونات وراحات أسبوعية وعطلات رسمية</li><li data-i18n="attendanceBenefit3">فصل إضافي العمل والراحة والعطلات مع تصدير تقرير Excel</li></ul><a class="tool-tutorial" href="https://youtu.be/p1MsmyLQxFU" target="_blank" rel="noopener noreferrer" data-copy-ar="شرح استخدام الأداة" data-copy-en="How to use this tool">شرح استخدام الأداة</a><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/hm-attendance-intelligence/" target="_blank" rel="noopener noreferrer"><span data-i18n="useTool">استخدم الأداة الآن</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><button class="tool-share" type="button" data-tool="attendance" aria-haspopup="dialog" aria-expanded="false" aria-label="شارك هذه الأداة: نظام تحليل الحضور والانصراف"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 10.6 6.8-4"></path><path d="m8.6 13.4 6.8 4"></path></svg><span data-share-label>مشاركة</span></button></div></div>
           </article>
           <article class="tool-showcase-card search-tool-card green-card" id="attendance-payroll" data-tool-category="calculators" data-search-ar="من البصمة للراتب مرتبات اكسل اكسيل إضافي نهاري ليلي مسير مفردات مرتب استحقاقات استقطاعات" data-search-en="attendance fingerprint payroll integrated approval review Excel xlsx salaries day night overtime payslip deductions">
             <div class="tool-showcase-image"><img src="../assets/tools/attendance-payroll.svg" width="960" height="640" alt="من البصمة للراتب — Excel بالمعادلات" loading="lazy" decoding="async"></div>
