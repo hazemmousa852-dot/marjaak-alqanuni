@@ -2740,3 +2740,29 @@ html[data-theme="light"]{--muted:#4b5c6b}
 .contact-intro{max-width:900px}
 .home-route-card p,.stat small,.tool-benefits{font-size:.95rem;line-height:1.7}
 @media(max-width:900px){.featured-tools .tool-showcase-grid{grid-template-columns:1fr}.brand-logo{width:40px;height:40px}}
+
+/* Course poster used as the training page's hero visual. */
+.training-visual.is-course-poster {
+  min-height: 0;
+  overflow: hidden;
+  background: var(--panel-solid);
+}
+.training-visual.is-course-poster .course-poster-link {
+  display: block;
+  line-height: 0;
+}
+.training-visual.is-course-poster img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: none;
+  object-fit: contain;
+  filter: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.training-visual.is-course-poster:focus-within {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
