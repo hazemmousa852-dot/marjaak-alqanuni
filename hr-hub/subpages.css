@@ -2798,7 +2798,7 @@ html[data-theme="light"]{--muted:#4b5c6b}
   .training-hero.poster-hero .training-facts {
     grid-column: 1 / -1;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: 24px;
+    margin-top: -10px;
   }
 }
 @media (max-width: 760px) {
