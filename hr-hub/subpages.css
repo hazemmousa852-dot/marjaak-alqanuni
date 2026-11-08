@@ -2766,3 +2766,5 @@ html[data-theme="light"]{--muted:#4b5c6b}
   outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
 }
+
+.training-hero.poster-hero .training-facts { margin-top: 24px; }
