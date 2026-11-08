@@ -269,9 +269,17 @@ body[data-page=home] .home-video-library{padding-block:clamp(20px,3vw,32px)}
 .home-reel-icon{position:relative;display:grid;place-items:center;width:34px;height:26px;border-radius:8px;background:#dc1534;color:white}
 .reel-dialog{width:min(760px,calc(100% - 24px))}
 .reel-screen{width:min(100%,115dvh);aspect-ratio:16/9}
-.training-gallery-intro{text-align:center;margin:0 auto 18px;max-width:880px}
-.training-gallery-intro p{color:var(--text-soft)}
-.training-gallery-intro .brand-inline-links{justify-content:center}
+.brand-presence .section-heading .eyebrow{margin-bottom:5px}
+.brand-presence .section-heading h2{margin-block:0;line-height:1.25}
+.brand-presence .section-heading>p:last-child{margin:8px 0 0;line-height:1.55}
+.training-gallery-intro{text-align:center;margin:14px auto 20px;max-width:880px}
+.training-gallery-intro h3{margin:0 0 7px;line-height:1.35}
+.training-gallery-intro p{margin:0;color:var(--text-soft);line-height:1.55}
+.training-gallery-intro .brand-inline-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:16px}
+.training-gallery-intro .brand-inline-links a{display:inline-flex;min-height:42px;align-items:center;justify-content:center;padding:8px 18px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);font-weight:800;text-decoration:none;transition:border-color .2s ease,background-color .2s ease,color .2s ease,transform .2s ease}
+.training-gallery-intro .brand-inline-links a:first-child{border-color:rgba(242,185,75,.7);background:rgba(242,185,75,.12);color:var(--gold)}
+.training-gallery-intro .brand-inline-links a:hover{border-color:var(--gold);background:rgba(242,185,75,.16);color:var(--gold);transform:translateY(-1px)}
+.training-gallery-intro .brand-inline-links a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .training-photo-card img{display:block;width:100%;height:clamp(170px,23vw,290px);object-fit:contain;background:var(--panel);border-radius:12px}
 .training-photo-card figcaption{margin-top:16px}
 .home-reel-link>div{min-width:0}
@@ -285,6 +293,8 @@ body[data-page=home] .home-reel-preview .reel-share{flex:none;width:auto;white-s
   .home-reel-preview .reel-share{justify-self:end}
   .home-reel-link p{font-size:12px}
   .home-video-library .reels-heading{flex-wrap:wrap}
+  .training-gallery-intro .brand-inline-links{align-items:stretch;gap:9px}
+  .training-gallery-intro .brand-inline-links a{flex:1 1 190px}
 }
 </style>
 <style id="home-header-fit">
@@ -558,6 +568,7 @@ document.querySelectorAll('[data-review-carousel]').forEach(track => {
 });
 </script></body>
 </html>
+
 
 
 
