@@ -2769,6 +2769,9 @@ html[data-theme="light"]{--muted:#4b5c6b}
 
 
 @media (min-width: 1021px) {
+  .training-hero.poster-hero {
+    padding-bottom: 48px;
+  }
   .training-hero.poster-hero .page-hero-grid {
     align-items: start;
   }
@@ -2778,9 +2781,14 @@ html[data-theme="light"]{--muted:#4b5c6b}
     gap: 24px;
     align-self: start;
   }
+  .training-hero.poster-hero .training-visual {
+    width: 100%;
+    max-width: 460px;
+    justify-self: center;
+  }
   .training-hero.poster-hero .training-facts {
+    width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-self: start;
     margin-top: 0;
   }
   .training-hero.poster-hero .training-facts div {
