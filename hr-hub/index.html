@@ -214,7 +214,9 @@ body[data-page=home] .home-story-grid{gap:32px;align-items:center}
 body[data-page=home] .home-story-photo{max-height:310px}
 body[data-page=home] .home-story-photo img{width:100%;height:310px;object-fit:cover}
 body[data-page=home] .home-story-copy h2{font-size:clamp(26px,3vw,38px);line-height:1.5;margin-block:10px}
-body[data-page=home] .home-route-card{width:min(100%,540px);margin-inline:auto;min-height:0;padding:20px;display:flex;flex-direction:column;gap:8px}
+body[data-page=home] .home-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){body[data-page=home] .home-route-grid{grid-template-columns:1fr}}
+body[data-page=home] .home-route-card{min-height:0;padding:20px;display:flex;flex-direction:column;gap:8px}
 body[data-page=home] .home-route-card h3{font-size:19px;line-height:1.5;margin:0}
 body[data-page=home] .home-route-card p{font-size:13px;line-height:1.8;margin:0 0 8px}
 body[data-page=home] .route-action{font-size:12px;margin-top:auto}
@@ -490,7 +492,12 @@ body[data-page=home] .desktop-nav a{font-size:13px}
 <section class="section home-destinations" aria-labelledby="destinationsTitle">
   <div class="shell">
     <div class="section-heading centered"><h2 id="destinationsTitle" data-i18n="destinationsEyebrow">اكتشف الموقع</h2></div>
-    <a class="home-route-card" href="../"><h3 data-i18n="routeLegalTitle">مرجعك القانوني</h3><p data-i18n="routeLegalDesc">قانون العمل والقرارات والمواقف العملية.</p><span class="route-action" data-i18n="openReference">افتح المرجع</span></a>
+    <div class="home-route-grid">
+      <a class="home-route-card" href="../"><h3 data-i18n="routeLegalTitle">مرجعك القانوني</h3><p data-i18n="routeLegalDesc">قانون العمل والقرارات والمواقف العملية.</p><span class="route-action" data-i18n="openReference">افتح المرجع</span></a>
+      <a class="home-route-card" href="tools/"><h3 data-i18n="routeToolsTitle">أدوات HR</h3><p data-i18n="routeToolsDesc">أدوات مجانية للحسابات والنماذج والبحث.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
+      <a class="home-route-card" href="videos/"><h3 data-i18n="routeVideosTitle">فيديوهات مجانية</h3><p data-i18n="routeVideosDesc">محتوى مرئي منظم حسب موضوعات الـHR.</p><span class="route-action" data-i18n="openPage">افتح الصفحة</span></a>
+      <a class="home-route-card" href="ask/"><h3 data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</h3><p data-copy-ar="سؤالك في شئون العاملين والمرتبات، وإجابته بمراجعة حازم موسى." data-copy-en="Personnel and payroll questions, reviewed by Hazem Moussa.">سؤالك في شئون العاملين والمرتبات، وإجابته بمراجعة حازم موسى.</p><span class="route-action" data-copy-ar="اكتب سؤالك" data-copy-en="Submit a question">اكتب سؤالك</span></a>
+    </div>
   </div>
 </section>
 
