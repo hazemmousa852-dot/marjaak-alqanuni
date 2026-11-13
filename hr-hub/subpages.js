@@ -81,7 +81,7 @@
         roleCreator: 'شئون العاملين والمرتبات',
         roleAria: 'مدير موارد بشرية ومتخصص شئون العاملين والمرتبات',
         portraitAlt: 'حازم موسى — مدير موارد بشرية ومدرب متخصص',
-        heroLead: 'أقود الموارد البشرية بخبرة مهنية منذ 2008 في مصر ودول الخليج، وأجمع بين تطوير أنظمة العمل وخبرة شئون العاملين والمرتبات. أشارك هذه الخبرة من خلال التدريب والمحتوى المتخصص والحلول الرقمية العملية.',
+        heroLead: 'أقود الموارد البشرية وأجمع بين تطوير أنظمة العمل وخبرة شئون العاملين والمرتبات. أشارك خبرتي من خلال التدريب والمحتوى المتخصص والحلول الرقمية العملية.',
         pillarsLabel: 'مجالات العمل',
         pillarPersonnel: 'شئون العاملين<br>والمرتبات',
         pillarLaw: 'قانون العمل<br>والامتثال',
@@ -134,7 +134,7 @@
         roleCreator: 'Personnel & Payroll',
         roleAria: 'HR manager with personnel and payroll expertise',
         portraitAlt: 'Hazem Moussa — HR manager and specialist trainer',
-        heroLead: 'I lead HR with professional experience since 2008 across Egypt and the Gulf, combining HR systems development with personnel and payroll expertise. I share that experience through training, specialist content and practical digital solutions.',
+        heroLead: 'I lead HR and combine workplace systems development with personnel and payroll expertise. I share practical knowledge through training, specialist content and digital solutions.',
         pillarsLabel: 'Areas of work',
         pillarPersonnel: 'Personnel<br>& Payroll',
         pillarLaw: 'Labor Law<br>& Compliance',
@@ -1280,6 +1280,8 @@
     });
     document.querySelector('#showAllTools')?.addEventListener('click', () => {
       toolSearch.value = '';
+      activeToolFlow = 'all';
+      toolFlowButtons.forEach((item) => { const selected = item.dataset.toolFlow === 'all'; item.classList.toggle('is-active', selected); item.setAttribute('aria-pressed', String(selected)); });
       setActiveToolFilter('all');
       toolSearch.focus();
     });
