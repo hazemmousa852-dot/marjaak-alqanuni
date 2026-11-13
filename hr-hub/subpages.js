@@ -1090,6 +1090,7 @@
   const toolSearch = document.querySelector('#toolSearch');
   const toolCards = [...document.querySelectorAll('.search-tool-card')];
   const toolFilterButtons = [...document.querySelectorAll('[data-tool-filter]')];
+  const toolFlowButtons = [...document.querySelectorAll('[data-tool-flow]')];
   const noTools = document.querySelector('#noTools');
   const resultStatus = document.querySelector('#toolResultStatus');
   const videoPlayers = [...document.querySelectorAll('.featured-video-player')];
@@ -1116,6 +1117,7 @@
   let currentLanguage = readPreference('hazem-site-language', 'ar');
   if (!common[currentLanguage]) currentLanguage = 'ar';
   let activeToolFilter = 'all';
+  let activeToolFlow = 'all';
 
   const getDictionary = (language) => ({
     ...common[language],
@@ -1141,7 +1143,8 @@
       const source = currentLanguage === 'ar' ? card.dataset.searchAr : card.dataset.searchEn;
       const matchesCategory = activeToolFilter === 'all' || card.dataset.toolCategory === activeToolFilter;
       const matchesSearch = !terms.length || terms.every((term) => normalize(`${source} ${card.textContent}`).includes(term));
-      const visible = matchesCategory && matchesSearch;
+      const matchesFlow = activeToolFlow === 'all' || card.dataset.toolFlow === activeToolFlow;
+      const visible = matchesCategory && matchesSearch && matchesFlow;
       card.hidden = !visible;
       if (visible) visibleCount += 1;
     });
@@ -1289,6 +1292,18 @@
 
   toolFilterButtons.forEach((button) => {
     button.addEventListener('click', () => setActiveToolFilter(button.dataset.toolFilter || 'all'));
+  });
+
+  toolFlowButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeToolFlow = button.dataset.toolFlow || 'all';
+      toolFlowButtons.forEach((item) => {
+        const selected = item === button;
+        item.classList.toggle('is-active', selected);
+        item.setAttribute('aria-pressed', String(selected));
+      });
+      filterTools();
+    });
   });
 
   const clearExpandedVideoState = () => {
