@@ -2127,3 +2127,9 @@ body[data-page="home"] .home-content-links{display:flex;gap:10px;flex-wrap:wrap}
 body[data-page="home"] .home-reels-entry{margin:14px 0;color:var(--gold);font-weight:800}
 body[data-page="home"] .home-reels-entry a{color:inherit}
 @media(max-width:720px){body[data-page="home"] .home-path-grid{grid-template-columns:1fr;gap:9px}body[data-page="home"] .home-path-card{padding:14px 16px}body[data-page="home"] .hero-primary-actions>*{flex:1 1 auto}}
+
+/* Keep the training and profile actions equally visible in both languages. */
+body[data-page="home"] .hero-primary-actions .primary-cta,
+body[data-page="home"] .hero-primary-actions .profile-download{flex:1 1 0;min-width:0;padding-inline:12px;font-size:clamp(12px,2vw,14px);text-align:center}
+body[data-page="home"] .hero-primary-actions .profile-download{gap:8px;text-decoration:none}
+body[data-page="home"] .profile-download-icon{flex:0 0 auto;font-size:1.25em;font-weight:900;line-height:1}
