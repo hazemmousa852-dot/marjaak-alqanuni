@@ -893,7 +893,7 @@ blockquote cite {
 .stats-wrap {
   position: relative;
   z-index: 10;
-  margin-top: -45px;
+  margin-top: 50px;
 }
 
 .stats-panel {
@@ -1951,7 +1951,7 @@ html[data-theme="light"] footer {
   }
 
   .stats-wrap {
-    margin-top: -25px;
+    margin-top: 50px;
   }
 
   .stats-panel {
