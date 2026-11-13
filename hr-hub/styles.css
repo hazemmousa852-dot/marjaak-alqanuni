@@ -2133,3 +2133,6 @@ body[data-page="home"] .hero-primary-actions .primary-cta,
 body[data-page="home"] .hero-primary-actions .profile-download{flex:1 1 0;min-width:0;padding-inline:12px;font-size:clamp(12px,2vw,14px);text-align:center}
 body[data-page="home"] .hero-primary-actions .profile-download{gap:8px;text-decoration:none}
 body[data-page="home"] .profile-download-icon{flex:0 0 auto;font-size:1.25em;font-weight:900;line-height:1}
+
+/* Focus the hero expertise row on HR core work and avoid repeating paths below. */
+body[data-page="home"] .pillars{grid-template-columns:repeat(2,minmax(0,1fr));max-width:420px}
