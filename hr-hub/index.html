@@ -393,6 +393,20 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
   body[data-page="home"] #top .hero-primary-actions > .primary-cta { flex-basis: 100%; }
 }
 </style>
+<style>
+body[data-page="home"] .home-proof-summary { padding-block: 18px 22px; }
+body[data-page="home"] .home-proof-summary h2 { margin: 0 0 14px; color: var(--accent-text); font-size: clamp(19px, 3vw, 27px); }
+.home-proof-grid { display:grid; grid-template-columns:minmax(0, 2fr) minmax(0, 1fr); gap:14px; }
+.home-proof-photos { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; align-content:start; }
+.home-proof-photos > a { grid-column:1/-1; color:var(--accent-text); }
+.home-proof-summary figure { min-width:0; min-height:0; margin:0; }
+.home-proof-photos figure img { width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; display:block; }
+.home-proof-reviews { display:grid; gap:10px; }
+.home-proof-reviews .trainee-review { padding:12px 16px; }
+.home-proof-reviews .review-quote-mark { display:none; }
+.home-proof-reviews blockquote { margin:0 0 8px; }
+@media(max-width:760px) { .home-proof-grid { grid-template-columns:minmax(0,1fr); } }
+</style>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -460,190 +474,33 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
       </div>
     </section>
 
+<section class="shell home-proof-summary" aria-labelledby="homeProofTitle">
+  <h2 id="homeProofTitle" data-copy-ar="خبرة منذ ٢٠٠٨ · مصر والخليج" data-copy-en="Experience since 2008 · Egypt and the Gulf">خبرة منذ ٢٠٠٨ · مصر والخليج</h2>
+  <div class="home-proof-grid">
+    <div class="home-proof-photos"><figure class="trainee-review training-photo-card">
+    <img src="gallery/images/48-thumb.webp" alt="شرح أثناء اللقاء التدريبي — حازم موسى" loading="lazy" decoding="async" width="480" height="383">
+    <figcaption><span><strong data-copy-ar="شرح أثناء اللقاء التدريبي" data-copy-en="Leading a training session">شرح أثناء اللقاء التدريبي</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
+  </figure>
+<figure class="trainee-review training-photo-card">
+    <img src="gallery/images/53-thumb.webp" alt="صورة جماعية مع المتدربين — حازم موسى" loading="lazy" decoding="async" width="480" height="360">
+    <figcaption><span><strong data-copy-ar="صورة جماعية مع المتدربين" data-copy-en="Group photo with trainees">صورة جماعية مع المتدربين</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
+  </figure><a href="gallery/" data-copy-ar="شاهد ألبومات التدريب" data-copy-en="View training albums">شاهد ألبومات التدريب</a></div>
+    <div class="home-proof-reviews" id="trainee-reviews"><figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>كويس جدا جدا ما شاء الله أنا استفادة كتير جدا بس مستر حازم بيبسط المعلومة أوووي وبجد شاطر جدا</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
+<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>ما شاء الله بجد، جزاكم الله خيرًا عنا، شرح كويس جدًا والمحتوى مميز، أنا ما شفت في أي مكان مستوى عالي زي مستواكم بجد وحتى على النطاق الشخصي تقديم مساعدة لكل المحتاج حقيقي ربنا يبارك لكم ❤️</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure></div>
+  </div>
+</section>
 <section class="home-paths" aria-label="مسارات الموقع"><div class="shell home-path-grid">
 <a class="home-path-card" href="videos/"><strong data-copy-ar="الفيديوهات المجانية" data-copy-en="Free videos">الفيديوهات المجانية</strong><span data-copy-ar="شروحات عملية في الموارد البشرية" data-copy-en="Practical HR explainers">شروحات عملية في الموارد البشرية</span><b aria-hidden="true">←</b></a>
 <a class="home-path-card" href="tools/"><strong data-copy-ar="أدوات مجانية" data-copy-en="Free tools">أدوات مجانية</strong><span data-copy-ar="حلول عملية لمهام HR" data-copy-en="Practical HR task solutions">حلول عملية لمهام HR</span><b aria-hidden="true">←</b></a>
 <a class="home-path-card" href="ask/"><strong data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</strong><span data-copy-ar="أرسل سؤالك وتابع الإجابة" data-copy-en="Submit a question and follow the answer">أرسل سؤالك وتابع الإجابة</span><b aria-hidden="true">←</b></a>
 </div></section>
-
-<section class="stats-wrap" aria-label="ملخص الخبرة" data-i18n-aria="statsLabel"><div class="shell stats-panel">
-      <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"></path></svg></span><span><strong data-copy-ar="منذ ٢٠٠٨ · مصر والخليج" data-copy-en="Since 2008 · Egypt & the Gulf">منذ ٢٠٠٨ · مصر والخليج</strong><small data-copy-ar="خبرة مهنية إقليمية" data-copy-en="Regional professional experience">خبرة مهنية إقليمية</small></span></div>
-<div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 10 10-5 10 5-10 5L2 10Z"></path><path d="M6 12.5V17c3 2.5 9 2.5 12 0v-4.5"></path></svg></span><span><strong data-copy-ar="تدريب عملي" data-copy-en="Practical training">تدريب عملي</strong><small data-copy-ar="معرفة تتحول لتطبيق" data-copy-en="Knowledge into practice">معرفة تتحول لتطبيق</small></span></div>
-<div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3L22 9.3l-5 4.9 1.2 6.8-6.2-3.2L5.8 21 7 14.2 2 9.3l6.9-1L12 2Z"></path></svg></span><span><strong data-copy-ar="أدوات HR" data-copy-en="HR tools">أدوات HR</strong><small data-copy-ar="حلول ومحتوى متخصص" data-copy-en="Tools & specialist content">حلول ومحتوى متخصص</small></span></div></div></section>
-
-<section class="section brand-overview" id="experience" aria-labelledby="experienceTitle"><div class="shell brand-overview-inner"><div><h2 data-copy-ar="مسيرتي المهنية" data-copy-en="My professional journey" id="experienceTitle">مسيرتي المهنية</h2><p data-copy-ar="خبرة متنوعة في قيادة الموارد البشرية وشئون العاملين والمرتبات عبر قطاعات متعددة." data-copy-en="Broad experience in HR leadership, personnel and payroll across multiple sectors." >خبرة متنوعة في قيادة الموارد البشرية وشئون العاملين والمرتبات عبر قطاعات متعددة.</p><p data-copy-ar="الماجستير المهني في إدارة الأعمال — جامعة الإسكندرية" data-copy-en="Professional Master of Business Administration — Alexandria University" class="brand-education">الماجستير المهني في إدارة الأعمال — جامعة الإسكندرية</p></div><a class="secondary-cta" href="about/"><span data-copy-ar="شاهد مسيرتي المهنية" data-copy-en="Explore my professional journey" >شاهد مسيرتي المهنية</span></a></div></section>
-
-<section class="section brand-presence" id="professional-presence" aria-labelledby="presenceTitle"><div class="shell"><div class="section-heading centered"><p data-copy-ar="مشاركة الخبرة" data-copy-en="Sharing professional experience" class="eyebrow">مشاركة الخبرة</p><h2 data-copy-ar="التدريب ومشاركة الخبرة" data-copy-en="Training and knowledge sharing" id="presenceTitle">التدريب ومشاركة الخبرة</h2><p data-copy-ar="شرح وتطبيق ومناقشات من واقع العمل." data-copy-en="Practical explanations, applications and workplace discussions." >شرح وتطبيق ومناقشات من واقع العمل.</p></div>
-<div class="training-gallery-intro"><h3 data-copy-ar="تدريب يربط المعرفة بالممارسة" data-copy-en="Training that connects knowledge with practice" >تدريب يربط المعرفة بالممارسة</h3><p data-copy-ar="أشارك خبرتي في شئون العاملين والمرتبات وتشريعات العمل والتأمينات وExcel للموارد البشرية، بالشرح والحالات التطبيقية." data-copy-en="I share experience in personnel, payroll, labor legislation, social insurance and Excel for HR through clear explanations and practical cases." >أشارك خبرتي في شئون العاملين والمرتبات وتشريعات العمل والتأمينات وExcel للموارد البشرية، بالشرح والحالات التطبيقية.</p><div class="brand-inline-links"><a href="training/"><span data-copy-ar="استكشف التدريب ←" data-copy-en="Explore training →" >استكشف التدريب ←</span></a><a href="gallery/"><span data-copy-ar="شاهد صور اللقاءات ←" data-copy-en="Browse training photos →" >شاهد صور اللقاءات ←</span></a></div></div>
-<div class="trainee-reviews-grid" id="trainingPhotoTrack" data-review-carousel data-dot-ar="صورة" data-dot-en="Photo" tabindex="0" role="region" aria-label="صور اللقاءات التدريبية / Training photos">
-  <figure class="trainee-review training-photo-card">
-    <img src="gallery/images/48-thumb.webp" alt="شرح أثناء اللقاء التدريبي — حازم موسى" loading="lazy" decoding="async" width="480" height="383">
-    <figcaption><span><strong data-copy-ar="شرح أثناء اللقاء التدريبي" data-copy-en="Leading a training session">شرح أثناء اللقاء التدريبي</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
-  </figure>
-  <figure class="trainee-review training-photo-card">
-    <img src="gallery/images/53-thumb.webp" alt="صورة جماعية مع المتدربين — حازم موسى" loading="lazy" decoding="async" width="480" height="360">
-    <figcaption><span><strong data-copy-ar="صورة جماعية مع المتدربين" data-copy-en="Group photo with trainees">صورة جماعية مع المتدربين</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
-  </figure>
-  <figure class="trainee-review training-photo-card">
-    <img src="gallery/images/38-thumb.webp" alt="تسليم شهادات التدريب — حازم موسى" loading="lazy" decoding="async" width="360" height="480">
-    <figcaption><span><strong data-copy-ar="تسليم شهادات التدريب" data-copy-en="Presenting training certificates">تسليم شهادات التدريب</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
-  </figure>
-  <figure class="trainee-review training-photo-card">
-    <img src="gallery/images/46-thumb.webp" alt="مناقشة مع المتدربين — حازم موسى" loading="lazy" decoding="async" width="480" height="270">
-    <figcaption><span><strong data-copy-ar="مناقشة مع المتدربين" data-copy-en="Discussion with trainees">مناقشة مع المتدربين</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
-  </figure>
-  <figure class="trainee-review training-photo-card">
-    <img src="gallery/images/19-thumb.webp" alt="لقاء تدريبي مع المشاركين — حازم موسى" loading="lazy" decoding="async" width="480" height="270">
-    <figcaption><span><strong data-copy-ar="لقاء تدريبي مع المشاركين" data-copy-en="A group moment from training">لقاء تدريبي مع المشاركين</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
-  </figure>
-  <figure class="trainee-review training-photo-card">
-    <img src="gallery/images/56-thumb.webp" alt="لقطة مع أحد المشاركين — حازم موسى" loading="lazy" decoding="async" width="360" height="480">
-    <figcaption><span><strong data-copy-ar="لقطة مع أحد المشاركين" data-copy-en="A photo with a participant">لقطة مع أحد المشاركين</strong><small data-copy-ar="من ألبومات التدريب" data-copy-en="From the training albums">من ألبومات التدريب</small></span></figcaption>
-  </figure>
-</div>
-<div class="reviews-carousel-controls"><button type="button" data-review-prev aria-controls="trainingPhotoTrack" aria-label="السابق / Previous">→</button><div class="reviews-dots" role="group" aria-label="اختر صورة / Choose a photo"></div><button type="button" data-review-next aria-controls="trainingPhotoTrack" aria-label="التالي / Next">←</button><button type="button" data-review-toggle aria-pressed="false">إيقاف الحركة</button></div>
-</div></section>
-
-<section class="section trainee-reviews" id="trainee-reviews" aria-labelledby="reviewsTitle"><div class="shell"><div class="section-heading centered"><p class="eyebrow" data-copy-ar="من تجربة المتدربين" data-copy-en="From trainees’ experiences">من تجربة المتدربين</p><h2 id="reviewsTitle" data-copy-ar="آراء المتدربين" data-copy-en="Trainee feedback">آراء المتدربين</h2><p data-copy-ar="تعليقات عن تدريب شؤون العاملين والمرتبات ضمن دبلومة الموارد البشرية في RisEdge — الإسكندرية." data-copy-en="Feedback on the Personnel & Payroll training within the RisEdge HR diploma in Alexandria.">تعليقات عن تدريب شؤون العاملين والمرتبات ضمن دبلومة الموارد البشرية في RisEdge — الإسكندرية.</p></div><div class="trainee-reviews-grid" id="reviewsTrack" data-review-carousel data-dot-ar="تعليق" data-dot-en="Feedback" tabindex="0" role="region" aria-label="آراء المتدربين / Trainee feedback"><figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>كويس جدا جدا ما شاء الله أنا استفادة كتير جدا بس مستر حازم بيبسط المعلومة أوووي وبجد شاطر جدا</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>ما شاء الله بجد، جزاكم الله خيرًا عنا، شرح كويس جدًا والمحتوى مميز، أنا ما شفت في أي مكان مستوى عالي زي مستواكم بجد وحتى على النطاق الشخصي تقديم مساعدة لكل المحتاج حقيقي ربنا يبارك لكم ❤️</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>مستر حازم كويس جدا جدا وما شاء الله عليه استفدنا منه جدا، وعرفنا معلومات كتير منه بصراحة ربنا يبارك له. ولحد دلوقتي الدبلومة ماشية معانا كويس أوي</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>والله أساتذتنا فوق مستوى التقييم يعني ما شاء الله الشرح كويس جدا وعنده صبر وطرق كتير في توصيل المعلومات بدون ملل وبجد كل المعلومات من جوه سوق العمل وبنواجهها كل يوم. شكرًا ليكم كلكم والله ❤️</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>مستر حازم فوق الممتاز، شخصية محترمة وخلوق وشاطر وبيوصل المعلومة بطريقة كويسة جدًا</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>كفى ووفى والله، طريقة شرحه جميلة جدًا ومبخلش علينا في أي معلومة، ربنا يجازيه</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>معلم ومدرب كويس أوي ما شاء الله عليه، وبيشرح كويس جدًا</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>عرف يوصلنا المعلومات بصراحة، وتدريبه على الإكسيل أسهل طرق، بندعيله بجد</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>كان جزء جميل ما شاء الله، شرحه جميل ومش بيبخل علينا لا بمعلومة ولا بمساعدة، الله يباركله، غير أسلوبه الجميل</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>الشرح تحفة ومعاملة حسنة، محتوى الدبلومة قيم ومفيد جدًا، ومدى وصول المعلومة رائع</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure>
-<figure class="trainee-review"><span class="review-quote-mark" aria-hidden="true">“</span><blockquote lang="ar" dir="rtl"><p>الصراحة كان أكثر من رائع، يباركله ويزيده من فضله وعلمه، هو شخص عملي وجاد وحازم جدًا، اسم على مسمى بجد</p></blockquote><figcaption><span class="review-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></svg></span><span><strong data-copy-ar="من آراء المتدربين" data-copy-en="Trainee feedback">من آراء المتدربين</strong><small data-copy-ar="شؤون العاملين والمرتبات · RisEdge" data-copy-en="Personnel & Payroll · RisEdge">شؤون العاملين والمرتبات · RisEdge</small></span></figcaption></figure></div><div class="reviews-carousel-controls"><button type="button" data-review-prev aria-controls="reviewsTrack" aria-label="السابق / Previous">→</button><div class="reviews-dots" role="group" aria-label="اختر تعليقًا / Choose feedback"></div><button type="button" data-review-next aria-controls="reviewsTrack" aria-label="التالي / Next">←</button><button type="button" data-review-toggle aria-pressed="false">إيقاف الحركة</button></div><div class="reviews-actions"><a class="primary-cta" href="training/" data-copy-ar="تعرّف على البرامج التدريبية" data-copy-en="Explore training programs">تعرّف على البرامج التدريبية</a></div></div></section>
-
-<section class="page-section home-ask-hazem" aria-labelledby="askHazemTitle">
-  <div class="shell cta-panel">
-    <img class="ask-banner-image" src="assets/tools/ask-hazem-portrait.webp" alt="" width="960" height="960" loading="lazy" decoding="async">
-    <div>
-      <p class="eyebrow" data-copy-ar="إجابة بمراجعة حازم" data-copy-en="Reviewed by Hazem">إجابة بمراجعة حازم</p>
-      <h2 id="askHazemTitle" data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</h2>
-      <p data-copy-ar="عندك سؤال في شؤون العاملين أو المرتبات؟ سجّله وتابع الإجابة من رابطك الخاص." data-copy-en="Have a personnel or payroll question? Submit it and follow the answer through your private link.">عندك سؤال في شؤون العاملين أو المرتبات؟ سجّله وتابع الإجابة من رابطك الخاص.</p>
-    </div>
-    <a class="primary-cta" href="ask/" data-copy-ar="سجّل سؤالك الآن ←" data-copy-en="Ask your question">سجّل سؤالك الآن ←</a>
-  </div>
-</section>
-
-<section class="section featured-tools" aria-labelledby="featuredTitle"><div class="shell"><div class="section-heading centered"><p data-copy-ar="نماذج من مشروعاتي" data-copy-en="Selected projects" class="eyebrow">نماذج من مشروعاتي</p><h2 data-copy-ar="خبرة تتحول إلى حلول يمكنك تجربتها" data-copy-en="Experience turned into tools you can use" id="featuredTitle">خبرة تتحول إلى حلول يمكنك تجربتها</h2><p data-copy-ar="مشروعات رقمية طوّرتها لدعم الممارسين في حساب المرتبات وتجهيز النماذج والوصول للمراجع القانونية." data-copy-en="Digital projects I developed to support payroll calculations, form preparation and access to legal references." >مشروعات رقمية طوّرتها لدعم الممارسين في حساب المرتبات وتجهيز النماذج والوصول للمراجع القانونية.</p></div><div class="tool-showcase-grid"><article class="tool-showcase-card search-tool-card green-card" data-tool-category="calculators" data-search-ar="حاسبة صافي شامل مرتب راتب payroll اجور ضرائب تأمينات فردي جماعي" data-search-en="net gross salary payroll calculator wages tax insurance individual batch">
-            <div class="tool-showcase-image"><img src="assets/tools/payroll-calculator-v2.webp?v=22" width="960" height="640" alt="واجهة دعائية لحاسبة صافي وشامل المرتب" loading="lazy" decoding="async"></div>
-            <div class="tool-showcase-body"><span class="tool-status"><span data-copy-ar="أداة منشورة" data-copy-en="Published tool" >أداة منشورة</span></span><h2><span data-copy-ar="حاسبة صافي / شامل المرتب" data-copy-en="Net / Gross Salary Calculator" >حاسبة صافي / شامل المرتب</span></h2><p><span data-copy-ar="احسب الصافي والشامل مع تفصيل الضرائب والتأمينات." data-copy-en="Calculate net and gross pay with tax and insurance breakdowns.">احسب الصافي والشامل مع تفصيل الضرائب والتأمينات.</span></p><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/Payroll-Net-Gross-Calculator/" target="_blank" rel="noopener noreferrer"><span><span data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now" >استخدم الأداة الآن</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
-          </article><article class="tool-showcase-card search-tool-card purple-card" data-tool-category="documents" data-search-ar="نموذجي التأمينات الاجتماعية نماذج س1 س2 س6 pdf excel دفعات" data-search-en="insurance forms s1 s2 s6 namozagy pdf excel batch generator">
-            <div class="tool-showcase-image"><img src="assets/tools/insurance-forms-v2.webp?v=22" width="960" height="640" alt="واجهة دعائية لأداة نماذج التأمينات الاجتماعية" loading="lazy" decoding="async"></div>
-            <div class="tool-showcase-body"><span class="tool-status"><span data-copy-ar="أداة منشورة" data-copy-en="Published tool" >أداة منشورة</span></span><h2><span data-copy-ar="نموذجي | نماذج التأمينات" data-copy-en="Namozagy | Insurance Forms" >نموذجي | نماذج التأمينات</span></h2><p><span data-copy-ar="جهّز نماذج التأمينات المتكررة بصيغة PDF منظمة وجاهزة للمراجعة." data-copy-en="Prepare recurring social-insurance forms as organized PDF files ready for review." >جهّز نماذج التأمينات المتكررة بصيغة PDF منظمة وجاهزة للمراجعة.</span></p><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/taamin-batch-pdf-generator/" target="_blank" rel="noopener noreferrer"><span><span data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now" >استخدم الأداة الآن</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
-          </article><article class="tool-showcase-card search-tool-card purple-card" data-tool-category="legal" data-search-ar="باحث قانون العمل 14 2025 279 ماده مواد جزائيه غرامات نسخ مشاركه" data-search-en="Egyptian labor law 14 2025 search 279 articles penalties fines copy share">
-            <div class="tool-showcase-image"><img src="assets/tools/labor-law-search-v2.webp?v=22" width="960" height="640" alt="مرجعك القانوني — قوانين وقرارات وشروحات" loading="lazy" decoding="async"></div>
-            <div class="tool-showcase-body"><span class="tool-status"><span data-copy-ar="أداة منشورة" data-copy-en="Published tool" >أداة منشورة</span></span><h2><span data-copy-ar="مرجعك القانوني" data-copy-en="Your Legal Reference">مرجعك القانوني</span></h2><p><span data-copy-ar="قوانين العمل والتأمينات والقرارات في مكان واحد." data-copy-en="Labor and insurance laws and decisions in one place.">قوانين العمل والتأمينات والقرارات في مكان واحد.</span></p><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/" target="_blank" rel="noopener noreferrer"><span><span data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now" >استخدم الأداة الآن</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
-          </article></div><p class="featured-all"><a class="secondary-cta" href="tools/"><span data-copy-ar="استعرض كل الأدوات" data-copy-en="Explore all tools" >استعرض كل الأدوات</span></a></p></div></section>
-
-<section class="section home-reels home-content-library" id="reels" aria-labelledby="reelsTitle">
-  <div class="shell">
-    <div class="reels-heading">
-      <div><p class="eyebrow" data-copy-ar="محتوى HR مع حازم موسى" data-copy-en="HR content with Hazem Moussa">محتوى HR مع حازم موسى</p><h2 id="reelsTitle" data-copy-ar="محتوى HR: ريلز وفيديوهات" data-copy-en="HR Content: Shorts & Videos">محتوى HR: ريلز وفيديوهات</h2><p data-copy-ar="لقطات سريعة وشروحات ومحاضرات مرتبة حسب الموضوع." data-copy-en="Quick insights, explainers and lectures organized by topic.">لقطات سريعة وشروحات ومحاضرات مرتبة حسب الموضوع.</p></div>
-      <div class="home-content-links"><a class="secondary-cta" href="reels/" data-copy-ar="كل الريلز" data-copy-en="All Shorts">كل الريلز</a><a class="secondary-cta" href="videos/" data-copy-ar="مكتبة الفيديوهات" data-copy-en="Video Library">مكتبة الفيديوهات</a></div>
-    </div>
-    <div class="home-reels-entry"><a href="reels/" data-copy-ar="شاهد أحدث الريلز ←" data-copy-en="Watch the latest Shorts →">شاهد أحدث الريلز ←</a></div>
-    <div class="home-reel-previews">
-      <article class="home-reel-preview" id="preview-videoJobApplication">
-        <a class="home-reel-link" href="https://youtu.be/4lye0UP6UKM" target="_blank" rel="noopener noreferrer" data-video-id="4lye0UP6UKM" aria-labelledby="preview-title-videoJobApplication">
-          <span class="home-video-thumb"><img src="https://i.ytimg.com/vi/4lye0UP6UKM/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="home-reel-icon" aria-hidden="true">▶</span></span>
-          <div><h3 id="preview-title-videoJobApplication" data-copy-ar="هتقدّم على وظيفة؟ رتّب أفكارك الأول" data-copy-en="Applying for a Job? Organize Your Thoughts First">هتقدّم على وظيفة؟ رتّب أفكارك الأول</h3><p data-copy-ar="حازم موسى يوضح إزاي ترتّب أفكارك قبل التقديم على وظيفة، عشان تعرض خبرتك ومهاراتك بشكل واضح يناسب الفرصة." data-copy-en="Hazem Moussa explains how to organize your thoughts before applying so you can present your experience and skills clearly and relate them to the role.">حازم موسى يوضح إزاي ترتّب أفكارك قبل التقديم على وظيفة، عشان تعرض خبرتك ومهاراتك بشكل واضح يناسب الفرصة.</p></div>
-        </a>
-        <button type="button" class="reel-share" data-video-share data-copy-ar="مشاركة الفيديو" data-copy-en="Share video">مشاركة الفيديو</button>
-      </article>
-      <article class="home-reel-preview" id="preview-videoWriteYourCV">
-        <a class="home-reel-link" href="https://youtu.be/gs5xhp1BS54" target="_blank" rel="noopener noreferrer" data-video-id="gs5xhp1BS54" aria-labelledby="preview-title-videoWriteYourCV">
-          <span class="home-video-thumb"><img src="https://i.ytimg.com/vi/gs5xhp1BS54/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720"><span class="home-reel-icon" aria-hidden="true">▶</span></span>
-          <div><h3 id="preview-title-videoWriteYourCV" data-copy-ar="اكتب الـCV صح… وخلّي خبرتك واضحة" data-copy-en="Write a CV That Makes Your Experience Clear">اكتب الـCV صح… وخلّي خبرتك واضحة</h3><p data-copy-ar="حازم موسى يشرح إزاي تجهّز سيرة ذاتية واضحة، وتبرز فيها خبراتك ومهاراتك اللي تهم مسؤول التوظيف." data-copy-en="Hazem Moussa explains how to write a clear CV and highlight the experience and skills that matter to recruiters.">حازم موسى يشرح إزاي تجهّز سيرة ذاتية واضحة، وتبرز فيها خبراتك ومهاراتك اللي تهم مسؤول التوظيف.</p></div>
-        </a>
-        <button type="button" class="reel-share" data-video-share data-copy-ar="مشاركة الفيديو" data-copy-en="Share video">مشاركة الفيديو</button>
-      </article>
-    </div>
-    <p class="reels-status" role="status" aria-live="polite"></p>
-  </div>
-</section>
-
-<dialog class="reel-dialog" aria-labelledby="reelDialogTitle"><div class="reel-dialog-bar"><h2 id="reelDialogTitle">فيديوهات حازم موسى</h2><form method="dialog"><button class="reel-close" aria-label="Close / إغلاق">×</button></form></div><div class="reel-screen"></div><a class="reel-youtube" target="_blank" rel="noopener noreferrer" data-copy-ar="افتح الفيديو على يوتيوب" data-copy-en="Open video on YouTube">افتح الفيديو على يوتيوب</a></dialog>
-
-
-
-
-<section class="page-section home-final"><div class="shell cta-panel"><div><p class="eyebrow" data-i18n="finalEyebrow">تواصل مهني</p><h2 data-i18n="finalTitle">خلّينا نحوّل المعرفة إلى تطبيق</h2><p data-copy-ar="للتنسيق لمحاضرة أو ورشة عمل أو مناقشة فرصة تعاون مهني، يسعدني تواصلك." data-copy-en="Get in touch to arrange a lecture, workshop or professional collaboration.">للتنسيق لمحاضرة أو ورشة عمل أو مناقشة فرصة تعاون مهني، يسعدني تواصلك.</p></div><a class="primary-cta" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D8%A7%D8%B2%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%A3%D9%88%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B6%D8%B1%D8%A7%D8%AA%20%D8%A3%D9%88%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A."><span data-copy-ar="تواصل للتدريب والتعاون" data-copy-en="Discuss training & collaboration">تواصل للتدريب والتعاون</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></section>
 </main>
 
   <footer><div class="shell footer-inner"><div class="footer-brand"><strong>Hazem Moussa</strong><span>HR &amp; Payroll Hub</span></div><p>© <span id="year"></span> Hazem Moussa. <span data-i18n="rights">جميع الحقوق محفوظة.</span></p><div class="social-links"><a href="tel:+201030006087" aria-label="Phone" title="01030006087">TEL</a><a href="https://wa.me/201030006087" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-whatsapp-link>WA</a><a href="https://www.linkedin.com/in/hazem-moussa-986b9798/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a><a href="https://www.facebook.com/share/18ngCpG8YP/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a><a href="https://www.youtube.com/@hazemmosa" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube — Hazem Moussa"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M23 7s-.2-1.7-1-2.4c-.9-.9-1.9-.9-2.3-1C16.5 3.4 12 3.4 12 3.4s-4.5 0-7.7.2c-.4.1-1.4.1-2.3 1C1.2 5.3 1 7 1 7S.8 9 .8 11v2C.8 15 1 17 1 17s.2 1.7 1 2.4c.9.9 2.1.9 2.6 1 1.9.2 7.4.2 7.4.2s4.5 0 7.7-.2c.4-.1 1.4-.1 2.3-1 .8-.7 1-2.4 1-2.4s.2-2 .2-4v-2C23.2 9 23 7 23 7ZM9.7 15.4V8.5l6 3.5-6 3.4Z"/></svg></a></div></div></footer>
   <script src="subpages.js?v=20261113-home-paths" defer></script>
 
-<script>
-(() => {
 
- const dialog = document.querySelector('.reel-dialog');
- const screen = dialog.querySelector('.reel-screen');
- let opener;
- const isEnglish = () => document.documentElement.lang === 'en';
- document.querySelectorAll('[data-video-id]').forEach(link => link.addEventListener('click', event => {
-   if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !dialog.showModal) return;
-   event.preventDefault(); opener = link;
-   const title = link.closest('article').querySelector('h3').textContent;
-   dialog.querySelector('h2').textContent = title;
-   const player = document.createElement('iframe');
-   player.src = 'https://www.youtube-nocookie.com/embed/' + link.dataset.videoId + '?autoplay=1&playsinline=1&rel=0';
-   player.title = title; player.allow = 'autoplay; encrypted-media; picture-in-picture; web-share'; player.allowFullscreen = true;
-   player.referrerPolicy = 'strict-origin-when-cross-origin';
-   screen.replaceChildren(player); dialog.querySelector('.reel-youtube').href = link.href;
-   dialog.showModal();
- }));
- dialog.addEventListener('close', () => { screen.replaceChildren(); opener?.focus(); });
- dialog.addEventListener('click', event => { if(event.target === dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();} });
- document.querySelectorAll('[data-video-share]').forEach(button => button.addEventListener('click', async () => {
-   const title = button.closest('article').querySelector('h3').textContent;
-   const url = button.closest('article').querySelector('[data-video-id]').href;
-   const text = isEnglish() ? 'Practical HR insights with Hazem Moussa: ' + title : 'معلومة من واقع شغلك مع حازم موسى: ' + title;
-   const status = document.querySelector('.reels-status');
-   try {
-     if (navigator.share) await navigator.share({title, text, url});
-     else { await navigator.clipboard.writeText(text + '\n' + url); status.textContent = isEnglish() ? 'Link copied.' : 'تم نسخ رسالة المشاركة ورابط الفيديو.'; }
-   } catch(error) { if(error.name !== 'AbortError') { status.textContent = isEnglish() ? 'Copy this link: ' + url : 'يمكنك نسخ رابط الفيديو: ' + url; } }
- }));
-})();
-</script>
-<script>
-document.querySelectorAll('[data-review-carousel]').forEach(track => {
- const cards=[...track.querySelectorAll('.trainee-review')];
- const section=track.closest('section'),toggle=section.querySelector('[data-review-toggle]'),dots=section.querySelector('.reviews-dots');
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- let paused=reduced.matches,hovered=false,focused=false,touching=false,visible=false,timer,scrollTimer;
- const english=()=>document.documentElement.lang==='en';
- const lastIndex=()=>Math.max(0,cards.length-(matchMedia('(max-width:640px)').matches?1:2));
- const current=()=>{const edge=track.getBoundingClientRect(),rtl=document.documentElement.dir==='rtl';return Math.min(lastIndex(),cards.reduce((best,c,i)=>{const r=c.getBoundingClientRect(),distance=Math.abs((rtl?r.right:r.left)-(rtl?edge.right:edge.left));return distance<best.distance?{index:i,distance}:best;},{index:0,distance:Infinity}).index);};
- const go=index=>{const target=cards[Math.min(lastIndex(),Math.max(0,index))],edge=track.getBoundingClientRect(),r=target.getBoundingClientRect();track.scrollBy({left:document.documentElement.dir==='rtl'?r.right-edge.right:r.left-edge.left,behavior:reduced.matches?'instant':'smooth'});};
- const labels=()=>{toggle.textContent=paused?(english()?'Play slideshow':'تشغيل الحركة'):(english()?'Pause slideshow':'إيقاف الحركة');toggle.setAttribute('aria-pressed',String(paused));};
- const refresh=()=>{const active=current();[...dots.children].forEach((dot,i)=>{dot.hidden=i>lastIndex();dot.setAttribute('aria-current',String(i===active));});labels();};
- const schedule=()=>{clearTimeout(timer);if(paused||hovered||focused||touching||!visible||document.hidden)return;timer=setTimeout(()=>{go(current()>=lastIndex()?0:current()+1);schedule();},7000);};
- cards.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',track.dataset.dotAr+' '+(i+1)+' / '+track.dataset.dotEn+' '+(i+1));b.addEventListener('click',()=>{go(i);schedule();});dots.append(b);});
- section.querySelector('[data-review-prev]').addEventListener('click',()=>{go(current()===0?lastIndex():current()-1);schedule();});
- section.querySelector('[data-review-next]').addEventListener('click',()=>{go(current()>=lastIndex()?0:current()+1);schedule();});
- toggle.addEventListener('click',()=>{paused=!paused;labels();schedule();});
- section.addEventListener('mouseenter',()=>{hovered=true;schedule();});
- section.addEventListener('mouseleave',()=>{hovered=false;schedule();});
- section.addEventListener('focusin',()=>{focused=true;schedule();});
- section.addEventListener('focusout',event=>{focused=section.contains(event.relatedTarget);schedule();});
- track.addEventListener('touchstart',()=>{touching=true;schedule();},{passive:true});
- track.addEventListener('touchend',()=>{touching=false;schedule();},{passive:true});
- track.addEventListener('touchcancel',()=>{touching=false;schedule();},{passive:true});
- track.addEventListener('scroll',()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{refresh();schedule();},150);},{passive:true});
- track.addEventListener('keydown',event=>{if(event.target!==track)return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();const delta=(event.key==='ArrowLeft')===(document.documentElement.dir==='rtl')?1:-1;go(current()+delta);schedule();}});
- new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule();},{threshold:.15}).observe(track);
- new MutationObserver(()=>{refresh();schedule();}).observe(document.documentElement,{attributes:true,attributeFilter:['dir','lang']});
- document.addEventListener('visibilitychange',schedule);
- reduced.addEventListener('change',()=>{paused=reduced.matches;refresh();schedule();});
- window.addEventListener('resize',()=>{refresh();schedule();});
- refresh();
-});
-</script></body>
+</body>
 </html>
 
 
