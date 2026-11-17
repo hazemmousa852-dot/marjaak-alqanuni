@@ -41,6 +41,27 @@
     }
   </script>
 <link rel="stylesheet" href="../layout-refinements.css?v=20261104-compact">
+  <style>
+    body[data-page="training"] :is(.module-card, .audience-card, .method-step) {
+      min-height: 0;
+      padding: clamp(14px, 2vw, 20px);
+    }
+    body[data-page="training"] :is(.module-number, .audience-icon) {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+    body[data-page="training"] :is(.module-card, .audience-card, .method-step) h3 {
+      margin-block: 10px 5px;
+    }
+    body[data-page="training"] .method-step > span { font-size: 36px; }
+    body[data-page="training"] .module-card .secondary-cta {
+      margin-block-start: 8px;
+      min-height: 44px;
+      padding: 6px 12px;
+    }
+  </style>
 </head>
 <body data-page="training">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
