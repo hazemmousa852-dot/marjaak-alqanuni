@@ -62,6 +62,14 @@
       padding: 6px 12px;
     }
   </style>
+<style>
+.training-hero .training-duration { display: inline-block; margin: 14px 0; padding: 6px 14px; border-radius: 24px; background: var(--gold); color: #071827; font-weight: 800; }
+.training-hero .training-routes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.training-hero .training-routes h2 { margin: 0 0 10px; font-size: clamp(17px, 2vw, 22px); }
+.training-hero .training-routes a { min-height: 44px; text-align: center; white-space: normal; }
+.training-hero #trainingHeroTitle { color: var(--accent-text); font-size: clamp(30px, 4vw, 52px); }
+@media (max-width: 560px) { .training-hero .training-routes { grid-template-columns: minmax(0, 1fr); } }
+</style>
 </head>
 <body data-page="training">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -111,10 +119,11 @@
         <div class="page-hero-copy">
           <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../" data-i18n="homeCrumb">الرئيسية</a><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span data-i18n="trainingCrumb">التدريب</span></nav>
           <p class="eyebrow" data-i18n="trainingEyebrow">برنامج تدريبي متكامل</p>
-          <h1 id="trainingHeroTitle" data-i18n="trainingHeroTitle">شئون العاملين <span>والمرتبات</span></h1>
+          <h1 id="trainingHeroTitle" data-copy-ar="تدريب عملي في شئون العاملين والمرتبات" data-copy-en="Practical Personnel and Payroll Training">تدريب عملي في شئون العاملين والمرتبات</h1>
           <p class="page-hero-lead" data-i18n="trainingHeroLead">من فهم القانون والإجراءات إلى تنفيذ المهام اليومية بثقة؛ برنامج أونلاين تطبيقي يربط المعرفة بواقع العمل داخل إدارة الموارد البشرية.</p>
-          <div class="page-hero-actions"><a class="primary-cta" href="https://wa.me/201030006087" target="_blank" rel="noopener noreferrer" data-whatsapp-link data-whatsapp-context="training"><span data-i18n="requestDetails">اطلب المواعيد والسعر</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><a class="secondary-cta" href="#curriculum"><span data-i18n="exploreCurriculum">استعرض المحاور</span></a></div>
-          <div class="hero-proof"><span data-i18n="trainingProof1">تطبيقات وحالات عملية</span><span data-i18n="trainingProof2">شرح من واقع الخبرة</span><span data-i18n="trainingProof3">مسار واضح ومتدرج</span></div>
+          <p class="training-duration" data-copy-ar="٣٠ ساعة تدريبية أونلاين" data-copy-en="30 hours of online training">٣٠ ساعة تدريبية أونلاين</p>
+          <div class="training-routes"><article class="audience-card"><h2 data-copy-ar="تدريب للأفراد" data-copy-en="Individual training">تدريب للأفراد</h2><a class="primary-cta" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A7%D9%84%D9%85%D8%AC%D9%85%D9%88%D8%B9%D8%A9%20%D8%A7%D9%84%D9%82%D8%A7%D8%AF%D9%85%D8%A9%20%D9%88%D8%B3%D8%B9%D8%B1%20%D9%88%D8%B7%D8%B1%D9%8A%D9%82%D8%A9%20%D8%A7%D9%84%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%81%D9%8A%20%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%B4%D8%A6%D9%88%D9%86%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D9%8A%D9%86%20%D9%88%D8%A7%D9%84%D9%85%D8%B1%D8%AA%D8%A8%D8%A7%D8%AA." target="_blank" rel="noopener noreferrer"><span data-copy-ar="استفسر عن التدريب" data-copy-en="Ask about training">استفسر عن التدريب</span></a></article><article class="audience-card"><h2 data-copy-ar="تدريب للشركات" data-copy-en="Corporate training">تدريب للشركات</h2><a class="secondary-cta" href="https://wa.me/201030006087?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D9%85%D9%86%D8%A7%D9%82%D8%B4%D8%A9%20%D8%A7%D8%AD%D8%AA%D9%8A%D8%A7%D8%AC%D8%A7%D8%AA%20%D9%81%D8%B1%D9%8A%D9%82%D9%8A%20%D9%88%D8%AA%D8%B1%D8%AA%D9%8A%D8%A8%20%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D9%84%D9%84%D8%B4%D8%B1%D9%83%D8%A9." target="_blank" rel="noopener noreferrer"><span data-copy-ar="ناقش تدريب فريقك" data-copy-en="Discuss team training">ناقش تدريب فريقك</span></a></article></div>
+          <div class="page-hero-actions"><a class="secondary-cta" href="#curriculum"><span data-i18n="exploreCurriculum">استعرض المحاور</span></a></div>
         </div>
 <div class="training-facts" aria-label="معلومات البرنامج">
         <div><strong data-i18n="factDuration">30 ساعة</strong><span data-i18n="factDurationLabel">تدريب تطبيقي</span></div>
