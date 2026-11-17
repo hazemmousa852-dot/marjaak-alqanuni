@@ -315,84 +315,6 @@ body[data-page=home] .desktop-nav a{font-size:13px}
 }
 </style>
   <meta property="og:image:alt" content="حازم موسى، استشاري موارد بشرية ومدرب، بجوار شعار HM">
-<style>
-body[data-page="home"] #top .hero-grid {
-  width: min(100% - 40px, 1260px);
-  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
-  grid-template-areas: "visual copy";
-  grid-template-rows: auto;
-  gap: clamp(24px, 4vw, 60px);
-  padding-block: 30px;
-  min-height: 0;
-}
-html[dir="ltr"] body[data-page="home"] #top .hero-grid {
-  grid-template-areas: "copy visual";
-  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
-}
-body[data-page="home"] #top .home-hero-copy { grid-area: copy; }
-body[data-page="home"] #top .hero-intro .eyebrow,
-body[data-page="home"] #top .hero-intro .role { margin: 0; }
-body[data-page="home"] #top .hero-name-line { margin-block: 12px 14px; }
-body[data-page="home"] #top .hero-name-line h1 {
-  font-size: clamp(42px, 4.9vw, 72px);
-  line-height: 1.18;
-}
-body[data-page="home"] #top .hero-details { padding: 16px 0 0; }
-body[data-page="home"] #top .hero-visual {
-  height: clamp(360px, 39vw, 510px);
-  min-height: 0;
-  margin: 0;
-  border-radius: 18px;
-  overflow: hidden;
-}
-body[data-page="home"] #top .portrait {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-position: center 17%;
-  transform: none;
-  filter: none;
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-body[data-page="home"] #top .hero-glow,
-body[data-page="home"] #top .portrait-halo { display: none; }
-body[data-page="home"] #top .hero-primary-actions { gap: 9px; }
-body[data-page="home"] #top .hero-primary-actions > a {
-  flex: 1 1 0;
-  min-height: 46px;
-  min-width: 0;
-  justify-content: center;
-  padding: 8px 10px;
-  text-align: center;
-  font-size: 14px;
-  white-space: normal;
-}
-body[data-page="home"] .home-paths .home-path-card {
-  grid-template-columns: minmax(0, 1fr) auto;
-  padding: 13px 16px;
-}
-body[data-page="home"] .home-paths .home-path-card > span {
-  grid-column: 1;
-  font-size: 12px;
-  color: var(--text-soft);
-}
-body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
-@media (max-width: 760px) {
-  html[dir] body[data-page="home"] #top .hero-grid {
-    width: min(100% - 28px, 520px);
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "copy" "visual";
-    gap: 18px;
-    padding-block: 24px 18px;
-  }
-  body[data-page="home"] #top .hero-visual { height: clamp(220px, 66vw, 340px); }
-  body[data-page="home"] #top .hero-name-line { justify-content: center; }
-  html[dir] body[data-page="home"] #top .hero-intro .eyebrow { text-align: center; }
-  body[data-page="home"] #top .hero-primary-actions > a { flex-basis: 42%; }
-  body[data-page="home"] #top .hero-primary-actions > .primary-cta { flex-basis: 100%; }
-}
-</style>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -441,10 +363,8 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
 <section class="hero" id="top" aria-labelledby="heroTitle">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="shell hero-grid">
-        <div class="hero-visual"><div class="portrait-halo" aria-hidden="true"></div><img class="portrait" src="assets/hazem-portrait.webp?v=20261102-speed" alt="حازم موسى" width="1022" height="1536" fetchpriority="high" data-i18n-alt="portraitAlt"><span class="portrait-hashtag">#يومياتhr_حازم_موسى</span></div>
-        <div class="home-hero-copy">
         <div class="hero-intro"><p class="eyebrow" data-i18n="welcome">قيادة موارد بشرية بخبرة من واقع العمل</p><div class="hero-name-line"><h1 id="heroTitle" data-copy-ar="حازم موسى" data-copy-en="Hazem Moussa">حازم موسى</h1></div><p class="role" aria-label="مدير موارد بشرية ومتخصص شئون العاملين والمرتبات" data-i18n-aria="roleAria"><span data-i18n="roleManager">مدير موارد بشرية</span><i aria-hidden="true">•</i><span data-i18n="roleCreator">شئون العاملين والمرتبات</span></p><span class="gold-line" aria-hidden="true"></span></div>
-
+        <div class="hero-visual"><div class="portrait-halo" aria-hidden="true"></div><img class="portrait" src="assets/hazem-portrait.webp?v=20261102-speed" alt="حازم موسى" width="1022" height="1536" fetchpriority="high" data-i18n-alt="portraitAlt"><span class="portrait-hashtag">#يومياتhr_حازم_موسى</span></div>
         <div class="hero-details">
           <p class="hero-lead" data-i18n="heroLead">أقود الموارد البشرية وأجمع بين تطوير أنظمة العمل وخبرة شئون العاملين والمرتبات. أشارك خبرتي من خلال التدريب والمحتوى المتخصص والحلول الرقمية العملية.</p>
           <div class="pillars" aria-label="مجالات العمل" data-i18n-aria="pillarsLabel">
@@ -453,17 +373,16 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
             
             
           </div>
-          <div class="hero-actions hero-primary-actions"><a class="primary-cta" href="training/"><span data-copy-ar="للتدريب والتعاون" data-copy-en="Training & collaboration">للتدريب والتعاون</span></a><a class="secondary-cta" href="about/" data-copy-ar="تعرّف على خبرتي" data-copy-en="Explore my experience">تعرّف على خبرتي</a><a class="secondary-cta profile-download" href="downloads/Hazem_Moussa_Profile_EN.pdf" download="Hazem_Moussa_Profile_EN.pdf" type="application/pdf"><span data-copy-ar="حمّل الملف التعريفي" data-copy-en="Download my profile">حمّل الملف التعريفي</span><span class="profile-download-icon" aria-hidden="true">↓</span></a></div>
+          <div class="hero-actions hero-primary-actions"><a class="primary-cta" href="training/"><span data-copy-ar="للتدريب والتعاون" data-copy-en="Training & collaboration">للتدريب والتعاون</span></a><a class="secondary-cta profile-download" href="downloads/Hazem_Moussa_Profile_EN.pdf" download="Hazem_Moussa_Profile_EN.pdf" type="application/pdf"><span data-copy-ar="حمّل الملف التعريفي" data-copy-en="Download my profile">حمّل الملف التعريفي</span><span class="profile-download-icon" aria-hidden="true">↓</span></a></div><div class="hero-quiet-links"><a href="about/" data-copy-ar="تعرّف على خبرتي" data-copy-en="Explore my experience">تعرّف على خبرتي</a></div>
           
         </div>
-      </div>
       </div>
     </section>
 
 <section class="home-paths" aria-label="مسارات الموقع"><div class="shell home-path-grid">
-<a class="home-path-card" href="videos/"><strong data-copy-ar="الفيديوهات المجانية" data-copy-en="Free videos">الفيديوهات المجانية</strong><span data-copy-ar="شروحات عملية في الموارد البشرية" data-copy-en="Practical HR explainers">شروحات عملية في الموارد البشرية</span><b aria-hidden="true">←</b></a>
-<a class="home-path-card" href="tools/"><strong data-copy-ar="أدوات مجانية" data-copy-en="Free tools">أدوات مجانية</strong><span data-copy-ar="حلول عملية لمهام HR" data-copy-en="Practical HR task solutions">حلول عملية لمهام HR</span><b aria-hidden="true">←</b></a>
-<a class="home-path-card" href="ask/"><strong data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</strong><span data-copy-ar="أرسل سؤالك وتابع الإجابة" data-copy-en="Submit a question and follow the answer">أرسل سؤالك وتابع الإجابة</span><b aria-hidden="true">←</b></a>
+<a class="home-path-card" href="training/"><span class="home-path-number">01</span><strong data-copy-ar="تدريب وتعاون" data-copy-en="Training & collaboration">تدريب وتعاون</strong><span data-copy-ar="برامج وورش عملية" data-copy-en="Practical programs and workshops">برامج وورش عملية</span><b aria-hidden="true">←</b></a>
+<a class="home-path-card" href="tools/"><span class="home-path-number">02</span><strong data-copy-ar="أدوات مجانية" data-copy-en="Free tools">أدوات مجانية</strong><span data-copy-ar="حلول عملية لمهام HR" data-copy-en="Practical HR task solutions">حلول عملية لمهام HR</span><b aria-hidden="true">←</b></a>
+<a class="home-path-card" href="ask/"><span class="home-path-number">03</span><strong data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</strong><span data-copy-ar="أرسل سؤالك وتابع الإجابة" data-copy-en="Submit a question and follow the answer">أرسل سؤالك وتابع الإجابة</span><b aria-hidden="true">←</b></a>
 </div></section>
 
 <section class="stats-wrap" aria-label="ملخص الخبرة" data-i18n-aria="statsLabel"><div class="shell stats-panel">
