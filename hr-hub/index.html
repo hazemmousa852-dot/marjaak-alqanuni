@@ -393,6 +393,24 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
   body[data-page="home"] #top .hero-primary-actions > .primary-cta { flex-basis: 100%; }
 }
 </style>
+<style id="featured-tools-carousel">
+body[data-page=home] #featuredToolsTrack{display:flex;gap:20px;overflow-x:auto;padding:3px 3px 16px}
+body[data-page=home] #featuredToolsTrack .tool-showcase-card{flex:0 0 calc((100% - 20px)/2);max-width:none;min-width:0;scroll-snap-align:start}
+body[data-page=home] #featuredToolsTrack .tool-showcase-image{height:auto;aspect-ratio:16/9}
+body[data-page=home] #featuredToolsTrack .tool-showcase-image img{object-fit:contain}
+#featuredToolsTrack .tool-showcase-image::after{display:none}
+#featuredToolsTrack h3{font-size:clamp(16px,2vw,22px);margin:0}
+#featuredToolsTrack .tool-showcase-body{flex:1}
+body[data-page=home] #featuredToolsTrack .tool-showcase-body p{display:block;min-height:0;margin:0}
+.featured-tool-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto}
+.featured-tool-actions .tool-tutorial{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;font-weight:700;color:var(--text-soft)}
+.featured-tool-actions .tool-tutorial::before{content:"▶";color:var(--accent-text)}
+.featured-tools .reviews-dots{flex-wrap:wrap;justify-content:center}
+@media(max-width:640px){
+  body[data-page=home] #featuredToolsTrack{gap:14px}
+  body[data-page=home] #featuredToolsTrack .tool-showcase-card{flex-basis:90%}
+}
+</style>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
@@ -528,16 +546,146 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
   </div>
 </section>
 
-<section class="section featured-tools" aria-labelledby="featuredTitle"><div class="shell"><div class="section-heading centered"><p data-copy-ar="نماذج من مشروعاتي" data-copy-en="Selected projects" class="eyebrow">نماذج من مشروعاتي</p><h2 data-copy-ar="خبرة تتحول إلى حلول يمكنك تجربتها" data-copy-en="Experience turned into tools you can use" id="featuredTitle">خبرة تتحول إلى حلول يمكنك تجربتها</h2><p data-copy-ar="مشروعات رقمية طوّرتها لدعم الممارسين في حساب المرتبات وتجهيز النماذج والوصول للمراجع القانونية." data-copy-en="Digital projects I developed to support payroll calculations, form preparation and access to legal references." >مشروعات رقمية طوّرتها لدعم الممارسين في حساب المرتبات وتجهيز النماذج والوصول للمراجع القانونية.</p></div><div class="tool-showcase-grid"><article class="tool-showcase-card search-tool-card green-card" data-tool-category="calculators" data-search-ar="حاسبة صافي شامل مرتب راتب payroll اجور ضرائب تأمينات فردي جماعي" data-search-en="net gross salary payroll calculator wages tax insurance individual batch">
-            <div class="tool-showcase-image"><img src="assets/tools/payroll-calculator-v2.webp?v=22" width="960" height="640" alt="واجهة دعائية لحاسبة صافي وشامل المرتب" loading="lazy" decoding="async"></div>
-            <div class="tool-showcase-body"><span class="tool-status"><span data-copy-ar="أداة منشورة" data-copy-en="Published tool" >أداة منشورة</span></span><h2><span data-copy-ar="حاسبة صافي / شامل المرتب" data-copy-en="Net / Gross Salary Calculator" >حاسبة صافي / شامل المرتب</span></h2><p><span data-copy-ar="احسب الصافي والشامل مع تفصيل الضرائب والتأمينات." data-copy-en="Calculate net and gross pay with tax and insurance breakdowns.">احسب الصافي والشامل مع تفصيل الضرائب والتأمينات.</span></p><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/Payroll-Net-Gross-Calculator/" target="_blank" rel="noopener noreferrer"><span><span data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now" >استخدم الأداة الآن</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
-          </article><article class="tool-showcase-card search-tool-card purple-card" data-tool-category="documents" data-search-ar="نموذجي التأمينات الاجتماعية نماذج س1 س2 س6 pdf excel دفعات" data-search-en="insurance forms s1 s2 s6 namozagy pdf excel batch generator">
-            <div class="tool-showcase-image"><img src="assets/tools/insurance-forms-v2.webp?v=22" width="960" height="640" alt="واجهة دعائية لأداة نماذج التأمينات الاجتماعية" loading="lazy" decoding="async"></div>
-            <div class="tool-showcase-body"><span class="tool-status"><span data-copy-ar="أداة منشورة" data-copy-en="Published tool" >أداة منشورة</span></span><h2><span data-copy-ar="نموذجي | نماذج التأمينات" data-copy-en="Namozagy | Insurance Forms" >نموذجي | نماذج التأمينات</span></h2><p><span data-copy-ar="جهّز نماذج التأمينات المتكررة بصيغة PDF منظمة وجاهزة للمراجعة." data-copy-en="Prepare recurring social-insurance forms as organized PDF files ready for review." >جهّز نماذج التأمينات المتكررة بصيغة PDF منظمة وجاهزة للمراجعة.</span></p><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/taamin-batch-pdf-generator/" target="_blank" rel="noopener noreferrer"><span><span data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now" >استخدم الأداة الآن</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
-          </article><article class="tool-showcase-card search-tool-card purple-card" data-tool-category="legal" data-search-ar="باحث قانون العمل 14 2025 279 ماده مواد جزائيه غرامات نسخ مشاركه" data-search-en="Egyptian labor law 14 2025 search 279 articles penalties fines copy share">
-            <div class="tool-showcase-image"><img src="assets/tools/labor-law-search-v2.webp?v=22" width="960" height="640" alt="مرجعك القانوني — قوانين وقرارات وشروحات" loading="lazy" decoding="async"></div>
-            <div class="tool-showcase-body"><span class="tool-status"><span data-copy-ar="أداة منشورة" data-copy-en="Published tool" >أداة منشورة</span></span><h2><span data-copy-ar="مرجعك القانوني" data-copy-en="Your Legal Reference">مرجعك القانوني</span></h2><p><span data-copy-ar="قوانين العمل والتأمينات والقرارات في مكان واحد." data-copy-en="Labor and insurance laws and decisions in one place.">قوانين العمل والتأمينات والقرارات في مكان واحد.</span></p><div class="tool-actions-wrap"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/" target="_blank" rel="noopener noreferrer"><span><span data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now" >استخدم الأداة الآن</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
-          </article></div><p class="featured-all"><a class="secondary-cta" href="tools/"><span data-copy-ar="استعرض كل الأدوات" data-copy-en="Explore all tools" >استعرض كل الأدوات</span></a></p></div></section>
+<section class="section featured-tools" aria-labelledby="featuredTitle"><div class="shell"><div class="section-heading centered"><p data-copy-ar="نماذج من مشروعاتي" data-copy-en="Selected projects" class="eyebrow">نماذج من مشروعاتي</p><h2 data-copy-ar="خبرة تتحول إلى حلول يمكنك تجربتها" data-copy-en="Experience turned into tools you can use" id="featuredTitle">خبرة تتحول إلى حلول يمكنك تجربتها</h2><p data-copy-ar="مشروعات رقمية طوّرتها لدعم الممارسين في حساب المرتبات وتجهيز النماذج والوصول للمراجع القانونية." data-copy-en="Digital projects I developed to support payroll calculations, form preparation and access to legal references." >مشروعات رقمية طوّرتها لدعم الممارسين في حساب المرتبات وتجهيز النماذج والوصول للمراجع القانونية.</p></div><div class="tool-showcase-grid trainee-reviews-grid" id="featuredToolsTrack" data-review-carousel data-dot-ar="أداة" data-dot-en="Tool" tabindex="0" role="region" aria-label="الأدوات / Tools">
+  <article class="tool-showcase-card purple-card">
+    <div class="tool-showcase-image"><img src="assets/tools/insurance-forms-tutorial.webp" width="960" height="540" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="نموذجي | نماذج التأمينات" data-copy-en="Namozagy | Insurance Forms">نموذجي | نماذج التأمينات</h3>
+      <p data-copy-ar="جهّز نماذج التأمينات المتكررة بصيغة PDF منظمة وجاهزة للمراجعة." data-copy-en="Prepare recurring social-insurance forms as organized PDF files ready for review.">جهّز نماذج التأمينات المتكررة بصيغة PDF منظمة وجاهزة للمراجعة.</p>
+      <div class="featured-tool-actions"><a class="tool-tutorial" href="https://youtu.be/M8ZcSEDCSOY" target="_blank" rel="noopener noreferrer" data-copy-ar="شرح استخدام الأداة" data-copy-en="How to use this tool">شرح استخدام الأداة</a><a class="tool-launch" href="https://hazemmousa852-dot.github.io/taamin-batch-pdf-generator/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card gold-card">
+    <div class="tool-showcase-image"><img src="assets/tools/attendance-explainer-20261107.jpg" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="نظام تحليل الحضور والانصراف" data-copy-en="HM Attendance Intelligence">نظام تحليل الحضور والانصراف</h3>
+      <p data-copy-ar="ابدأ بملف البصمة وإعدادات الورديات، واحصل على تقرير حضور وتأخير وإضافي لكل موظف بصيغة Excel." data-copy-en="Start with punch records and shift settings; export an Excel attendance, lateness and overtime report for each employee.">ابدأ بملف البصمة وإعدادات الورديات، واحصل على تقرير حضور وتأخير وإضافي لكل موظف بصيغة Excel.</p>
+      <div class="featured-tool-actions"><a class="tool-tutorial" href="https://youtu.be/p1MsmyLQxFU" target="_blank" rel="noopener noreferrer" data-copy-ar="شرح استخدام الأداة" data-copy-en="How to use this tool">شرح استخدام الأداة</a><a class="tool-launch" href="https://hazemmousa852-dot.github.io/hm-attendance-intelligence/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/payroll-sheet-builder-portrait.png" width="1672" height="941" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="صانع شيت الرواتب" data-copy-en="Payroll Sheet Builder">صانع شيت الرواتب</h3>
+      <p data-copy-ar="أدخل بيانات الموظفين وبنود الأجر لتجهيز شيت رواتب Excel بالمعادلات؛ مناسب عندما تكون ملخصات الحضور جاهزة لديك." data-copy-en="Enter employee and pay-item data to build a formula-based Excel payroll workbook; use it when attendance summaries are already prepared.">أدخل بيانات الموظفين وبنود الأجر لتجهيز شيت رواتب Excel بالمعادلات؛ مناسب عندما تكون ملخصات الحضور جاهزة لديك.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tools/payroll-sheet-builder/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/payroll-calculator-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="حاسبة صافي / شامل المرتب" data-copy-en="Net / Gross Salary Calculator">حاسبة صافي / شامل المرتب</h3>
+      <p data-copy-ar="احسب صافي الراتب من الإجمالي أو الإجمالي المطلوب لصافي محدد وفق قواعد 2026، مع تفصيل التأمينات والضرائب." data-copy-en="Calculate net pay from gross, or the gross required for a target net salary under 2026 rules, with insurance and tax breakdowns.">احسب صافي الراتب من الإجمالي أو الإجمالي المطلوب لصافي محدد وفق قواعد 2026، مع تفصيل التأمينات والضرائب.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/Payroll-Net-Gross-Calculator/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card blue-card">
+    <div class="tool-showcase-image"><img src="assets/tools/leave-calculator-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="حاسبة الإجازات السنوية" data-copy-en="Annual Leave Calculator">حاسبة الإجازات السنوية</h3>
+      <p data-copy-ar="احسب رصيد الإجازات المستحق بصورة منظمة بدل الحسابات اليدوية المتكررة." data-copy-en="Calculate annual leave entitlement clearly instead of repeating manual calculations.">احسب رصيد الإجازات المستحق بصورة منظمة بدل الحسابات اليدوية المتكررة.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/Leave-Balance-Calculator/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card gold-card">
+    <div class="tool-showcase-image"><img src="assets/tools/industrial-labor-guide-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="دليل المنشآت وحاسبات العمل" data-copy-en="Establishment Guide &amp; Labor Calculators">دليل المنشآت وحاسبات العمل</h3>
+      <p data-copy-ar="اعرف الفروق العملية بين المنشآت الصناعية وغير الصناعية، واحسب العمل الإضافي والإجازة المرضية وفق النظام المنطبق." data-copy-en="Understand the practical differences between industrial and non-industrial establishments, then calculate overtime and sick leave under the applicable system.">اعرف الفروق العملية بين المنشآت الصناعية وغير الصناعية، واحسب العمل الإضافي والإجازة المرضية وفق النظام المنطبق.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/industrial-labor-guide/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card purple-card">
+    <div class="tool-showcase-image"><img src="assets/tools/employment-contract-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="منشئ عقد العمل المصري" data-copy-en="Egyptian Employment Contract Generator">منشئ عقد العمل المصري</h3>
+      <p data-copy-ar="أنشئ عقد عمل بالعربية أو بالعربية والإنجليزية وفق قانون العمل 14 لسنة 2025، مع معاينة البنود وتعديلها." data-copy-en="Create an Arabic or bilingual Arabic-English contract under Labor Law 14/2025, with a preview and editable clauses.">أنشئ عقد عمل بالعربية أو بالعربية والإنجليزية وفق قانون العمل 14 لسنة 2025، مع معاينة البنود وتعديلها.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://egypt-employment-contract-bilingual.vercel.app/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/cv-builder-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="منشئ السيرة الذاتية ATS" data-copy-en="ATS CV Builder">منشئ السيرة الذاتية ATS</h3>
+      <p data-copy-ar="ابنِ سيرة ذاتية عربية أو إنجليزية منظمة ومتوافقة مع ATS، وعدّل أقسامك وشاهد النتيجة فورًا." data-copy-en="Build a structured Arabic or English ATS-friendly CV, edit its sections and see the result instantly.">ابنِ سيرة ذاتية عربية أو إنجليزية منظمة ومتوافقة مع ATS، وعدّل أقسامك وشاهد النتيجة فورًا.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://riseedge-cv-builder-ats.vercel.app/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card gold-card">
+    <div class="tool-showcase-image"><img src="assets/tools/company-evaluation-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="مدقق شئون العاملين القانوني" data-copy-en="Personnel Legal Audit">مدقق شئون العاملين القانوني</h3>
+      <p data-copy-ar="افحص جاهزية ملف شئون العاملين قبل التفتيش عبر 9 محاور و41 بند امتثال، واحصل على تشخيص قابل للطباعة." data-copy-en="Check personnel-file readiness before inspection across 9 sections and 41 compliance items, then generate a printable diagnosis.">افحص جاهزية ملف شئون العاملين قبل التفتيش عبر 9 محاور و41 بند امتثال، واحصل على تشخيص قابل للطباعة.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/Company_Evaluation/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card gold-card">
+    <div class="tool-showcase-image"><img src="assets/tools/legal-reference-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="مرجعك القانوني" data-copy-en="Your Legal Reference">مرجعك القانوني</h3>
+      <p data-copy-ar="ابحث داخل مواد القانون والقرارات والمواقف العملية من مكان واحد." data-copy-en="Search legal articles, decisions and practical workplace scenarios in one place.">ابحث داخل مواد القانون والقرارات والمواقف العملية من مكان واحد.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card purple-card">
+    <div class="tool-showcase-image"><img src="assets/tools/labor-law-search-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="باحث قانون العمل 14 لسنة 2025" data-copy-en="Labor Law 14/2025 Search">باحث قانون العمل 14 لسنة 2025</h3>
+      <p data-copy-ar="صل للمادة التي تحتاجها فورًا داخل 279 مادة كاملة، بالبحث عن كلمة أو رقم المادة." data-copy-en="Reach the exact provision you need across all 279 articles by searching a keyword or article number.">صل للمادة التي تحتاجها فورًا داخل 279 مادة كاملة، بالبحث عن كلمة أو رقم المادة.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/Search_14_2025/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card blue-card">
+    <div class="tool-showcase-image"><img src="assets/tools/insurance-law-search-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="باحث قانون التأمينات 148 لسنة 2019" data-copy-en="Social Insurance Law 148/2019 Search">باحث قانون التأمينات 148 لسنة 2019</h3>
+      <p data-copy-ar="ابحث بسرعة داخل 170 مادة كاملة من قانون التأمينات الاجتماعية والمعاشات." data-copy-en="Search all 170 articles of Egypt’s Social Insurance and Pensions Law in seconds.">ابحث بسرعة داخل 170 مادة كاملة من قانون التأمينات الاجتماعية والمعاشات.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/search_148_2019/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/labor-law-game-v2.webp?v=22" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="لعبة قانون العمل" data-copy-en="Labor Law Game">لعبة قانون العمل</h3>
+      <p data-copy-ar="اختبر فهمك لقانون العمل 14 لسنة 2025 في تجربة تفاعلية خفيفة تحوّل المراجعة إلى تحدٍ ممتع." data-copy-en="Test your understanding of Labor Law 14/2025 in a light interactive experience that turns revision into a fun challenge.">اختبر فهمك لقانون العمل 14 لسنة 2025 في تجربة تفاعلية خفيفة تحوّل المراجعة إلى تحدٍ ممتع.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/labor-law-game/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/insurance-adventure-v1.webp" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="مغامرة التأمينات — اتعلّم والعب" data-copy-en="Social Insurance Adventure">مغامرة التأمينات — اتعلّم والعب</h3>
+      <p data-copy-ar="خوض مغامرة في التأمينات الاجتماعية المصرية: جاوب على أسئلة، حلّ مواقف من شغل شئون العاملين، واجمع النقاط لحد ما تستلم شهادة إنجازك." data-copy-en="Explore Egyptian social insurance through interactive questions and practical challenges.">خوض مغامرة في التأمينات الاجتماعية المصرية: جاوب على أسئلة، حلّ مواقف من شغل شئون العاملين، واجمع النقاط لحد ما تستلم شهادة إنجازك.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tools/insurance-adventure/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/pension-estimator-v2.svg" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="حاسبة المعاش التقديري والمبكر" data-copy-en="Pension &amp; Early Retirement Estimator">حاسبة المعاش التقديري والمبكر</h3>
+      <p data-copy-ar="قدّر المعاش وافهم الحساب خطوة بخطوة للعاملين بالقطاع الخاص، مع فحص مبدئي للشروط." data-copy-en="Estimate a pension and understand each step, with preliminary eligibility checks for private-sector employees in Egypt.">قدّر المعاش وافهم الحساب خطوة بخطوة للعاملين بالقطاع الخاص، مع فحص مبدئي للشروط.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tools/pension-estimator/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card green-card">
+    <div class="tool-showcase-image"><img src="assets/tools/attendance-payroll.svg" width="960" height="640" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="من البصمة للراتب" data-copy-en="Attendance to Payroll">من البصمة للراتب</h3>
+      <p data-copy-ar="ابدأ بالبصمة وبيانات الأجور، وراجع الحضور قبل ترحيله إلى مسير الرواتب وقسائم الراتب في ملف Excel مترابط." data-copy-en="Start with punch records and pay data; review attendance before transferring it into linked Excel payroll and payslips.">ابدأ بالبصمة وبيانات الأجور، وراجع الحضور قبل ترحيله إلى مسير الرواتب وقسائم الراتب في ملف Excel مترابط.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tools/attendance-payroll/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+  <article class="tool-showcase-card gold-card">
+    <div class="tool-showcase-image"><img src="assets/tools/ask-hazem-portrait.webp" width="960" height="960" alt="" loading="lazy" decoding="async"></div>
+    <div class="tool-showcase-body">
+      <h3 data-copy-ar="اسأل حازم" data-copy-en="Ask Hazem">اسأل حازم</h3>
+      <p data-copy-ar="اكتب سؤالك وتابع إجابة حازم موسى من رابطك الخاص." data-copy-en="Submit your question and track Hazem Moussa’s answer privately.">اكتب سؤالك وتابع إجابة حازم موسى من رابطك الخاص.</p>
+      <div class="featured-tool-actions"><a class="tool-launch" href="ask/" data-copy-ar="استخدم الأداة الآن" data-copy-en="Use tool now">استخدم الأداة الآن</a></div>
+    </div>
+  </article>
+</div>
+<div class="reviews-carousel-controls"><button type="button" data-review-prev aria-controls="featuredToolsTrack" aria-label="السابق / Previous">→</button><div class="reviews-dots" role="group" aria-label="اختر أداة / Choose a tool"></div><button type="button" data-review-next aria-controls="featuredToolsTrack" aria-label="التالي / Next">←</button><button type="button" data-review-toggle aria-pressed="false">إيقاف الحركة</button></div>
+<p class="featured-all"><a class="secondary-cta" href="tools/"><span data-copy-ar="استعرض كل الأدوات" data-copy-en="Explore all tools" >استعرض كل الأدوات</span></a></p></div></section>
 
 <section class="section home-reels home-content-library" id="reels" aria-labelledby="reelsTitle">
   <div class="shell">
@@ -612,7 +760,7 @@ body[data-page="home"] .home-paths .home-path-card b { grid-column: 2; }
 </script>
 <script>
 document.querySelectorAll('[data-review-carousel]').forEach(track => {
- const cards=[...track.querySelectorAll('.trainee-review')];
+ const cards=[...track.children];
  const section=track.closest('section'),toggle=section.querySelector('[data-review-toggle]'),dots=section.querySelector('.reviews-dots');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let paused=reduced.matches,hovered=false,focused=false,touching=false,visible=false,timer,scrollTimer;
