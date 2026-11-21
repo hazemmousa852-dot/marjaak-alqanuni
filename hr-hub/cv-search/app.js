@@ -15,9 +15,11 @@
  function safeRequestLink(value){if(!value)return true;try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password;}catch{return false;}}
  function setRows(){rows=(isDemo?demos:publicRows).map(r=>({...r,search:normalize([r.name,r.job,r.level,r.governorate,r.specialty].join(' '))}));
   for(const field of Object.keys(labels)){const select=$(field);select.replaceChildren(new Option(labels[field],''));for(const v of [...new Set(rows.map(r=>r[field]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar')))select.add(new Option(v,v));select.disabled=!rows.length;}
-  $('demo-notice').hidden=!isDemo;$('demo-toggle').textContent=isDemo?'العودة للدليل العام':'جرّب أمثلة خيالية';$('demo-toggle').setAttribute('aria-pressed',String(isDemo));
-  $('mode-description').textContent=isDemo?'أمثلة خيالية لتجربة البحث فقط. لا تواصل ولا ملفات حقيقية.':'الدليل العام يعرض المشاركات التي تمت مراجعتها فقط.';
-  $('index-status').textContent=isDemo?'عرض تجريبي':loadFailed?'تعذر تحميل الدليل':publicRows.length?`${publicRows.length.toLocaleString('ar-EG')} مشاركة`:'الدليل في بدايته';reset();
+  $('demo-notice').hidden=!isDemo;$('demo-toggle').textContent=isDemo?'العودة للدليل العام':'جرّب البحث بأمثلة خيالية';$('demo-toggle').setAttribute('aria-pressed',String(isDemo));
+  const publicDescription=loadFailed?'جرّب الأمثلة الخيالية لحد ما الدليل يرجع.':publicRows.length?'الدليل العام يعرض المشاركات التي تمت مراجعتها فقط.':'السير بتظهر هنا بعد المراجعة. تقدر تجرّب البحث دلوقتي بأمثلة خيالية.';
+  $('mode-description').textContent=isDemo?'أمثلة خيالية لتجربة البحث فقط. لا تواصل ولا ملفات حقيقية.':publicDescription;
+  $('index-status').textContent=isDemo?'عرض تجريبي':loadFailed?'تعذر تحميل الدليل':publicRows.length?`${publicRows.length.toLocaleString('ar-EG')} مشاركة`:'لا توجد سير منشورة حاليًا';
+  filter();
  }
  function reset(){for(const id of ['query',...Object.keys(labels)])$(id).value='';filter();}
  function filter(){const tokens=normalize($('query').value).split(' ').filter(Boolean);filtered=rows.filter(r=>Object.keys(labels).every(k=>!$(k).value||r[k]===$(k).value)&&tokens.every(t=>r.search.includes(t)));page=1;render();}
@@ -28,7 +30,21 @@
   $('empty').hidden=!!filtered.length;$('empty-title').textContent=rows.length?'مفيش نتائج بالشروط دي':loadFailed&&!isDemo?'الدليل غير متاح حاليًا':'البداية من هنا';$('empty-text').textContent=rows.length?'جرّب تقلل الفلاتر أو تغيّر كلمة البحث.':loadFailed&&!isDemo?'حاول تحديث الصفحة لاحقًا. تقدر تجرّب الأمثلة الخيالية أو تجهّز طلب المشاركة.':'الدليل لسه في بدايته. سجّل سيرتك لتكون ضمن المشاركات الأولى بعد المراجعة.';$('empty-cta').hidden=!!rows.length;
   const pages=Math.ceil(filtered.length/pageSize);$('pagination').hidden=pages<=1;$('previous').disabled=page<=1;$('next').disabled=page>=pages;$('page-label').textContent=`${page.toLocaleString('ar-EG')} / ${pages.toLocaleString('ar-EG')}`;
  }
- $('filters').addEventListener('submit',e=>e.preventDefault());$('query').addEventListener('input',filter);for(const id of Object.keys(labels))$(id).addEventListener('change',filter);$('reset').addEventListener('click',reset);$('demo-toggle').addEventListener('click',()=>{isDemo=!isDemo;setRows();});for(const [id,delta]of [['previous',-1],['next',1]])$(id).addEventListener('click',()=>{page+=delta;render();$('search-title').scrollIntoView({block:'start'});});
+ function showResults(){
+  const heading=$('results-heading');
+  heading.focus({preventScroll:true});
+  heading.scrollIntoView({block:'start'});
+ }
+ $('filters').addEventListener('submit',e=>{e.preventDefault();showResults();});
+ $('query').addEventListener('input',filter);
+ for(const id of Object.keys(labels))$(id).addEventListener('change',filter);
+ $('reset').addEventListener('click',reset);
+ $('demo-toggle').addEventListener('click',()=>{
+  isDemo=!isDemo;
+  setRows();
+  if(isDemo&&$('query').value.trim())showResults();
+ });
+ for(const [id,delta]of [['previous',-1],['next',1]])$(id).addEventListener('click',()=>{page+=delta;render();$('search-title').scrollIntoView({block:'start'});});
  async function load(){try{const response=await fetch('public-cvs.json',{cache:'no-store',credentials:'omit'});if(!response.ok)throw Error('load');const data=await response.json();if(data.schema_version!==1||!Array.isArray(data.records)||data.records.length>50000)throw Error('schema');
   if(!data.records.every(r=>r&&typeof r.id==='string'&&['name','job','level','governorate','contact','cv_url'].every(k=>typeof r[k]==='string'&&r[k].length<=1000)&&(r.specialty==null||typeof r.specialty==='string')&&r.publication_approved===true&&r.consent_scope==='public_web_cv_and_contact'&&safeCvUrl(r.cv_url)))throw Error('record');publicRows=data.records;
  }catch{loadFailed=true;$('load-error').textContent='تعذر تحميل الدليل. لن نعرض بيانات بديلة على أنها مشاركات حقيقية. جرّب لاحقًا، أو افتح الأمثلة الخيالية.';$('load-error').hidden=false;}setRows();}
