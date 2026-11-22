@@ -6,8 +6,8 @@
 <meta name="description" content="مكتبة نماذج شؤون العاملين بالعربي والإنجليزي، مع نموذجي لتجهيز استمارات التأمينات س1 وس2 وس6.">
 <title>نموذجي | مكتبة نماذج شؤون العاملين — حازم موسى</title>
 <link rel="canonical" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/forms/">
-<link rel="stylesheet" href="forms.css">
-<script src="forms.js" defer></script>
+<link rel="stylesheet" href="forms.css?v=2">
+<script src="forms.js?v=2" defer></script>
 </head>
 <body>
 <header class="top"><div class="wrap top-inner">
@@ -22,11 +22,11 @@
     <h1 data-ar="مكتبة نماذج شؤون العاملين" data-en="Personnel Forms Library">مكتبة نماذج شؤون العاملين</h1>
     <p data-ar="جهّز خطابات الموظفين ونماذج التأمينات من مكان واحد." data-en="Prepare employee letters and social insurance forms in one place.">جهّز خطابات الموظفين ونماذج التأمينات من مكان واحد.</p>
   </div>
-  <nav class="sections" aria-label="أقسام المكتبة" id="sections">
-    <a href="#personnel" aria-current="page" data-ar="نماذج وخطابات الموظفين" data-en="Employee forms & letters">نماذج وخطابات الموظفين</a>
-    <a href="#insurance" data-ar="التأمينات · س1 وس2 وس6" data-en="Social insurance · S1, S2 & S6">التأمينات · س1 وس2 وس6</a>
-  </nav>
-  <section id="personnel" class="workspace" aria-labelledby="catalog-title">
+  <div class="sections" role="tablist" aria-label="أقسام المكتبة" id="sections">
+    <button type="button" role="tab" id="personnel-tab" aria-controls="personnel" aria-selected="true" data-ar="نماذج الموظفين" data-en="Employee forms">نماذج الموظفين</button>
+    <button type="button" role="tab" id="insurance-tab" aria-controls="insurance" aria-selected="false" tabindex="-1" data-ar="التأمينات · س1 وس2 وس6" data-en="Social insurance · S1, S2 & S6">التأمينات · س1 وس2 وس6</button>
+  </div>
+  <section id="personnel" class="workspace" role="tabpanel" aria-labelledby="personnel-tab">
     <div class="editor">
       <section class="panel">
         <h2 id="catalog-title" data-ar="اختر النموذج" data-en="Choose a template">اختر النموذج</h2>
@@ -72,7 +72,7 @@
       <p class="footnote" data-ar="مقاس A4 · بيانات النموذج واللوجو داخل المتصفح، وتتم إزالتها عند إعادة تحميل الصفحة." data-en="A4 · Form entries and the logo stay in this browser and clear when the page reloads.">مقاس A4 · بيانات النموذج واللوجو داخل المتصفح، وتتم إزالتها عند إعادة تحميل الصفحة.</p>
     </section>
   </section>
-  <section id="insurance" class="panel insurance" hidden aria-labelledby="insurance-title">
+  <section id="insurance" class="panel insurance" role="tabpanel" aria-labelledby="insurance-tab" hidden>
     <div class="insurance-head">
       <div>
         <h2 id="insurance-title" data-ar="نموذجي للتأمينات الاجتماعية" data-en="Namozagy for social insurance">نموذجي للتأمينات الاجتماعية</h2>

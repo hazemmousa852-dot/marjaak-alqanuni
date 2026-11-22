@@ -210,17 +210,44 @@ function renderLanguage() {
   renderPaper();
 }
 
+const sectionTabs = Array.from($('sections').querySelectorAll('[role="tab"]'));
+
 function renderSection() {
   const insuranceActive = location.hash === '#insurance';
   $('insurance').hidden = !insuranceActive;
   $('personnel').hidden = insuranceActive;
-  for (const link of $('sections').querySelectorAll('a')) {
-    if (link.hash === (insuranceActive ? '#insurance' : '#personnel')) link.setAttribute('aria-current','page');
-    else link.removeAttribute('aria-current');
+  for (const tab of sectionTabs) {
+    const selected = tab.id === (insuranceActive ? 'insurance-tab' : 'personnel-tab');
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
   }
   if (insuranceActive && !$('insurance-frame').hasAttribute('src')) {
     $('insurance-frame').src = $('insurance-launch').href;
   }
+}
+
+function selectSection(tab) {
+  const hash = '#' + tab.getAttribute('aria-controls');
+  if (location.hash !== hash) history.pushState(null, '', hash);
+  renderSection();
+}
+
+for (const [index, tab] of sectionTabs.entries()) {
+  tab.addEventListener('click', () => selectSection(tab));
+  tab.addEventListener('keydown', (event) => {
+    const step = root.dir === 'rtl' ? -1 : 1;
+    const next = {
+      Home: 0,
+      End: sectionTabs.length - 1,
+      ArrowLeft: (index - step + sectionTabs.length) % sectionTabs.length,
+      ArrowRight: (index + step + sectionTabs.length) % sectionTabs.length
+    }[event.key];
+    if (!Number.isInteger(next)) return;
+    event.preventDefault();
+    const nextTab = sectionTabs[next];
+    selectSection(nextTab);
+    nextTab.focus();
+  });
 }
 
 function replaceLogo(url) {
@@ -284,5 +311,6 @@ $('clear').addEventListener('click', () => {
 });
 $('print').addEventListener('click', () => window.print());
 window.addEventListener('hashchange', renderSection);
+window.addEventListener('popstate', renderSection);
 renderLanguage();
 renderSection();
