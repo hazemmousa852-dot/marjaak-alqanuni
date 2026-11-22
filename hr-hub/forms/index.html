@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="مكتبة نماذج شؤون العاملين بالعربي والإنجليزي، مع نموذجي لتجهيز استمارات التأمينات س1 وس2 وس6.">
+<title>نموذجي | مكتبة نماذج شؤون العاملين — حازم موسى</title>
+<link rel="canonical" href="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/forms/">
+<link rel="stylesheet" href="forms.css">
+<script src="forms.js" defer></script>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner">
+  <a href="../tools/" class="brand"><b dir="ltr">HM</b><span data-ar="أدوات حازم موسى" data-en="Hazem Moussa’s Tools">أدوات حازم موسى</span></a>
+  <div class="controls">
+    <button id="language" type="button" lang="en">English</button>
+    <button id="theme" type="button" data-ar="الوضع الفاتح" data-en="Light mode">الوضع الفاتح</button>
+  </div>
+</div></header>
+<main class="wrap">
+  <div class="intro"><p class="brand-line" data-ar="نموذجي" data-en="Namozagy">نموذجي</p>
+    <h1 data-ar="مكتبة نماذج شؤون العاملين" data-en="Personnel Forms Library">مكتبة نماذج شؤون العاملين</h1>
+    <p data-ar="جهّز خطابات الموظفين ونماذج التأمينات من مكان واحد." data-en="Prepare employee letters and social insurance forms in one place.">جهّز خطابات الموظفين ونماذج التأمينات من مكان واحد.</p>
+  </div>
+  <nav class="sections" aria-label="أقسام المكتبة" id="sections">
+    <a href="#personnel" aria-current="page" data-ar="نماذج وخطابات الموظفين" data-en="Employee forms & letters">نماذج وخطابات الموظفين</a>
+    <a href="#insurance" data-ar="التأمينات · س1 وس2 وس6" data-en="Social insurance · S1, S2 & S6">التأمينات · س1 وس2 وس6</a>
+  </nav>
+  <section id="personnel" class="workspace" aria-labelledby="catalog-title">
+    <div class="editor">
+      <section class="panel">
+        <h2 id="catalog-title" data-ar="اختر النموذج" data-en="Choose a template">اختر النموذج</h2>
+        <label class="sr-only" for="search" data-ar="ابحث في النماذج" data-en="Search templates">ابحث في النماذج</label>
+        <input id="search" type="search" placeholder="ابحث عن نموذج أو خطاب" autocomplete="off">
+        <div id="catalog" class="catalog"></div>
+        <p id="empty" role="status" hidden data-ar="مفيش نماذج مطابقة للبحث." data-en="No matching templates.">مفيش نماذج مطابقة للبحث.</p>
+      </section>
+      <section class="panel">
+        <h2 id="editor-title"></h2>
+        <details>
+          <summary data-ar="هوية الشركة واللوجو" data-en="Company branding and logo">هوية الشركة واللوجو</summary>
+          <div class="fields">
+            <label><span data-ar="اسم الشركة بالعربي" data-en="Company name in Arabic">اسم الشركة بالعربي</span><input id="company-ar" maxlength="140" dir="rtl" autocomplete="off"></label>
+            <label><span data-ar="اسم الشركة بالإنجليزي" data-en="Company name in English">اسم الشركة بالإنجليزي</span><input id="company-en" maxlength="140" dir="ltr" autocomplete="off"></label>
+            <label class="wide"><span data-ar="لوجو الشركة (PNG أو JPEG أو WebP)" data-en="Company logo (PNG, JPEG or WebP)">لوجو الشركة (PNG أو JPEG أو WebP)</span><input type="file" id="logo" accept="image/png,image/jpeg,image/webp"></label>
+            <button id="remove-logo" type="button" hidden data-ar="إزالة اللوجو" data-en="Remove logo">إزالة اللوجو</button>
+            <p id="logo-error" role="status" class="wide" hidden data-ar="اختَر صورة PNG أو JPEG أو WebP بحجم أقصاه 5 ميجابايت." data-en="Choose a PNG, JPEG or WebP image up to 5 MB.">اختَر صورة PNG أو JPEG أو WebP بحجم أقصاه 5 ميجابايت.</p>
+          </div>
+        </details>
+        <div id="fields" class="fields"></div>
+        <div class="editor-actions">
+          <button id="clear" type="button" data-ar="مسح بيانات النموذج" data-en="Clear form entries">مسح بيانات النموذج</button>
+          <a href="#preview" class="preview-jump" data-ar="عرض المعاينة" data-en="Go to preview">عرض المعاينة</a>
+        </div>
+      </section>
+    </div>
+    <section class="panel preview" id="preview" aria-labelledby="preview-title">
+      <div class="preview-bar"><h2 id="preview-title" data-ar="معاينة المستند" data-en="Document preview">معاينة المستند</h2>
+        <div class="controls">
+          <label class="sr-only" for="document-language" data-ar="لغة المستند" data-en="Document language">لغة المستند</label>
+          <select id="document-language"><option value="ar" lang="ar">العربية</option><option value="en" lang="en">English</option></select>
+          <button id="print" class="primary" type="button" data-ar="طباعة / حفظ PDF" data-en="Print / Save PDF">طباعة / حفظ PDF</button>
+        </div>
+      </div>
+      <article id="document" class="paper" lang="ar" dir="rtl">
+        <header class="letterhead"><img id="paper-logo" alt="" hidden><b id="paper-company"></b></header>
+        <div id="paper-date"></div>
+        <h3 id="paper-title"></h3>
+        <div id="paper-content"></div>
+        <footer id="paper-signatures"></footer>
+      </article>
+      <p class="footnote" data-ar="مقاس A4 · بيانات النموذج واللوجو داخل المتصفح، وتتم إزالتها عند إعادة تحميل الصفحة." data-en="A4 · Form entries and the logo stay in this browser and clear when the page reloads.">مقاس A4 · بيانات النموذج واللوجو داخل المتصفح، وتتم إزالتها عند إعادة تحميل الصفحة.</p>
+    </section>
+  </section>
+  <section id="insurance" class="panel insurance" hidden aria-labelledby="insurance-title">
+    <div class="insurance-head">
+      <div>
+        <h2 id="insurance-title" data-ar="نموذجي للتأمينات الاجتماعية" data-en="Namozagy for social insurance">نموذجي للتأمينات الاجتماعية</h2>
+        <p data-ar="وفّر وقت تجهيز نماذج التأمينات س1 وس2 وس6، وراجع ملفات PDF قبل الطباعة، مع «نموذجي» من حازم موسى." data-en="Prepare social insurance forms S1, S2 and S6 faster and review the PDFs before printing with Hazem Moussa’s Namozagy.">وفّر وقت تجهيز نماذج التأمينات س1 وس2 وس6، وراجع ملفات PDF قبل الطباعة، مع «نموذجي» من حازم موسى.</p>
+      </div>
+      <div class="controls">
+        <a id="insurance-launch" class="primary" href="https://hazemmousa852-dot.github.io/taamin-batch-pdf-generator/" target="_blank" rel="noopener" data-ar="فتح الأداة في صفحة مستقلة" data-en="Open tool in a separate page">فتح الأداة في صفحة مستقلة</a>
+        <a href="https://youtu.be/M8ZcSEDCSOY" target="_blank" rel="noopener" data-ar="شرح استخدام الأداة" data-en="Watch the tutorial">شرح استخدام الأداة</a>
+      </div>
+    </div>
+    <iframe id="insurance-frame" title="أداة نموذجي لتجهيز نماذج التأمينات" allow="clipboard-write"></iframe>
+  </section>
+</main>
+</body>
+</html>
