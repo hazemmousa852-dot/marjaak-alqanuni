@@ -1,7 +1,19 @@
 'use strict';
 (() => {
  const $=id=>document.getElementById(id), mailbox='hazem.mousa852@gmail.com', pageSize=12;
- const labels={job:'كل الوظائف',level:'كل المستويات',governorate:'كل المحافظات'};
+ const labels={job:'كل المجالات',level:'كل المستويات',governorate:'كل المحافظات'};
+ const jobCategories=new Map([
+  ['CNC programmer by (power mill and Edgecam) and fabrication work and','الهندسة'],
+  ['Industrial Engineer – Process& design optimization','الهندسة'],
+  ['Mechanical Engineer, Production Engineer and Maintenance Engineer','الهندسة'],
+  ['Customer Care & Retail Agent','خدمة العملاء'],
+  ['Financial Manager','المحاسبة'],
+  ['Receptionist &Accountant','المحاسبة'],
+  ['HR Manager','الموارد البشرية'],
+  ['Logistics Supervisor - FRIDAL','اللوجستيات'],
+  ['Purchasing manager','المشتريات']
+ ]);
+ const filterValue=(row,field)=>field==='job'?(jobCategories.get(row.job)??row.job):row[field];
  const demos=[
   {id:'demo-1',name:'مرشح تجريبي ١',job:'المحاسبة',level:'متوسط',governorate:'القاهرة',specialty:'الحسابات العامة',demo:true},
   {id:'demo-2',name:'مرشح تجريبي ٢',job:'الموارد البشرية',level:'متقدم / خبير',governorate:'الإسكندرية',specialty:'شئون العاملين والمرتبات',demo:true},
@@ -14,13 +26,13 @@
  function safeCvUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&['drive.google.com','docs.google.com'].includes(u.hostname)&&!u.username&&!u.password?u.href:null;}catch{return null;}}
  function safeRequestLink(value){if(!value)return true;try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password;}catch{return false;}}
  function setRows(){rows=(isDemo?demos:publicRows).map(r=>({...r,search:normalize([r.name,r.job,r.level,r.governorate,r.specialty,r.original_role_title,r.academic_specialty,...(r.role_search_terms||[])].join(' '))}));
-  for(const field of Object.keys(labels)){const select=$(field);select.replaceChildren(new Option(labels[field],''));for(const v of [...new Set(rows.map(r=>r[field]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar')))select.add(new Option(v,v));select.disabled=!rows.length;}
+  for(const field of Object.keys(labels)){const select=$(field);select.replaceChildren(new Option(labels[field],''));for(const v of [...new Set(rows.map(r=>filterValue(r,field)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ar')))select.add(new Option(v,v));select.disabled=!rows.length;}
   $('demo-notice').hidden=!isDemo;$('demo-toggle').textContent=isDemo?'العودة للدليل العام':'جرّب أمثلة خيالية';$('demo-toggle').setAttribute('aria-pressed',String(isDemo));
   $('mode-description').textContent=isDemo?'أمثلة خيالية لتجربة البحث فقط. لا تواصل ولا ملفات حقيقية.':'فهرس ملفات من أرشيف بنك حازم. البيانات مستخرجة آليًا، وتصنيف المجلد غير متحقق. ليست مراجعة مهنية أو إثباتًا لحداثة السيرة.';
   $('index-status').textContent=isDemo?'عرض تجريبي':loadFailed?'تعذر تحميل الدليل':publicRows.length?`${publicRows.length.toLocaleString('ar-EG')} سيرة`:'لا توجد سير متاحة حاليًا';reset();
  }
  function reset(){for(const id of ['query',...Object.keys(labels)])$(id).value='';filter();}
- function filter(){const tokens=normalize($('query').value).split(' ').filter(Boolean);filtered=rows.filter(r=>Object.keys(labels).every(k=>!$(k).value||r[k]===$(k).value)&&tokens.every(t=>r.search.includes(t)));page=1;render();}
+ function filter(){const tokens=normalize($('query').value).split(' ').filter(Boolean);filtered=rows.filter(r=>Object.keys(labels).every(k=>!$(k).value||filterValue(r,k)===$(k).value)&&tokens.every(t=>r.search.includes(t)));page=1;render();}
  function render(){const result=$('results');result.replaceChildren();$('count').textContent=`${filtered.length.toLocaleString('ar-EG')} ${isDemo?'مثال تجريبي':'سيرة'}${rows.length&&filtered.length!==rows.length?` من ${rows.length.toLocaleString('ar-EG')}`:''}`;
   for(const r of filtered.slice((page-1)*pageSize,page*pageSize)){const card=el('article',undefined,'card');if(r.demo)card.append(el('span','مثال خيالي · ليس مرشحًا حقيقيًا','tag'));card.append(el('h3',r.name),el('p',r.job||'مجال غير محدد','role'));const dl=el('dl');for(const [key,label]of [['level','المستوى'],['governorate','المحافظة'],['specialty','التخصص المهني']]){const inferred=r.field_sources?.[key]==='folder_unverified';dl.append(el('dt',label+(inferred?' · تصنيف مجلد':'')),el('dd',r[key]||'غير محدد'));}if(r.original_role_title)dl.append(el('dt',r.specialty_basis==='target_role'?'وظيفة مستهدفة':'مسمى مذكور بالسيرة'),el('dd',r.original_role_title));if(r.academic_specialty)dl.append(el('dt','تخصص دراسي مذكور'),el('dd',r.academic_specialty));card.append(dl);if(!r.demo){const notes=[];if(r.specialty_basis==='target_role')notes.push('التخصص مبني على وظيفة مستهدفة، وليس خبرة مثبتة.');else if(r.specialty)notes.push('التخصص من دور مذكور بالسيرة، وقد لا يكون الأحدث.');if(r.field_sources?.name==='filename_inferred')notes.push('الاسم مستنتج من اسم الملف، غير متحقق.');if(Object.values(r.field_sources||{}).includes('folder_unverified'))notes.push('التصنيف من المجلد غير متحقق من السيرة.');if(r.field_sources?.job==='folder_unverified')notes.push('المجال المعروض تصنيف المجلد، وليس مسمى وظيفيًا مؤكدًا.');if(notes.length)card.append(el('p',notes.join(' '),'source-note'));}
    const url=!r.demo&&safeCvUrl(r.cv_url);if(url){const a=el('a','عرض السيرة الذاتية ↗','button secondary');a.href=url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);}else card.append(el('p',r.demo?'بيانات للعرض فقط. لا توجد سيرة أو وسيلة تواصل.':'الملف متاح عند الطلب.','hint'));result.append(card);
