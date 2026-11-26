@@ -78,7 +78,16 @@ renderEmployees();
 $('importStatus').textContent='تم استيراد '+data.length+' موظف'}catch(err){$('importStatus').textContent=err.message}e.target.value=''};
 
 function settings(){return{company:$('company').value.trim(),month:$('month').value,days:+$('days').value,hours:+$('hours').value,factor:+$('factor').value,nightFactor:+$('nightFactor').value,basis:$('basis').value,round:+$('round').value,blank:+$('blank').value}}
-function validate(){for(const id of ['company','month','days','hours','factor','nightFactor','blank'])if(!$(id).checkValidity()){go(0);
+const insuranceRules = {
+  2024: { limits: [2000, 12600], workerRate: .11, employerRate: .1875 },
+  2025: { limits: [2300, 14500], workerRate: .11, employerRate: .1875 },
+  2026: { limits: [2700, 16700], workerRate: .11, employerRate: .1875 },
+  2027: { limits: [3200, 19300], workerRate: .115, employerRate: .1925 }
+};
+const unsupportedYearMessage = 'قواعد الأجر التأميني متاحة لسنوات ٢٠٢٤ إلى ٢٠٢٧. اختر شهرًا ضمن هذه الفترة.';
+function validate(){const monthField = $('month');
+monthField.setCustomValidity(monthField.value && !insuranceRules[Number(monthField.value.slice(0,4))] ? unsupportedYearMessage : '');
+for(const id of ['company','month','days','hours','factor','nightFactor','blank'])if(!$(id).checkValidity()){go(0);
 $(id).reportValidity();
 return false}if(!$('company').value.trim()){alert('اكتب اسم المنشأة');
 return false}if(employees.some(e=>!e.code.trim()||!e.name.trim()||!Number.isFinite(e.basic)||!Number.isFinite(e.fixed)||e.basic<0||e.fixed<0)){alert('أكمل اسم وكود كل موظف وأدخل أجورًا صحيحة غير سالبة');
@@ -128,7 +137,9 @@ const formula=f=>({f});
 function makeWorkbook(){
 let s=settings(),active=items.filter(x=>x.on),count=Math.max(1,employees.length+s.blank),end=count+1,year=Number(s.month.slice(0,4));
 
-const limits={2024:[2000,12600],2025:[2300,14500],2026:[2700,16700],2027:[3200,19300]}[year]||[2700,16700],workerRate=year>=2027?.115:.11,employerRate=year>=2027?.1925:.1875;
+const rules = insuranceRules[year];
+if (!rules) throw new Error(unsupportedYearMessage);
+const { limits, workerRate, employerRate } = rules;
 
 const ref=(sheet,c,r)=>`'${sheet}'!${col(c)}${r}`,taxCalc=x=>`IF(${x}<=600000,MAX(MIN(${x},55000)-40000,0)*10%+MAX(MIN(${x},70000)-55000,0)*15%+MAX(MIN(${x},200000)-70000,0)*20%+MAX(MIN(${x},400000)-200000,0)*22.5%+MAX(${x}-400000,0)*25%,IF(${x}<=700000,MIN(${x},55000)*10%+MAX(MIN(${x},70000)-55000,0)*15%+MAX(MIN(${x},200000)-70000,0)*20%+MAX(MIN(${x},400000)-200000,0)*22.5%+MAX(${x}-400000,0)*25%,IF(${x}<=800000,MIN(${x},70000)*15%+MAX(MIN(${x},200000)-70000,0)*20%+MAX(MIN(${x},400000)-200000,0)*22.5%+MAX(${x}-400000,0)*25%,IF(${x}<=900000,MIN(${x},200000)*20%+MAX(MIN(${x},400000)-200000,0)*22.5%+MAX(${x}-400000,0)*25%,IF(${x}<=1200000,MIN(${x},400000)*22.5%+MAX(${x}-400000,0)*25%,MIN(${x},1200000)*25%+MAX(${x}-1200000,0)*27.5%)))))`;
 
@@ -136,6 +147,7 @@ let sheets=[];
 function sheet(name,rows,editable=false){sheets.push({name,rows,editable})}
 sheet('دليل الاستخدام',[
 [s.company+' — صانع شيت الرواتب'],['الشهر',s.month],
+['إصدار إعدادات التأمينات', 'EG-' + year + '-1'],
 ['١. عدّل الإعدادات وبيانات الموظفين؛ الخلايا الزرقاء للإدخال.'],
 ['٢. أوراق الموظفين والمتغيرات وكشف الرواتب جداول Excel فعلية بفلاتر وصفوف ملوّنة؛ أدخل المتغيرات ولا تغيّر ترتيب الأكواد.'],
 ['٣. راجع كشف الرواتب والملخص ثم اختر رقم الموظف في قسيمة الراتب.'],

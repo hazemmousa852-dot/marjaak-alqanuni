@@ -63,7 +63,7 @@
 <div class="grid">
 <label>اسم المنشأة<input id="company" value="منشأتي" maxlength="100" required>
 </label>
-<label>شهر الرواتب<input id="month" type="month" value="2026-10" required>
+<label>شهر الرواتب<input id="month" type="month" value="2026-10" min="2024-01" max="2027-12" aria-describedby="monthHelp" required><small id="monthHelp">السنوات المتاحة من ٢٠٢٤ إلى ٢٠٢٧.</small>
 </label>
 <label>أساس حساب اليوم<select id="dayMode">
 <option value="fixed">عدد أيام ثابت</option>
@@ -161,7 +161,7 @@
 </div>
 <p class="bottom">بياناتك لا تُرفع إلى خادم ولا تُحفظ تلقائيًا. حمّل الملف قبل مغادرة الصفحة.</p>
 </main>
-<script src="app.js?v=20261101-table1">
+<script src="app.js?v=20261126-year-rules">
 </script>
 <script defer src="https://hazemmousa852-dot.github.io/marjaak-alqanuni/hr-hub/tool-header.js?v=20261101"></script>
 </body>
